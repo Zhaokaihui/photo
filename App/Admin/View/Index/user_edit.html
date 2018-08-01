@@ -1,0 +1,72 @@
+<meta charset="UTF-8">
+<extend name='./Public/Tpl/Admin_index.html'/>
+<block name="main">
+    <div class="div_from_aoto" style="width: 500px;">
+    <FORM method='post' action="{:U('Index/user_edit')}">
+        <DIV class="control-group">
+            <label class="laber_from">用户邮箱</label>
+            <DIV  class="controls" ><INPUT class="input_from" type='email' name='email' placeholder=" 请输入注册邮箱"><P class=help-block></P></DIV>
+        </DIV>
+        <DIV class="control-group">
+            <LABEL class="laber_from">状态</LABEL>
+            <DIV  class="controls" >
+                <SELECT class="input_select" name='status'>
+                    <OPTION value='0'>正常</OPTION>
+                    <OPTION value='1'>禁用</OPTION>
+                </SELECT>
+            </DIV>
+        </DIV>
+        <DIV class="control-group">
+            <LABEL class="laber_from">角色</LABEL>
+            <DIV  class="controls" >
+                <SELECT class="input_select" name='role'>
+                    <OPTION value='0'>普通会员</OPTION>
+                    <if condition="($_SESSION['User']['Role'] eq 2)">
+                        <OPTION value='1'>管理员</OPTION>
+                    </if>
+                </SELECT>
+            </DIV>
+        </DIV>
+        <DIV class="control-group">
+            <LABEL class="laber_from" ></LABEL>
+            <DIV class="controls" ><input type='submit' class="btn btn-success" style="width:120px;" ></DIV>
+        </DIV>
+    </FORM>
+</div>
+<script type="text/javascript">
+    var bool=0;
+    $("input[name='email']").focusout(function(){
+        var email=$(this).val();
+        var str=/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+        if(str.test(email)){
+            $.get("{:U('Index/exist')}",{email:$(this).val()},function(data){
+                if(data){
+                    bool++;
+                    $("input[name='email']").next().html('');
+                    $("select[name='status'] option[value="+data.Status+"]").attr('selected',true).siblings().attr('selected',false);
+                    $("select[name='role'] option[value="+data.Role+"]").attr('selected',true).siblings().attr('selected',false);
+                }else{
+                    $("input[name='email']").next().css('color','red').html('邮箱不存在');
+                }
+            });
+        }else{
+            $(this).next().css('color','red').html('邮箱格式非法');
+        }
+    });
+
+    if({$result}!=null){
+        $("input[name='email']").val("{$result.Email}");
+        $("select[name='status'] option[value="+{$result.Status}+"]").attr('selected',true).siblings().attr('selected',false);
+                    $("select[name='role'] option[value="+{$result.Role}+"]").attr('selected',true).siblings().attr('selected',false);
+    }
+
+    $(".controls button").click(function(){
+        if(bool==0){
+            return false;
+        }
+    });
+
+</script>
+</block>
+
+<block name="type">角色管理</block>

@@ -1,0 +1,102 @@
+<meta charset="UTF-8">
+<extend name='./Public/Tpl/Admin_index.html'/>
+<block name="main">
+<script type="text/javascript" src="__PUBLIC__/JS/css-browser-select.js"></script>
+    <div class="div_from_aoto" style="width: 1000px;">
+        <div class='lyq-term'>
+            <form method="get" action="{:U('Index/user_list')}">
+                用户名称：<input type='text' name='by_name'/>
+                用户状态：<select name="by_status"  style="height:30px;width:80px">
+                    <option value="-1">--选择--</option>
+                    <option value="0">正常</option>
+                    <option value="1">禁用</option>
+                </select>
+                <button class="termButton" style="height:30px;width:80px">搜索</button>
+            </form>
+        </div>
+        <div id="pageContainer">
+            <div id="tableContainer">
+            <foreach name='list' item='val'>
+                <div class="tableCell" par={$val.User_id}>
+                    <div class="tableHeading">
+                        <h2>{$val.User_name}</h2>
+                        <div class="price1 priceContainer">
+                            <img src='__PUBLIC__/images/{$val.Face}'>
+                        </div>
+                    </div>
+                </div>
+            </foreach>
+                
+                <div class="cl"></div>
+                    
+                <table class="pricingTableContent">
+                    <tr class="signUpRow">
+                    <foreach name='list' item='val'>
+                        <td par={$val.User_id} class="signUpButton"></td>
+                    </foreach>
+                    </tr>
+
+                    <!-- Table Content -->
+                    <tr>
+                    <foreach name='list' item='val'>
+                        <td par={$val.User_id}><strong>邮箱：</strong>{$val.Email}</td>
+                    </foreach> 
+                    </tr>
+
+                    <tr class="altRow">
+                    <foreach name='list' item='val'>
+                        <td par={$val.User_id}><strong>电话：</strong>{$val.User_tel}</td>
+                    </foreach>
+                    </tr>
+
+                    <tr>
+                    <foreach name='list' item='val'>
+                        <td par={$val.User_id}><strong>简介：</strong>{$val.User_introduction}</td>
+                    </foreach>
+                    </tr>
+
+                    <tr class="altRow">
+                    <foreach name='list' item='val'>
+                        <td par={$val.User_id}><strong>状态：</strong><a class='admin-status'>{$val.Status}</a></td>
+                    </foreach>
+                    </tr>
+
+                    <tr>
+                    <foreach name='list' item='val'>
+                        <td par={$val.User_id}><strong>角色：</strong><a class='admin-role'>{$val.Role}</a></td>
+                    </foreach>
+                    </tr>
+
+                    <!-- Table Footer -->
+                    <tfoot>
+                        <tr>
+                        <foreach name='list' item='val'>
+                            <td par={$val.User_id}>
+                                <a href="{:U('Index/user_edit')}" class="signUpButton">用户修改</a>
+                            </td>
+                        </foreach>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="quotes">{$page}</div>
+<script type="text/javascript">
+    $('.tableCell').click(function(){
+        $(this).addClass('recommended').siblings().removeClass('recommended').children().children('.price3').removeClass('price3').addClass('price1');
+        $(this).children().children('.price1').addClass('price3').removeClass('price1');
+        var par=$(this).attr('par');
+        $("td[par='"+par+"']").addClass('recommended').siblings().removeClass('recommended');
+    });
+    $('.signUpButton').click(function(){
+        var par=$(this).parent().attr('par');
+        var url=$(this).attr('href');
+        url=url+'?userid='+par;
+        $(this).attr('href',url);
+    });
+    
+</script>
+</block>
+
+<block name="type">用户列表</block>

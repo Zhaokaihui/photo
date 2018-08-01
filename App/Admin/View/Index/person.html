@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="__PUBLIC__/CSS/person.css">
+	<script type="text/javascript" src="__PUBLIC__/JS/jquery-1.11.2.min.js"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<div class="nav-handler">
+				<a class="logo" href="{:U('Index/index')}" style="text-decoration:none">
+					<span>Teambition</span>个人账户中心
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class='site-main'>
+		<div class='container'>
+			<div class='main-sidebar'>
+				<div class='card sidebar-user'>
+					<div class='user-face'><img src="__PUBLIC__/images/{$Think.session.User.Face}"></div>
+					<div class='user-items'>
+						<div class='user-name'>{$Think.session.User.User_name}</div>
+						<div class='user-email'>{$Think.session.User.Email}</div>
+					</div>
+				</div>
+				<div class='card sidebar-nav'>
+					<ul class='nav'>
+						<li class='is-current' par='person'><a>个人信息</a></li>
+						<li par='pwd'><a>账号密码</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class='card main-content'>
+				<div class='card-title'>个人信息</div>
+				<form action="{:U('Index/person_edit')}" method="POST" enctype="multipart/form-data" par='person'>
+					<div class='form-group'>
+						<div class='form-lab'>头像</div>
+						<div class='form-wrap'>
+							<div class='face-img'>
+								<img src="__PUBLIC__/images/{$Think.session.User.Face}">
+							</div>
+							<input name='face' type='file' style="display:none">
+							<a class='face-btn'>上传新头像</a>	
+						</div>
+					</div>
+					<div class='form-group'>
+						<div class='form-lab'>昵称</div>
+						<input name='username' type='text' value="{$list['User_name']}">
+					</div>
+					<div class='form-group'>
+						<div class='form-lab'>电话</div>
+						<input name='tel' type='text' value="{$list['User_tel']}">
+					</div>
+					<input class='sub' type='submit' value='保存'>
+				</form>
+				<form action="{:U('Index/pwd_edit')}" method="get" style="display:none" par='pwd'>
+					<div class='form-group'>
+						<div class='form-lab'>旧密码</div>
+						<input name='oldpwd' type='password'>
+					</div>
+					<div class='form-group'>
+						<div class='form-lab'>新密码</div>
+						<input name='newpwd' type='password'>
+					</div>
+					<input class='sub' type='submit' value='保存'>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$('li').click(function(){
+		$(this).addClass('is-current').siblings().removeClass('is-current');
+		var par=$(this).attr('par');
+		$("form[par='"+par+"']").css('display','block').siblings('form').css('display','none');
+	});
+	$('.face-btn').click(function(){
+		$("input[name='face']").click();
+	});
+</script>
+</html>
