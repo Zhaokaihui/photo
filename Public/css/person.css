@@ -1,0 +1,39 @@
+/*6.8 林育群 个人中心*/
+*{margin:0;padding:0;font-family:微软雅黑;line-height:20px;}
+body{line-height: 20px;background: #ededed;}
+.container-fluid{background: #fff;border-right:0;border-radius:0;margin-bottom:20px;width:100%;min-width:320px;padding-left:0;padding-right:0;box-shadow: 0 2px 3px 0 rgba(0,0,0,.05);}
+.container-fluid .navbar-header{width:100%;margin:0;height:70px;}
+.container-fluid .navbar-header .nav-handler{float:left;height:60px;text-align:center;}
+.container-fluid .navbar-header .nav-handler>a{display:inline-block;line-height:20px;padding:20px 25px;color:#383838;font-size:16px;text-align:center;}
+.container-fluid .navbar-header .nav-handler .logo{padding-left:64px;background-image:url(../images/logo-person.png);background-size:24px 24px;background-repeat:no-repeat;background-position:25px 18px;font-weight:600;overflow:hidden;}
+
+.site-main{width:100%;padding-bottom:20px;min-height:50%;}
+.site-main .container{width:85%;margin-left:auto;padding-left:10px;padding-right:10px;}
+.site-main .container .main-sidebar{width:32%;padding-left:10px;float:left;}
+.site-main .container .main-sidebar .sidebar-user{padding:20px;height: 80px}
+.site-main .container .main-sidebar .user-face{margin-right:20px;width:80px;height:80px;overflow:hidden;border-radius:41px;float:left}
+.site-main .container .main-sidebar .user-face img{width:80px;}
+.site-main .container .main-sidebar .user-items .user-name{margin-top:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:20px;font-weight:600;}
+.site-main .container .main-sidebar .user-items .user-email{color:gray;margin-top:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+.site-main .container .main-sidebar .sidebar-nav{}
+.site-main .container .main-sidebar .sidebar-nav .nav{list-style: none;}
+.site-main .container .main-sidebar .sidebar-nav .nav li{box-shadow:0 1px 0 rgba(0,0,0,.05);}
+.site-main .container .main-sidebar .sidebar-nav .nav li:hover{cursor:pointer;}
+.site-main .container .main-sidebar .sidebar-nav .nav li a{display:block;padding:15px 20px;font-size:18px;}
+.site-main .container .main-sidebar .sidebar-nav .nav .is-current{font-weight:600;}
+
+.site-main .container .main-content{padding:20px;width:50%;float:left;margin-left: 3%}
+.site-main .container .main-content .card-title{font-weight: 600;}
+.site-main .container .main-content form .form-group{width:100%;overflow: auto;}
+.site-main .container .main-content form .form-group .form-lab{padding-right: 10px;padding-top:40px;color:grey;width:20%;float:left;}
+.site-main .container .main-content form .form-group .form-wrap{width:60%;float:left;}
+.site-main .container .main-content form .form-group .form-wrap .face-img{width:100px;height:100px;overflow:hidden;border-radius:80px;float:left;}
+.site-main .container .main-content form .form-group .form-wrap .face-img img{width:100px;}
+.site-main .container .main-content form .form-group .form-wrap .face-btn{display:block;float:left;padding-top:40px;margin:30px;padding:10px;border:1px solid #03a9f4;border-radius:5px;color:#03a9f4;}
+.site-main .container .main-content form .form-group .form-wrap .face-btn:hover{color:white;background:#03a9f4;cursor:pointer;}
+.site-main .container .main-content form .form-group input{margin-top:35px;width:60%;height:30px;border-radius:5px;border:1px solid gray;}
+.site-main .container .main-content .sub{opacity:.7;width:60%;padding:9px 16px;border-radius:3px;border-color:#03a9f4;background-color:#03a9f4;color:white;margin-top:20px;margin-left:22%;border:1px solid #03a9f4;}
+.site-main .container .main-content .sub:hover{cursor:pointer;}
+
+.card{background:white;box-shadow:rgba(0,0,0,.0470588)0 2px 3px 0;border-radius:3px;margin-bottom: 20px;}

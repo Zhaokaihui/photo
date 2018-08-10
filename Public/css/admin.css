@@ -1,0 +1,49 @@
+/*index页面样式*/
+.div_from_aoto .all-count{width:100%;}
+.div_from_aoto .all-count>div{float:left;width:20%;padding:40px;margin-bottom: 20px}
+.div_from_aoto .all-count .count-user{background:#27A9E3}
+.div_from_aoto .all-count .count-user div{margin:10px auto;color:white;font-size: 20px;}
+.div_from_aoto .all-count .count-project{margin-left:5%;margin-right:5%;background:#28B779}
+.div_from_aoto .all-count .count-project div{margin:10px auto;color:white;font-size: 20px;}
+.div_from_aoto .all-count .count-task{background:#FFB748}
+.div_from_aoto .all-count .count-task div{margin:10px auto;color:white;font-size: 20px;}
+.div_from_aoto .all-count-data{width:100%;}
+
+.div_from_aoto .count-ico{width:93%;border:1px solid rgba(0,0,0,0.2);padding:10px;background:#E7E7E7;}
+
+.div_from_aoto .all-count-data{width:93%;border:1px solid rgba(0,0,0,0.2);padding:10px;border-top:0;}
+.div_from_aoto .all-count-data .count-data li{list-style: none;margin-top: 30px;margin-bottom:30px;}
+.div_from_aoto .all-count-data .count-data li .count-box{height:30px;background:red;float:left;margin-right: 10px}
+
+/*用户添加页面*/
+.div_from_aoto .control-group .controls{width:420px;}
+.div_from_aoto .control-group .controls .help-block{float:right;margin-top: 5px;}
+
+/*用户搜索页面*/
+.div_from_aoto .lyq-term{width:600px;margin:10px auto;}
+.div_from_aoto .lyq-term .termButton{
+	margin-left: 10px;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-image-source: initial;
+	border-image-slice: initial;
+	border-image-width: initial;
+	border-image-outset: initial;
+	border-image-repeat: initial;
+	border-radius: 4px;
+	color: rgb(255, 255, 255);
+	background-color: rgb(92, 184, 92);
+	border-color: rgb(76, 174, 76);
+}

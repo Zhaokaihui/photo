@@ -1,0 +1,7 @@
+.tableCell .tableHeading .price1 img{width:90px;display: block;border-radius: 100px;overflow: hidden;}
+.tableCell .tableHeading .price1{padding-left:23px;padding-top: 11px}
+
+.tableCell .tableHeading .price3 img{width:110px;display: block;border-radius: 100px;overflow: hidden;}
+.tableCell .tableHeading .price3{padding-left:23px;padding-top: 11px}
+
+.pricingTableContent .signUpButton{cursor: pointer;}

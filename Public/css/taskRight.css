@@ -1,0 +1,62 @@
+@CHARSET "UTF-8";
+#yue-taskRight{ opacity:0;background:white;width:0;border:0px solid #EEE;box-shadow:0 0 15px gray;position:fixed;top:52px;overflow:hidden;font-size:16px;font-family:微软雅黑;z-index:200;}
+#yue-taskRight #yue-taskTitle{width:95%;margin-top:15px;margin:0 auto;margin-top:15px;}
+#yue-taskRight #yue-taskTitle a{float:right;color:#A6A9AA;}
+#yue-taskRight #yue-taskTitle a:hover{color:#04A7F0;cursor:pointer}
+#yue-taskRight #yue-taskTitle span{color:#A6A9AA}
+#yue-taskRight #yue-taskTitle span.yue-taskn{color:#808080}
+#yue-taskRight #yue-taskTitle span.yue-taskn:hover{color:#04A7F0;cursor:pointer}
+#yue-taskRight #yue-taskTitle #yue-titleinfo{font-size:20px;height:30px;}
+#yue-taskRight #yue-taskTitle #yue-titleinfo:hover{background:#EEE;cursor:text;}
+#yue-taskRight #yue-taskTitle{padding-bottom:20px;border-bottom:1px solid #EEE}
+#yue-taskRight #yue-taskNotice ul{width:95%;margin:0 auto;margin-top:15px; border:1px solid #EEE;color:#A6A9AA;border-raius:5px;}
+#yue-taskRight #yue-taskNotice ul li{float:left;width:24.5%;text-align:center;}
+#yue-taskRight #yue-taskNotice ul li .yue-notice{width:88px;font-size:16px;height:16px;border:0px;font-family:微软雅黑;}
+#yue-taskRight #yue-taskNotice ul li .yue-notice:hover{color:#04A7F0;cursor:pointer;}
+#yue-taskRight #yue-taskNotice ul li+li{border-left:1px solid #EEE;}
+#yue-taskRight #yue-taskNotice ul li div{margin-bottom:10px;}
+#yue-taskRight #yue-taskNotice ul li div #user_img img{width:20px;height:20px;border-radius:15px;position:relative;top:5px;}
+#yue-taskRight #yue-taskNotice ul li div.notice_content{line-height:27px;}
+
+
+#yue-taskRight #yue-taskAbout > div{border-radius:5px;color:#A6A9AA;width:95%;border:1px solid #EEE;height:100%;line-height:30px;margin:0 auto;margin-top:15px;}
+.yue-bc{float:right;cursor:pointer;width:50px;height:30px;border-radius:5px;background:#04A7F0;text-align:center;color:white;margin:0 10px 10px 10px;}
+.yue-qx{float:right;cursor:pointer}
+.yue-qx:hover{float:right;cursor:pointer;color:gray}
+.yue-taskedit{display:none;}
+.yue-tasktxt{height:80px;width:100%;border:0px none; #DDD;font-size:14px}
+#yue-taskRight #yue-taskAbout > div#yue-sontask:hover{cursor:pointer;color:#04A7F0}
+#yue-taskRight #yue-taskAbout > div#yue-taskclause:hover{cursor:pointer;color:#04A7F0}
+#yue-taskRight #yue-taskAbout > div > i{margin-left:15px;}
+.yue-taskadd:hover{cursor:pointer;color:#04A7F0}
+
+
+#yue-taskinteract{width:95%;border:1px solid #EEE;margin:15px auto 0 auto;border-radius:5px;}
+#yue-taskinteract #yue-taskpartake{padding-bottom:10px;border-bottom:1px solid #EEE}
+#yue-taskinteract #yue-taskpartake p:first-child{margin-left:15px;font-size:13px;font-weight:bold;color:#7E7E7E;margin-top:10px;}
+#yue-taskinteract #yue-taskpartake p:nth-child(2){margin-left:15px;}
+#yue-taskinteract #yue-taskpartake p:nth-child(2) img{width:20px;height:20px;border-radius:10px;position:relative;top:4px;cursor:pointer;}
+#yue-taskinteract #yue-taskpartake p:nth-child(2) img+img{margin-left:5px;}
+#yue-taskinteract #yue-taskpartake p:nth-child(2) #yue-partakeadd{color:white;padding:0 5px 0 5px;;border-radius:10px;background:#04A7F0;margin-left:10px;cursor:pointer;}
+#yue-taskinteract #yue-taskzan{color:#A6A9AA;padding:10px 0 10px 0;border-bottom:1px solid #EEE;}
+#yue-taskinteract #yue-taskzan #yue-zan{margin-left:15px;}
+#yue-taskinteract #yue-taskzan span:hover{cursor:pointer;color:#04A7F0}
+
+
+#yue-taskinteract #yue-taskactive{color:#A6A9AA;font-size:13px;}
+#yue-taskinteract #yue-taskactive ul li{margin-top:15px;}
+#yue-taskinteract #yue-taskactive ul li div i{margin-left:15px;width:20px;float:left}
+.yue-activeleft{margin-left:15px;}
+.yue-activeright{float:right;margin-right:10px;}
+
+#yue-taskactive ul li div img{width:25px;height:25px;border-radius:15px;margin-left:15px;}
+#yue-taskactive ul{padding-bottom:75px;}
+
+#sonTsak{margin-left:15px;}
+#sonTsak li{padding:5px 0;}
+#sonTsak li span:nth-child(2){float:right;margin-right:20px;cursor:pointer}
+
+/*右边添加参与者*/
+#right_taskUserAdd{box-shadow:0 0 10px #DDD;position:fixed;width:100px;background:white;}
+#right_taskUserAdd li{padding:5px 0;}
+#right_taskUserAdd li img{width:20px;height:20px;border-radius:15px;}

@@ -1,13 +1,7 @@
 <?php
-	namespace Admin\Model;
+	namespace Login\Model;
 	use Think\Model;
-	class AdminModel extends Model{
-		function getCount($tab){
-			$Model=D($tab);
-			$list=$Model->select();
-			return count($list);
-		}
-
+	class SignupModel extends Model{
 		function judge($email){
 			$Model=D('User');
 			$map['Email']=$email;
@@ -15,9 +9,11 @@
 			return $judge[0];
 		}
 
-		function doSign($email,$pwd,$role){
+		function doSign($email,$pwd){
 			/*数据库存储*/
-			$judge=$this->judge($email);
+			$Model=D('User');
+			$map['Email']=$email;
+			$judge=$Model->where($map)->select();
 			if($judge){
 				return false;
 			}else{
@@ -26,12 +22,18 @@
 				$data['Pwd']=$pwd;
 				$data['Face']='default.jpg';
 				$data['Status']=0;
-				$data['Role']=$role;
-				$Model=D('User');
 				$result=$Model->data($data)->add();
 				return $result;
 			}
+			
+		}
+
+		function setPwd($email,$pwd){
+			$Model=D('User');
+			$data['Pwd']=$pwd;
+			$map['Email']=$email;
+			$bool=$Model->where($map)->save($data);
+			return $bool;
 		}
 	}
-
 ?>
