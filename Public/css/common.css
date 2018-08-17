@@ -178,3 +178,14 @@ li{list-style:none}
 .myTaskName{margin-left:10px;}
 .myTaskProject{color:gray;margin-left:20px;}
 #my_content ul li:hover{background:#EEE}
+
+.tableHeader {
+	height: 35px;
+	line-height: 35px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #646987;
+	background-color: #e3e8ee;
+	padding: 0 30px;
+	text-align: left;
+}

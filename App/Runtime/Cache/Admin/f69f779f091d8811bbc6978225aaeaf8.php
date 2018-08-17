@@ -96,89 +96,88 @@
 
         <div class="route_bg">
             <a href="<?php echo U('Index/index');?>" id='admin-index'>主页</a><i class="glyph-icon icon-chevron-right"></i>
-            <a id='admin-type'>用户管理</a>
+            <a id='admin-type'>用户列表</a>
         </div>
         <div class="mian_content">
             <div id="page_content">
-                
-    <div class="div_from_aoto" style="width: 500px;">
-    <FORM method='post'>
-        <DIV class="control-group">
-            <label class="laber_from">注册邮箱</label>
-            <DIV  class="controls" ><INPUT class="input_from" type='email' name='email' placeholder=" 请输入注册邮箱"><P class='help-block'></P></DIV>
-        </DIV>
-        <DIV class="control-group">
-            <LABEL class="laber_from">密码</LABEL>
-            <DIV  class="controls" ><INPUT class="input_from" type='password' name='pwd' placeholder=" 请输入密码" name='pwd'><P class='help-block'></P></DIV>
-        </DIV>
-        <DIV class="control-group">
-            <LABEL class="laber_from" >确认密码</LABEL>
-            <DIV  class="controls" ><INPUT class="input_from" type='password' name='pwd2' placeholder=" 请输入确认密码"><P class='help-block'></P></DIV>
-        </DIV>
-        <DIV class="control-group">
-            <LABEL class="laber_from">角色</LABEL>
-            <DIV  class="controls" >
-                <SELECT class="input_select" name='role'>
-                    <OPTION selected value='0'>普通会员</OPTION>
-                    <?php if(($_SESSION['User']['Role'] == 2)): ?><OPTION value='1'>管理员</OPTION><?php endif; ?>
-                </SELECT>
-            </DIV>
-        </DIV>
-        <DIV class="control-group">
-            <LABEL class="laber_from" ></LABEL>
-            <DIV class="controls" ><button class="btn btn-success" style="width:120px;" >确认</button></DIV>
-        </DIV>
-    </FORM>
+                 <script type="text/javascript"
+	src="/Public/JS/css-browser-select.js"></script>
+<div class="div_from_aoto" style="width: 1000px;">
+	<div class='lyq-term'>
+		<div role="tabpanel" class="tab-pane" id="user">
+			<div class="check-div form-inline">
+				<div class="col-xs-3">
+					<button class="btn btn-yellow btn-xs" data-toggle="modal"
+						data-target="#addUser">添加用户</button>
+				</div>
+				<div class="col-xs-4">
+					<input type="text" class="form-control input-sm"
+						placeholder="输入文字搜索">
+					<button class="btn btn-white btn-xs ">查 询</button>
+				</div>
+				<div class="col-lg-3 col-lg-offset-2 col-xs-4"
+					style="padding-right: 40px; text-align: right;">
+					<label for="paixu">排序:&nbsp;</label> <select class=" form-control">
+						<option>地区</option>
+						<option>地区</option>
+						<option>班期</option>
+						<option>性别</option>
+						<option>年龄</option>
+						<option>份数</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="data-div">
+				<div class="row tableHeader">
+					<div class="col-xs-2 ">用户名</div>
+					<div class="col-xs-2">地区</div>
+					<div class="col-xs-2">真实姓名</div>
+					<div class="col-xs-2">电话</div>
+					<div class="col-xs-2">状态</div>
+					<div class="col-xs-2">操作</div>
+				</div>
+				<div class="tablebody">
+
+					<div class="row">
+						<div class="col-xs-2 ">goodmoning</div>
+						<div class="col-xs-2">国际关系地区</div>
+						<div class="col-xs-2">李豆豆</div>
+						<div class="col-xs-2">13688889999</div>
+						<div class="col-xs-2">状态</div>
+						<div class="col-xs-2">
+							<button class="btn btn-success btn-xs" data-toggle="modal"
+								data-target="#reviseUser">修改</button>
+							<button class="btn btn-danger btn-xs" data-toggle="modal"
+								data-target="#deleteUser">删除</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+<div class="quotes"><?php echo ($page); ?></div>
 <script type="text/javascript">
-    var bool=0;
-    $("input[name='email']").focusout(function(){
-        var email=$(this).val();
-        var str=/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-        if(str.test(email)){
-            $.get("<?php echo U('Index/exist');?>",{email:$(this).val()},function(data){
-                if(!data){
-                    bool++;
-                    $("input[name='email']").next().html('');
-                }else{
-                    $("input[name='email']").next().css('color','red').html('邮箱已被使用');
-                }
-            });
-        }else{
-            $(this).next().css('color','red').html('邮箱格式非法');
-        }
-    });
-
-    $("input[name='pwd']").focusout(function(){
-        var pwd=$(this).val();
-        if(pwd!=''){
-            bool++;
-            $(this).next().html('');
-        }else{
-            $(this).next().css('color','red').html('密码不许为空');
-        }
-    });
-
-    $("input[name='pwd2']").focusout(function(){
-        var pwd2=$(this).val();
-        var pwd=$("input[name='pwd']").val();
-        if(pwd!='' && pwd==pwd2){
-            bool++;
-            $(this).next().html('');
-        }else{
-            $(this).next().css('color','red').html('密码不一致');
-        }
-    });
-
-    $(".controls button").click(function(){
-        if(bool!=3){
-            return false;
-        }
-        bool=0;
-    });
-
-</script>
-
+	$('.tableCell').click(
+			function() {
+				$(this).addClass('recommended').siblings().removeClass(
+						'recommended').children().children('.price3')
+						.removeClass('price3').addClass('price1');
+				$(this).children().children('.price1').addClass('price3')
+						.removeClass('price1');
+				var par = $(this).attr('par');
+				$("td[par='" + par + "']").addClass('recommended').siblings()
+						.removeClass('recommended');
+			});
+	$('.signUpButton').click(function() {
+		var par = $(this).parent().attr('par');
+		var url = $(this).attr('href');
+		url = url + '?userid=' + par;
+		$(this).attr('href', url);
+	});
+</script> 
             </div>
         </div>
     </div>

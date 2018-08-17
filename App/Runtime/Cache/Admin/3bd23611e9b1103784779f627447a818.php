@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>大屌丝后台管理</title>
+<title></title>
 
 <link rel="stylesheet" href="/Public/CSS/index.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/Public/CSS/add.css" type="text/css" media="screen" />
@@ -12,6 +12,12 @@
 <link rel="stylesheet" href="/Public/CSS/lyq-list.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/Public/CSS/master.css" media="screen">
 <link rel="stylesheet" href="/Public/CSS/reset.css" media="screen">
+<link rel="stylesheet" href="/Public/CSS/admin_common.css" media="screen">
+<link rel="stylesheet" href="/Public/CSS/bootstrap.min_new.css" media="screen">
+<link rel="stylesheet" type="text/css" href="css/flat-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.nouislider.css">
+<link rel="stylesheet" type="text/css" href="css/slide.css" />
+
 <script type="text/javascript" src="/Public/JS/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="/Public/JS/tendina.min.js"></script>
 <script type="text/javascript" src="/Public/JS/common.js"></script>
@@ -46,6 +52,20 @@
                     <li><a href="<?php echo U('Index/project_count');?>"><i class="glyph-icon icon-chevron-right"></i>项目统计</a></li>
                     <li><a href="<?php echo U('Index/task_count');?>"><i class="glyph-icon icon-chevron-right"></i>任务统计</a></li>
                 </ul> -->
+            </li>
+            <li class="childUlLi">
+                <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>相册管理</a>
+                <ul>
+                    <li><a href="<?php echo U('Index/album_list');?>"><i class="glyph-icon icon-chevron-right"></i>相册列表</a></li>
+                    <li><a href="<?php echo U('Index/album_add');?>"><i class="glyph-icon icon-chevron-right"></i>相册添加</a></li>
+                </ul>
+            </li>
+            <li class="childUlLi">
+                <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>照片管理</a>
+                <ul>
+                    <li><a href="<?php echo U('Index/photo_list');?>"><i class="glyph-icon icon-chevron-right"></i>照片列表</a></li>
+                    <li><a href="<?php echo U('Index/photo_add');?>"><i class="glyph-icon icon-chevron-right"></i>照片添加</a></li>
+                </ul>
             </li>
             <li class="childUlLi">
                 <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>用户管理</a>

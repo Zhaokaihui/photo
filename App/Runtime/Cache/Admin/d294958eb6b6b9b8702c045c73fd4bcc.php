@@ -12,6 +12,12 @@
 <link rel="stylesheet" href="/Public/CSS/lyq-list.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/Public/CSS/master.css" media="screen">
 <link rel="stylesheet" href="/Public/CSS/reset.css" media="screen">
+<link rel="stylesheet" href="/Public/CSS/admin_common.css" media="screen">
+<link rel="stylesheet" href="/Public/CSS/bootstrap.min_new.css" media="screen">
+<link rel="stylesheet" type="text/css" href="css/flat-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.nouislider.css">
+<link rel="stylesheet" type="text/css" href="css/slide.css" />
+
 <script type="text/javascript" src="/Public/JS/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="/Public/JS/tendina.min.js"></script>
 <script type="text/javascript" src="/Public/JS/common.js"></script>

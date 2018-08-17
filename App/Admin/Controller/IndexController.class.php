@@ -150,6 +150,49 @@ class IndexController extends Controller{
  			$this->error('密码错误');
  		}	
  	}
+ 	
+ 	function album_list(){
+ 	    $Album = D('album');
+ 	    $list = $Album->select();
+ 	    $this->assign('list',$list);
+ 	    $this->display();
+ 	}
+ 	
+ 	
+ 	function user_list1(){
+ 	    $User=M('User');
+ 	    $p=$_GET['p']?$_GET['p']:1;
+ 	
+ 	    $name=$_GET['by_name']?$_GET['p']:null;
+ 	    $map['Role']=array('lt',$_SESSION['User']['Role']);
+ 	    if(!empty($_GET['by_status'])){
+ 	        $map['Status']=array('gt',$_GET['by_status']);
+ 	    }
+ 	    if(!empty($_GET['by_name'])){
+ 	        $map['User_name']=array('like',$_GET['by_name']."%");
+ 	    }
+ 	
+ 	    $count=$User->where($map)->count();
+ 	    $max=ceil($count/4);
+ 	    if($p>$max){
+ 	        $p=$max;
+ 	    }
+ 	    if($p<1){
+ 	        $p=1;
+ 	    }
+ 	    $list=$User->where($map)->order('User_id')->page($p.',4')->select();
+ 	    $status=['正常','禁用'];
+ 	    $role=['普通会员','管理员'];
+ 	    foreach($list as $key=>$val){
+ 	        $list[$key]['Status']=$status[$val['Status']];
+ 	        $list[$key]['Role']=$role[$val['Role']];
+ 	    }
+ 	    $this->assign('list',$list);
+ 	    $Page=new \Think\Page($count,4);
+ 	    $show=$Page->show();
+ 	    $this->assign('page',$show);
+ 	    $this->display();
+ 	}
 	
 }
 ?>
