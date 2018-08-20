@@ -87,11 +87,10 @@ div.tableCell {
 
 /*table.pricingTableContent { width: 100%; }*/
 
-	td {
+	.pricingTableContent td {
 		text-align: center;
 		vertical-align: middle;
 		width: 238px;
-		
 		border-right: 1px solid #e2e7eb;
 		
 		color: #77808a;

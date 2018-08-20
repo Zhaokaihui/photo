@@ -66,41 +66,6 @@ class IndexController extends Controller{
  		}
  	}
 
- 	function user_list(){
- 		$User=M('User');
- 		$p=$_GET['p']?$_GET['p']:1;
-
- 		$name=$_GET['by_name']?$_GET['p']:null;
- 		$map['Role']=array('lt',$_SESSION['User']['Role']);
- 		if(!empty($_GET['by_status'])){
- 			$map['Status']=array('gt',$_GET['by_status']);
- 		}
- 		if(!empty($_GET['by_name'])){
- 			$map['User_name']=array('like',$_GET['by_name']."%");
- 		}
-
- 		$count=$User->where($map)->count();
- 		$max=ceil($count/4);
- 		if($p>$max){
- 			$p=$max;
- 		}
- 		if($p<1){
- 			$p=1;
- 		}
- 		$list=$User->where($map)->order('User_id')->page($p.',4')->select();
- 		$status=['正常','禁用'];
- 		$role=['普通会员','管理员'];
- 		foreach($list as $key=>$val){
- 			$list[$key]['Status']=$status[$val['Status']];
- 			$list[$key]['Role']=$role[$val['Role']];
- 		}
- 		$this->assign('list',$list);
- 		$Page=new \Think\Page($count,4);
- 		$show=$Page->show();
- 		$this->assign('page',$show);
- 		$this->display();
- 	}
-
  	function getUserById($id){
  		$Model=D('User');
  		$judge=$Model->where('User_id=%s',$id)->find();
@@ -151,48 +116,94 @@ class IndexController extends Controller{
  		}	
  	}
  	
+ 	/**
+ 	 * 相册列表
+ 	 */
  	function album_list(){
  	    $Album = D('album');
- 	    $list = $Album->select();
- 	    $this->assign('list',$list);
- 	    $this->display();
- 	}
- 	
- 	
- 	function user_list1(){
- 	    $User=M('User');
+ 	    $map['is_delete'] = 0;
+ 	    
  	    $p=$_GET['p']?$_GET['p']:1;
- 	
- 	    $name=$_GET['by_name']?$_GET['p']:null;
- 	    $map['Role']=array('lt',$_SESSION['User']['Role']);
- 	    if(!empty($_GET['by_status'])){
- 	        $map['Status']=array('gt',$_GET['by_status']);
- 	    }
- 	    if(!empty($_GET['by_name'])){
- 	        $map['User_name']=array('like',$_GET['by_name']."%");
- 	    }
- 	
- 	    $count=$User->where($map)->count();
- 	    $max=ceil($count/4);
+ 	    //$list = $Album->where($map)->select();
+ 	    
+ 	    //分页
+ 	    $count=$Album->where($map)->count();
+ 	    $max=ceil($count/10);
  	    if($p>$max){
  	        $p=$max;
  	    }
  	    if($p<1){
  	        $p=1;
  	    }
- 	    $list=$User->where($map)->order('User_id')->page($p.',4')->select();
- 	    $status=['正常','禁用'];
- 	    $role=['普通会员','管理员'];
- 	    foreach($list as $key=>$val){
- 	        $list[$key]['Status']=$status[$val['Status']];
- 	        $list[$key]['Role']=$role[$val['Role']];
- 	    }
- 	    $this->assign('list',$list);
- 	    $Page=new \Think\Page($count,4);
+ 	    $list=$Album->where($map)->order('Id')->page($p.',10')->select();
+ 	    $Page=new \Think\Page($count,10);
  	    $show=$Page->show();
+ 	    
+ 	    foreach($list as $key => $val){
+ 	        if (strlen($val['album_introduce'])>60) 
+ 	            $list[$key]['album_introduce']=substr($val['album_introduce'],0,60) . '...';
+ 	    }
  	    $this->assign('page',$show);
- 	    $this->display();
+ 	    $this->assign('list',$list);
+ 	    $this->display('album_list');
  	}
+ 	
+ 	/**
+ 	 * 修改相册信息
+ 	 */
+ 	function album_edit(){
+ 	    $id=$_SESSION['User']['User_id'];
+ 	    $upload = new \Think\Upload();
+ 	    $upload->exts=array('jpg', 'gif', 'png', 'jpeg');
+ 	    $upload->rootPath='./Public/albumImg/';
+ 	    $info=$upload->upload();
+ 	    $face=$info['face']['savepath'].$info['face']['savename'];
+ 	    $data['User_name']=$_POST['username'];
+ 	    $data['User_tel']=$_POST['tel'];
+ 	    if($face){
+ 	        $data['Face']=$face;
+ 	    }
+ 	    $User=D('User');
+ 	    $User->where('User_id=%d',$id)->save($data);
+ 	    $this->display('person');
+ 	}
+ 	
+ 	
+function user_list(){
+ 		$User=M('User');
+ 		$p=$_GET['p']?$_GET['p']:1;
+
+ 		$name=$_GET['by_name']?$_GET['p']:null;
+ 		$map['Role']=array('lt',$_SESSION['User']['Role']);
+ 		if(!empty($_GET['by_status'])){
+ 			$map['Status']=array('gt',$_GET['by_status']);
+ 		}
+ 		if(!empty($_GET['by_name'])){
+ 			$map['User_name']=array('like',$_GET['by_name']."%");
+ 		}
+
+ 		$count=$User->where($map)->count();
+ 		$max=ceil($count/4);
+ 		if($p>$max){
+ 			$p=$max;
+ 		}
+ 		if($p<1){
+ 			$p=1;
+ 		}
+ 		$list=$User->where($map)->order('User_id')->page($p.',4')->select();
+ 		$status=['正常','禁用'];
+ 		$role=['普通会员','管理员'];
+ 		foreach($list as $key=>$val){
+ 			$list[$key]['Status']=$status[$val['Status']];
+ 			$list[$key]['Role']=$role[$val['Role']];
+ 		}
+ 		$this->assign('list',$list);
+ 		$Page=new \Think\Page($count,4);
+ 		$show=$Page->show();
+ 		$this->assign('page',$show);
+ 		$this->display();
+ 	}
+ 	
 	
 }
 ?>

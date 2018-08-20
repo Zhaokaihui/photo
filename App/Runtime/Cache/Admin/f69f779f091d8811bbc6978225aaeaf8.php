@@ -96,13 +96,13 @@
 
         <div class="route_bg">
             <a href="<?php echo U('Index/index');?>" id='admin-index'>主页</a><i class="glyph-icon icon-chevron-right"></i>
-            <a id='admin-type'>用户列表</a>
+            <a id='admin-type'>相册列表</a>
         </div>
         <div class="mian_content">
             <div id="page_content">
                  <script type="text/javascript"
 	src="/Public/JS/css-browser-select.js"></script>
-<div class="div_from_aoto" style="width: 1000px;">
+<div class="div_from_aoto">
 	<div class='lyq-term'>
 		<div role="tabpanel" class="tab-pane" id="user">
 			<div class="check-div form-inline">
@@ -113,7 +113,7 @@
 				<div class="col-xs-4">
 					<input type="text" class="form-control input-sm"
 						placeholder="输入文字搜索">
-					<button class="btn btn-white btn-xs ">查 询</button>
+					<button class="btn-white btn-xs ">查 询</button>
 				</div>
 				<div class="col-lg-3 col-lg-offset-2 col-xs-4"
 					style="padding-right: 40px; text-align: right;">
@@ -128,33 +128,26 @@
 				</div>
 			</div>
 
-			<div class="data-div">
-				<div class="row tableHeader">
-					<div class="col-xs-2 ">用户名</div>
-					<div class="col-xs-2">地区</div>
-					<div class="col-xs-2">真实姓名</div>
-					<div class="col-xs-2">电话</div>
-					<div class="col-xs-2">状态</div>
-					<div class="col-xs-2">操作</div>
-				</div>
-				<div class="tablebody">
-
-					<div class="row">
-						<div class="col-xs-2 ">goodmoning</div>
-						<div class="col-xs-2">国际关系地区</div>
-						<div class="col-xs-2">李豆豆</div>
-						<div class="col-xs-2">13688889999</div>
-						<div class="col-xs-2">状态</div>
-						<div class="col-xs-2">
-							<button class="btn btn-success btn-xs" data-toggle="modal"
-								data-target="#reviseUser">修改</button>
-							<button class="btn btn-danger btn-xs" data-toggle="modal"
-								data-target="#deleteUser">删除</button>
-						</div>
-					</div>
-
-				</div>
-			</div>
+			<table class="album-data-div">
+				<tr class="tableHeader">
+					<td>编号</td>
+					<td>相册名称</td>
+					<td>相册封面</td>
+					<td>相册简介</td>
+					<td>操作</td>
+				</tr>
+				<?php if(is_array($list)): foreach($list as $key=>$val): ?><tr class="tablebody">
+					<td class="col-xs-2" height="120px"><?php echo ($val['id']); ?></td>
+					<td class="col-xs-2"><?php echo ($val['album_name']); ?></td>
+					<td class="col-xs-2"><img class="album_img" src='/Public/albumImg/<?php echo ($val['album_image']); ?>'></td>
+					<td class="col-xs-2"><?php echo ($val['album_introduce']); ?></td>
+					<td class="col-xs-2" par=<?php echo ($val['id']); ?>>
+                         <a href="<?php echo U('Index/user_edit');?>" class="signUpButton">用户修改</a>
+						<a class="btn btn-success btn-xs" href="<?php echo U('Index/user_edit');?>">修改</a>
+						<a class="btn btn-danger btn-xs" href="<?php echo U('Index/user_edit');?>">删除</a>
+					</td>
+				</tr><?php endforeach; endif; ?>
+			</table>
 		</div>
 	</div>
 </div>
