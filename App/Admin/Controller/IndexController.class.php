@@ -152,20 +152,22 @@ class IndexController extends Controller{
  	 * 修改相册信息
  	 */
  	function album_edit(){
- 	    $id=$_SESSION['User']['User_id'];
- 	    $upload = new \Think\Upload();
- 	    $upload->exts=array('jpg', 'gif', 'png', 'jpeg');
- 	    $upload->rootPath='./Public/albumImg/';
- 	    $info=$upload->upload();
- 	    $face=$info['face']['savepath'].$info['face']['savename'];
- 	    $data['User_name']=$_POST['username'];
- 	    $data['User_tel']=$_POST['tel'];
- 	    if($face){
- 	        $data['Face']=$face;
- 	    }
- 	    $User=D('User');
- 	    $User->where('User_id=%d',$id)->save($data);
- 	    $this->display('person');
+ 	    if(!empty($_POST['aid'])){
+ 			$email=$_POST['email'];
+ 			$role=$_POST['role'];
+ 			$status=$_POST['status'];
+ 			$Model=D('User');
+ 			$data['Status']=$status;
+ 			$data['Role']=$role;
+			$Model->where('Email=%s',"'"+$email+"'")->save($data);
+ 		}
+ 		if(!empty($_GET['id'])){
+ 			$id=$_GET['id'];
+ 			$Model=D('Album');
+ 			$result=$Model->where('id=%d',$id)->find();
+ 			$this->assign('result',$result);
+ 		}
+ 		$this->display();
  	}
  	
  	

@@ -1,0 +1,70 @@
+<meta charset="UTF-8">
+<extend name='./Public/Tpl/Admin_index.html' />
+<block name="main">
+<div class="div_from_aoto" style="width: 500px;">
+	<form method='post' action="{:U('Index/album_edit')}">
+		<div class="control-group">
+			<label class="laber_from">相册名称</label>
+			<div class="controls">
+				<input class="input_from" type='album_name' name='album_name'
+					placeholder="请输入相册名称" value='{$result["album_name"]}'>
+				<p class=help-block></p>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="laber_from">相册简介</label>
+			<div class="controls">
+				<textarea class="text_from" width="250px" height="100px"
+					type='album_introduce' name='album_introduce' placeholder="请输入相册简介">{$result['album_introduce']}</textarea>
+				<p class=help-block></p>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="laber_from">排序</label>
+			<div class="controls">
+				<input class="input_from" type='sort' name='sort'
+					value='{$result["sort"]}'>
+				<p class=help-block></p>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="laber_from">状态</label>
+			<div class="controls">
+				<select class="input_select" id="is_delete" name='is_delete'>
+					<option value="0">正常</option>
+					<option value="1">禁用</option>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="laber_from">角色</label>
+			<div class="controls">
+				<select class="input_select" id="is_delete" name='role'>
+					<option value='0'>普通会员</option>
+					<if condition="($result['is_delete'] eq 2)">
+					<option value='1'>管理员</option>
+					</if>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="laber_from"></label>
+			<div class="controls">
+				<input type='submit' class="btn btn-success" style="width: 120px;">
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	var result = {$result};
+	$('#is_delete').val({$result['is_delete']})
+
+    $(".controls button").click(function(){
+        if(bool==0){
+            return false;
+        }
+    });
+
+</script> </block>
+
+<block name="type">相册管理</block>

@@ -131,6 +131,7 @@
     </FORM>
 </div>
 <script type="text/javascript">
+alert(1);
     var bool=0;
     $("input[name='email']").focusout(function(){
         var email=$(this).val();

@@ -43,7 +43,7 @@
 					<td class="col-xs-2"><img class="album_img" src='__PUBLIC__/albumImg/{$val['album_image']}'></td>
 					<td class="col-xs-2">{$val['album_introduce']}</td>
 					<td class="col-xs-2" par={$val['id']}>
-						<a class="btn btn-success btn-xs" href="{:U('Index/album_edit')}">修改</a>
+						<a class="btn btn-success btn-xs edit-btn" href="{:U('Index/album_edit')}">修改</a>
 						<a class="btn btn-danger btn-xs" href="{:U('Index/album_del')}">删除</a>
 					</td>
 				</tr>
@@ -54,6 +54,7 @@
 </div>
 <div class="quotes">{$page}</div>
 <script type="text/javascript">
+alert(1);
 	$('.tableCell').click(
 			function() {
 				$(this).addClass('recommended').siblings().removeClass(
@@ -65,10 +66,10 @@
 				$("td[par='" + par + "']").addClass('recommended').siblings()
 						.removeClass('recommended');
 			});
-	$('.signUpButton').click(function() {
+	$('.edit-btn').click(function() {
 		var par = $(this).parent().attr('par');
 		var url = $(this).attr('href');
-		url = url + '?userid=' + par;
+		url = url + '?id=' + par;
 		$(this).attr('href', url);
 	});
 </script> </block>

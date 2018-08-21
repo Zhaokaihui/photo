@@ -96,80 +96,73 @@
 
         <div class="route_bg">
             <a href="<?php echo U('Index/index');?>" id='admin-index'>主页</a><i class="glyph-icon icon-chevron-right"></i>
-            <a id='admin-type'>相册列表</a>
+            <a id='admin-type'>相册管理</a>
         </div>
         <div class="mian_content">
             <div id="page_content">
-                 <script type="text/javascript"
-	src="/Public/JS/css-browser-select.js"></script>
-<div class="div_from_aoto">
-	<div class='lyq-term'>
-		<div role="tabpanel" class="tab-pane" id="user">
-			<div class="check-div form-inline">
-				<div class="col-xs-3">
-					<button class="btn btn-yellow btn-xs" data-toggle="modal"
-						data-target="#addUser">添加用户</button>
-				</div>
-				<div class="col-xs-4">
-					<input type="text" class="form-control input-sm"
-						placeholder="输入文字搜索">
-					<button class="btn-white btn-xs ">查 询</button>
-				</div>
-				<div class="col-lg-3 col-lg-offset-2 col-xs-4"
-					style="padding-right: 40px; text-align: right;">
-					<label for="paixu">排序:&nbsp;</label> <select class=" form-control">
-						<option>地区</option>
-						<option>地区</option>
-						<option>班期</option>
-						<option>性别</option>
-						<option>年龄</option>
-						<option>份数</option>
-					</select>
-				</div>
+                
+<div class="div_from_aoto" style="width: 500px;">
+	<form method='post' action="<?php echo U('Index/album_edit');?>">
+		<div class="control-group">
+			<label class="laber_from">相册名称</label>
+			<div class="controls">
+				<input class="input_from" type='album_name' name='album_name'
+					placeholder="请输入相册名称" value='<?php echo ($result["album_name"]); ?>'>
+				<p class=help-block></p>
 			</div>
-
-			<table class="album-data-div">
-				<tr class="tableHeader">
-					<td>编号</td>
-					<td>相册名称</td>
-					<td>相册封面</td>
-					<td>相册简介</td>
-					<td>操作</td>
-				</tr>
-				<?php if(is_array($list)): foreach($list as $key=>$val): ?><tr class="tablebody">
-					<td class="col-xs-2" height="120px"><?php echo ($val['id']); ?></td>
-					<td class="col-xs-2"><?php echo ($val['album_name']); ?></td>
-					<td class="col-xs-2"><img class="album_img" src='/Public/albumImg/<?php echo ($val['album_image']); ?>'></td>
-					<td class="col-xs-2"><?php echo ($val['album_introduce']); ?></td>
-					<td class="col-xs-2" par=<?php echo ($val['id']); ?>>
-						<a class="btn btn-success btn-xs edit-btn" href="<?php echo U('Index/album_edit');?>">修改</a>
-						<a class="btn btn-danger btn-xs" href="<?php echo U('Index/album_del');?>">删除</a>
-					</td>
-				</tr><?php endforeach; endif; ?>
-			</table>
 		</div>
-	</div>
+		<div class="control-group">
+			<label class="laber_from">相册简介</label>
+			<div class="controls">
+				<textarea class="text_from" width="250px" height="100px"
+					type='album_introduce' name='album_introduce' placeholder="请输入相册简介"><?php echo ($result['album_introduce']); ?></textarea>
+				<p class=help-block></p>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="laber_from">排序</label>
+			<div class="controls">
+				<input class="input_from" type='sort' name='sort'
+					value='<?php echo ($result["sort"]); ?>'>
+				<p class=help-block></p>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="laber_from">状态</label>
+			<div class="controls">
+				<select class="input_select" id="is_delete" name='is_delete'>
+					<option value="0">正常</option>
+					<option value="1">禁用</option>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="laber_from">角色</label>
+			<div class="controls">
+				<select class="input_select" id="is_delete" name='role'>
+					<option value='0'>普通会员</option>
+					<?php if(($result['is_delete'] == 2)): ?><option value='1'>管理员</option><?php endif; ?>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="laber_from"></label>
+			<div class="controls">
+				<input type='submit' class="btn btn-success" style="width: 120px;">
+			</div>
+		</div>
+	</form>
 </div>
-<div class="quotes"><?php echo ($page); ?></div>
 <script type="text/javascript">
-alert(1);
-	$('.tableCell').click(
-			function() {
-				$(this).addClass('recommended').siblings().removeClass(
-						'recommended').children().children('.price3')
-						.removeClass('price3').addClass('price1');
-				$(this).children().children('.price1').addClass('price3')
-						.removeClass('price1');
-				var par = $(this).attr('par');
-				$("td[par='" + par + "']").addClass('recommended').siblings()
-						.removeClass('recommended');
-			});
-	$('.edit-btn').click(function() {
-		var par = $(this).parent().attr('par');
-		var url = $(this).attr('href');
-		url = url + '?id=' + par;
-		$(this).attr('href', url);
-	});
+	var result = <?php echo ($result); ?>;
+	$('#is_delete').val(<?php echo ($result['is_delete']); ?>)
+
+    $(".controls button").click(function(){
+        if(bool==0){
+            return false;
+        }
+    });
+
 </script> 
             </div>
         </div>
