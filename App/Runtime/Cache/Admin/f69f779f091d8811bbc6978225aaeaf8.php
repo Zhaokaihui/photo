@@ -139,7 +139,7 @@
 				<?php if(is_array($list)): foreach($list as $key=>$val): ?><tr class="tablebody">
 					<td class="col-xs-2" height="120px"><?php echo ($val['id']); ?></td>
 					<td class="col-xs-2"><?php echo ($val['album_name']); ?></td>
-					<td class="col-xs-2"><img class="album_img" src='/Public/albumImg/<?php echo ($val['album_image']); ?>'></td>
+					<td class="col-xs-2"><img class="album_img" src='/Public/images/albumImg/<?php echo ($val['album_image']); ?>'></td>
 					<td class="col-xs-2"><?php echo ($val['album_introduce']); ?></td>
 					<td class="col-xs-2" par=<?php echo ($val['id']); ?>>
 						<a class="btn btn-success btn-xs edit-btn" href="<?php echo U('Index/album_edit');?>">修改</a>
@@ -152,7 +152,6 @@
 </div>
 <div class="quotes"><?php echo ($page); ?></div>
 <script type="text/javascript">
-alert(1);
 	$('.tableCell').click(
 			function() {
 				$(this).addClass('recommended').siblings().removeClass(

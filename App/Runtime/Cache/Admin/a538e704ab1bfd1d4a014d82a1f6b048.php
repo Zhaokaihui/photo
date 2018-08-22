@@ -102,31 +102,40 @@
             <div id="page_content">
                 
 <div class="div_from_aoto" style="width: 500px;">
-	<form method='post' action="<?php echo U('Index/album_edit');?>">
+	<form method='post' action="<?php echo U('Index/album_edit',array('id'=>$result['id']));?>" enctype="multipart/form-data" >
 		<div class="control-group">
 			<label class="laber_from">相册名称</label>
 			<div class="controls">
-				<input class="input_from" type='album_name' name='album_name'
-					placeholder="请输入相册名称" value='<?php echo ($result["album_name"]); ?>'>
+				<input class="input_from" name='album_name' placeholder="请输入相册名称" value='<?php echo ($result["album_name"]); ?>'>
 				<p class=help-block></p>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="laber_from">相册简介</label>
 			<div class="controls">
-				<textarea class="text_from" width="250px" height="100px"
-					type='album_introduce' name='album_introduce' placeholder="请输入相册简介"><?php echo ($result['album_introduce']); ?></textarea>
+				<textarea class="text_from" style="width:250px;height:100px" name='album_introduce' placeholder="请输入相册简介"><?php echo ($result['album_introduce']); ?></textarea>
 				<p class=help-block></p>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="laber_from">排序</label>
 			<div class="controls">
-				<input class="input_from" type='sort' name='sort'
-					value='<?php echo ($result["sort"]); ?>'>
+				<input class="input_from" name='sort' value='<?php echo ($result["sort"]); ?>'>
 				<p class=help-block></p>
 			</div>
 		</div>
+		
+		<div class="control-group">
+			<label class="laber_from">相册封面</label>
+			<div class="controls">
+				<img class="album_image_img" src="/Public/images/albumImg/<?php echo ($result['album_image']); ?>">
+				<button type="button" class="btn btn-success img_upload_btn" >选择图片 </button>
+				<input type="file" name="image"  id="picture" class="img_upload_file" multiple="multiple" style="display: none" />
+				<p class=help-block></p>
+			</div>
+		</div>
+		
+		
 		<div class="control-group">
 			<label class="laber_from">状态</label>
 			<div class="controls">
@@ -137,31 +146,55 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="laber_from">角色</label>
-			<div class="controls">
-				<select class="input_select" id="is_delete" name='role'>
-					<option value='0'>普通会员</option>
-					<?php if(($result['is_delete'] == 2)): ?><option value='1'>管理员</option><?php endif; ?>
-				</select>
-			</div>
-		</div>
-		<div class="control-group">
 			<label class="laber_from"></label>
 			<div class="controls">
-				<input type='submit' class="btn btn-success" style="width: 120px;">
+				<input type='submit' id="btn" class="btn btn-success" style="width: 120px;">
 			</div>
+		</div>
+		<div class="hidden-div">
+			<input type="hidden" name="id" value="<?php echo ($result['id']); ?>">
 		</div>
 	</form>
 </div>
 <script type="text/javascript">
 	var result = <?php echo ($result); ?>;
 	$('#is_delete').val(<?php echo ($result['is_delete']); ?>)
-
-    $(".controls button").click(function(){
-        if(bool==0){
-            return false;
-        }
+	
+	$(".img_upload_btn").click(function() {
+        $(".img_upload_file").click();
     });
+	
+	$(".img_upload_file").change(function() {
+		var path = $(this).val(),
+		extStart = path.lastIndexOf('.'),
+		ext = path.substring(extStart,path.length).toUpperCase();
+		//判断图片格式
+		if(ext !== '.PNG' && ext !== '.JPG' && ext !== '.JPEG' && ext !== '.GIF'){
+			alert('请上传正确格式的图片');
+			return false;
+		}
+		
+		//判断图片大小
+		
+		var size = this.files[0].size / 1024;
+		if(size > 6144){
+		   alert('图片大小不能超过6M');
+		   return false;
+		}
+		
+		var file = this.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function(e) {
+			$(".album_image_img").attr("src", this.result);
+		};
+	});
+	
+	$(".controls button").click(function(){
+		if(bool==0){
+			return false;
+		}
+	});
 
 </script> 
             </div>

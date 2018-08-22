@@ -49,7 +49,7 @@
 }
 
 
-/*相册liebioa*/
+/*相册列表*/
 .tableHeader {
 	height: 35px;
 	line-height: 35px;
@@ -89,4 +89,10 @@
 	margin-right: 10px;
 	color: #eab67c!important;
 	border: 1px solid #eab67c!important;
+}
+
+/*相册编辑*/
+.album_image_img{
+	max-width:300px;
+	max-height:300px;
 }

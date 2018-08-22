@@ -152,14 +152,21 @@ class IndexController extends Controller{
  	 * 修改相册信息
  	 */
  	function album_edit(){
- 	    if(!empty($_POST['aid'])){
- 			$email=$_POST['email'];
- 			$role=$_POST['role'];
- 			$status=$_POST['status'];
- 			$Model=D('User');
- 			$data['Status']=$status;
- 			$data['Role']=$role;
-			$Model->where('Email=%s',"'"+$email+"'")->save($data);
+ 	    if(!empty($_POST['id'])){
+ 	        $Model=D('album');
+ 			$data['album_name']=$_POST['album_name'];
+ 			$data['sort']=$_POST['sort'];
+ 			$data['is_delete']=$_POST['is_delete'];
+ 			$data['album_introduce'] = $_POST['album_introduce'];
+ 			
+ 			$upload = new \Think\Upload();
+ 			$upload->exts=array('jpg', 'gif', 'png', 'jpeg');
+ 			$upload->rootPath='./Public/images/albumImg/';
+ 			$info=$upload->upload();
+ 			if(!empty($info)){
+ 			    $data['album_image'] = $info['image']['savepath'].$info['image']['savename'];
+ 			}
+			$Model->where('id=%s',$_POST[id])->save($data);
  		}
  		if(!empty($_GET['id'])){
  			$id=$_GET['id'];
@@ -171,7 +178,7 @@ class IndexController extends Controller{
  	}
  	
  	
-function user_list(){
+    function user_list(){
  		$User=M('User');
  		$p=$_GET['p']?$_GET['p']:1;
 

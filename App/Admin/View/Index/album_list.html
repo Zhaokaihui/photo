@@ -40,7 +40,7 @@
 				<tr class="tablebody">
 					<td class="col-xs-2" height="120px">{$val['id']}</td>
 					<td class="col-xs-2">{$val['album_name']}</td>
-					<td class="col-xs-2"><img class="album_img" src='__PUBLIC__/albumImg/{$val['album_image']}'></td>
+					<td class="col-xs-2"><img class="album_img" src='__PUBLIC__/images/albumImg/{$val['album_image']}'></td>
 					<td class="col-xs-2">{$val['album_introduce']}</td>
 					<td class="col-xs-2" par={$val['id']}>
 						<a class="btn btn-success btn-xs edit-btn" href="{:U('Index/album_edit')}">修改</a>
@@ -54,7 +54,6 @@
 </div>
 <div class="quotes">{$page}</div>
 <script type="text/javascript">
-alert(1);
 	$('.tableCell').click(
 			function() {
 				$(this).addClass('recommended').siblings().removeClass(
