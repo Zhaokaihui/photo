@@ -2,7 +2,7 @@
 <extend name='./Public/Tpl/Admin_index.html' />
 <block name="main">
 <div class="div_from_aoto" style="width: 500px;">
-	<form method='post' action="{:U('Index/album_edit',array('id'=>$result['id']))}" enctype="multipart/form-data" >
+	<form method='post' id="myForm" action="{:U('Index/album_edit')}" enctype="multipart/form-data" >
 		<div class="control-group">
 			<label class="laber_from">相册名称</label>
 			<div class="controls">
@@ -48,7 +48,8 @@
 		<div class="control-group">
 			<label class="laber_from"></label>
 			<div class="controls">
-				<input type='submit' id="btn" class="btn btn-success" style="width: 120px;">
+				<button type="button" id="update_btn" class="btn btn-success" style="width: 120px;">提交</button>
+				<button type="button" id="btn" class="btn btn-success" style="width: 120px;">提交</button>
 			</div>
 		</div>
 		<div class="hidden-div">
@@ -64,6 +65,23 @@
         $(".img_upload_file").click();
     });
 	
+	$('#update_btn').click(function(){
+		var form = document.getElementById("myForm");
+		var myFormData = new FormData(form);
+		$.ajax({
+			type: "POST",
+			url: '{:U("Index/album_update")}',
+			data: myFormData,
+			dataType: "json",
+			processData: false,
+			contentType: false,
+			success: function(data){
+				layer.msg(data.msg);
+			}
+		});
+		 
+	})
+	
 	$(".img_upload_file").change(function() {
 		var path = $(this).val(),
 		extStart = path.lastIndexOf('.'),
@@ -75,7 +93,6 @@
 		}
 		
 		//判断图片大小
-		
 		var size = this.files[0].size / 1024;
 		if(size > 6144){
 		   alert('图片大小不能超过6M');
@@ -90,11 +107,6 @@
 		};
 	});
 	
-	$(".controls button").click(function(){
-		if(bool==0){
-			return false;
-		}
-	});
 
 </script> </block>
 

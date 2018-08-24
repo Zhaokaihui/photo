@@ -98,119 +98,62 @@
 
         <div class="route_bg">
             <a href="<?php echo U('Index/index');?>" id='admin-index'>主页</a><i class="glyph-icon icon-chevron-right"></i>
-            <a id='admin-type'>相册管理</a>
+            <a id='admin-type'>后台主页</a>
         </div>
         <div class="mian_content">
             <div id="page_content">
                 
-<div class="div_from_aoto" style="width: 500px;">
-	<form method='post' id="myForm" action="<?php echo U('Index/album_edit');?>" enctype="multipart/form-data" >
-		<div class="control-group">
-			<label class="laber_from">相册名称</label>
-			<div class="controls">
-				<input class="input_from" name='album_name' placeholder="请输入相册名称" value='<?php echo ($result["album_name"]); ?>'>
-				<p class=help-block></p>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="laber_from">相册简介</label>
-			<div class="controls">
-				<textarea class="text_from" style="width:250px;height:100px" name='album_introduce' placeholder="请输入相册简介"><?php echo ($result['album_introduce']); ?></textarea>
-				<p class=help-block></p>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="laber_from">排序</label>
-			<div class="controls">
-				<input class="input_from" name='sort' value='<?php echo ($result["sort"]); ?>'>
-				<p class=help-block></p>
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<label class="laber_from">相册封面</label>
-			<div class="controls">
-				<img class="album_image_img" src="/Public/images/albumImg/<?php echo ($result['album_image']); ?>">
-				<button type="button" class="btn btn-success img_upload_btn" >选择图片 </button>
-				<input type="file" name="image"  id="picture" class="img_upload_file" multiple="multiple" style="display: none" />
-				<p class=help-block></p>
-			</div>
-		</div>
-		
-		
-		<div class="control-group">
-			<label class="laber_from">状态</label>
-			<div class="controls">
-				<select class="input_select" id="is_delete" name='is_delete'>
-					<option value="0">正常</option>
-					<option value="1">禁用</option>
-				</select>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="laber_from"></label>
-			<div class="controls">
-				<button type="button" id="update_btn" class="btn btn-success" style="width: 120px;">提交</button>
-				<button type="button" id="btn" class="btn btn-success" style="width: 120px;">提交</button>
-			</div>
-		</div>
-		<div class="hidden-div">
-			<input type="hidden" name="id" value="<?php echo ($result['id']); ?>">
-		</div>
-	</form>
-</div>
-<script type="text/javascript">
-	var result = <?php echo ($result); ?>;
-	$('#is_delete').val(<?php echo ($result['is_delete']); ?>)
-	
-	$(".img_upload_btn").click(function() {
-        $(".img_upload_file").click();
-    });
-	
-	$('#update_btn').click(function(){
-		var form = document.getElementById("myForm");
-		var myFormData = new FormData(form);
-		$.ajax({
-			type: "POST",
-			url: '<?php echo U("Index/album_update");?>',
-			data: myFormData,
-			dataType: "json",
-			processData: false,
-			contentType: false,
-			success: function(data){
-				layer.msg(data.msg);
-			}
-		});
-		 
-	})
-	
-	$(".img_upload_file").change(function() {
-		var path = $(this).val(),
-		extStart = path.lastIndexOf('.'),
-		ext = path.substring(extStart,path.length).toUpperCase();
-		//判断图片格式
-		if(ext !== '.PNG' && ext !== '.JPG' && ext !== '.JPEG' && ext !== '.GIF'){
-			alert('请上传正确格式的图片');
-			return false;
-		}
-		
-		//判断图片大小
-		var size = this.files[0].size / 1024;
-		if(size > 6144){
-		   alert('图片大小不能超过6M');
-		   return false;
-		}
-		
-		var file = this.files[0];
-		var reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onload = function(e) {
-			$(".album_image_img").attr("src", this.result);
-		};
-	});
-	
+	<div class="div_from_aoto" style="width: 950px;">
+	    <div class="all-count">
+	    	<div class="count-user">
+	    		<div class='fa fa-group'></div>
+	    		<div>会员</div>
+	    	</div>
+	    	<div class="count-project">
+				<div class='fa fa-navicon'></div>
+	    		<div>项目</div>
+	    	</div>
+	    	<div class="count-task">
+				<div class='fa fa-clipboard'></div>
+	    		<div>任务</div>
+	    	</div>
+	    </div>
 
-</script> 
+	    <div style="clear:both" class='count-ico'><div class='fa fa-bar-chart'></div>　统计</div>
+	    <div class="all-count-data">
+	    	<ul class="count-data">
+	    		<li class="user-count">
+	    			<div class="count-box" style='background:#27A9E3'></div>
+	    			<span style='color:#27A9E3'><?php echo ($list[0]); ?></span>
+	    		</li>
+	    		<li class="project-count">
+	    			<div class="count-box" style='background:#28B779'></div>
+	    			<span style='color:#28B779'><?php echo ($list[1]); ?></span>
+	    		</li>
+	    		<li class="task-count">
+	    			<div class="count-box" style='background:#FFB748'></div>
+	    			<span style='color:#FFB748'><?php echo ($list[2]); ?></span>
+	    		</li>
+	    	</ul>
+	    </div>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			var num=<?php echo ($list[0]); ?>;
+			var set_width=5+num+'px';
+			$('.user-count div').animate({width:set_width},1000);
+
+			var num=<?php echo ($list[1]); ?>;
+			var set_width=5+num+'px';
+			$('.project-count div').animate({width:set_width},1000);
+
+			var num=<?php echo ($list[2]); ?>;
+			var set_width=5+num+'px';
+			$('.task-count div').animate({width:set_width},1000);
+
+		});
+	</script>
+
             </div>
         </div>
     </div>

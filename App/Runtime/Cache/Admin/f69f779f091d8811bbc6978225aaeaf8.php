@@ -23,6 +23,8 @@
 <script type="text/javascript" src="/Public/JS/common.js"></script>
 <script type="text/javascript" src="/Public/JS/bootstrap.min.js"></script>
 
+<script type="text/javascript" src="/Public/plugin/layer/layer.js"></script>
+
 </head>
 <body>
     <!--顶部-->
@@ -128,7 +130,7 @@
 				</div>
 			</div>
 
-			<table class="album-data-div">
+			<table class="album-data-div" width="100%">
 				<tr class="tableHeader">
 					<td>编号</td>
 					<td>相册名称</td>

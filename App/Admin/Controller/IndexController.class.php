@@ -152,31 +152,50 @@ class IndexController extends Controller{
  	 * 修改相册信息
  	 */
  	function album_edit(){
- 	    if(!empty($_POST['id'])){
- 	        $Model=D('album');
- 			$data['album_name']=$_POST['album_name'];
- 			$data['sort']=$_POST['sort'];
- 			$data['is_delete']=$_POST['is_delete'];
- 			$data['album_introduce'] = $_POST['album_introduce'];
- 			
- 			$upload = new \Think\Upload();
- 			$upload->exts=array('jpg', 'gif', 'png', 'jpeg');
- 			$upload->rootPath='./Public/images/albumImg/';
- 			$info=$upload->upload();
- 			if(!empty($info)){
- 			    $data['album_image'] = $info['image']['savepath'].$info['image']['savename'];
- 			}
-			$Model->where('id=%s',$_POST[id])->save($data);
- 		}
  		if(!empty($_GET['id'])){
  			$id=$_GET['id'];
  			$Model=D('Album');
  			$result=$Model->where('id=%d',$id)->find();
  			$this->assign('result',$result);
  		}
- 		$this->display();
+	    $this->display();
  	}
  	
+ 	function album_update(){
+ 	    if(!empty($_POST['id'])){
+ 	        $id = $_POST['id'];
+ 	        
+ 	        $Model=D('album');
+ 	        $oldImage = $Model->where('id=%d',$id)->field('album_image')->find();
+ 			$data['album_name']=$_POST['album_name'];
+ 			$data['sort']=$_POST['sort'];
+ 			$data['is_delete']=$_POST['is_delete'];
+ 			$data['album_introduce'] = $_POST['album_introduce'];
+
+ 			//上传图片
+ 			$upload = new \Think\Upload();
+ 			$upload->exts=array('jpg', 'gif', 'png', 'jpeg');
+ 			$upload->rootPath='./Public/images/albumImg/';
+ 			$info=$upload->upload();
+ 			$data['album_image'] = '';
+ 			if(!empty($info)){
+ 			    $data['album_image'] = $info['image']['savepath'].$info['image']['savename'];
+ 			}
+ 			//删除旧图片
+ 			if($oldImage['album_image'] != $data['album_image'] && $data['album_image'] != ''){
+ 			    unlink('./Public/images/albumImg/'.$oldImage['album_image']);
+ 			}
+ 			
+ 			$result = $Model->where('id=%s',$id)->save($data);
+ 			if($result){
+ 			    $return = array('msg'=>'修改成功！');
+ 			}else{
+ 			    $return = array('msg'=>'修改失败！');
+ 			}
+
+ 			$this->ajaxReturn($return);
+ 	    }
+ 	}
  	
     function user_list(){
  		$User=M('User');
