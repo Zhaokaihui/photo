@@ -144,8 +144,8 @@
 					<td class="col-xs-2"><img class="album_img" src='/Public/images/albumImg/<?php echo ($val['album_image']); ?>'></td>
 					<td class="col-xs-2"><?php echo ($val['album_introduce']); ?></td>
 					<td class="col-xs-2" par=<?php echo ($val['id']); ?>>
-						<a class="btn btn-success btn-xs edit-btn" href="<?php echo U('Index/album_edit');?>">修改</a>
-						<a class="btn btn-danger btn-xs" href="<?php echo U('Index/album_del');?>">删除</a>
+						<a class="btn btn-success btn-xs edit-btn" href="<?php echo U('Index/album_edit_add');?>">修改</a>
+						<a class="btn btn-danger btn-xs del-btn">删除</a>
 					</td>
 				</tr><?php endforeach; endif; ?>
 			</table>
@@ -171,6 +171,23 @@
 		url = url + '?id=' + par;
 		$(this).attr('href', url);
 	});
+	
+	$('.del-btn').click(function(){
+		var par = $(this).parent().attr('par');
+		layer.alert('',{
+			icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
+			$.ajax({
+				type: "GET",
+				url: '<?php echo U("Index/album_del");?>',
+				data: {id:par},
+				dataType: "json",
+				success: function(data){
+					refresh(1,data.msg)
+				}
+			});
+		    layer.close(index);
+		});
+	})
 </script> 
             </div>
         </div>

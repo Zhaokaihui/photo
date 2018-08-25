@@ -27,3 +27,14 @@ $(function(){
         $(this).find("a").attr("class","");
     });
 });
+
+
+//规定时间，刷新页面
+//time 时间 秒
+//msg  提示信息
+function refresh(time,msg){
+	setTimeout(function(){
+		window.location.reload();
+	},time*1000);
+	layer.msg(msg);
+}

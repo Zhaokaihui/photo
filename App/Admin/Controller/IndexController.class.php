@@ -151,14 +151,14 @@ class IndexController extends Controller{
  	/**
  	 * 修改相册信息
  	 */
- 	function album_edit(){
+ 	function album_edit_add(){
  		if(!empty($_GET['id'])){
  			$id=$_GET['id'];
  			$Model=D('Album');
  			$result=$Model->where('id=%d',$id)->find();
  			$this->assign('result',$result);
+ 			$this->display('album_edit');
  		}
-	    $this->display();
  	}
  	
  	function album_update(){
@@ -195,6 +195,21 @@ class IndexController extends Controller{
 
  			$this->ajaxReturn($return);
  	    }
+ 	}
+ 	
+ 	function album_del(){
+ 	    $id = $_GET['id'];
+ 	    $Model=D('album');
+ 	    $oldImage = $Model->where('id=%d',$id)->field('album_image')->find();
+ 	    $result = $Model->where('id=%s',$id)->delete();
+ 	    if($result){
+ 	        //删除旧图片
+ 	        unlink('./Public/images/albumImg/'.$oldImage['album_image']);
+ 	        $return = array('msg'=>'修改成功！');
+ 	    }else{
+ 	        $return = array('msg'=>'删除失败！');
+ 	    }
+ 	    $this->ajaxReturn($return);
  	}
  	
     function user_list(){

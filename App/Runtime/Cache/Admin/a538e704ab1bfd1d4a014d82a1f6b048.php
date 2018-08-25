@@ -130,8 +130,9 @@
 		<div class="control-group">
 			<label class="laber_from">相册封面</label>
 			<div class="controls">
-				<img class="album_image_img" src="/Public/images/albumImg/<?php echo ($result['album_image']); ?>">
-				<button type="button" class="btn btn-success img_upload_btn" >选择图片 </button>
+				<button type="button" class="img_upload_btn" title="点击上传图片">
+					<img class="album_image_img" src="/Public/images/albumImg/<?php echo ($result['album_image']); ?>">
+				</button>
 				<input type="file" name="image"  id="picture" class="img_upload_file" multiple="multiple" style="display: none" />
 				<p class=help-block></p>
 			</div>
@@ -151,7 +152,7 @@
 			<label class="laber_from"></label>
 			<div class="controls">
 				<button type="button" id="update_btn" class="btn btn-success" style="width: 120px;">提交</button>
-				<button type="button" id="btn" class="btn btn-success" style="width: 120px;">提交</button>
+				<button type="button" id="back_btn" class="btn btn-success" onclick="window.location.href=document.referrer;" style="width: 120px;">返回列表</button>
 			</div>
 		</div>
 		<div class="hidden-div">
@@ -170,6 +171,8 @@
 	$('#update_btn').click(function(){
 		var form = document.getElementById("myForm");
 		var myFormData = new FormData(form);
+		var album_image_img = $(".album_image_img").attr("src");
+		myFormData.append("album_image", album_image_img);
 		$.ajax({
 			type: "POST",
 			url: '<?php echo U("Index/album_update");?>',

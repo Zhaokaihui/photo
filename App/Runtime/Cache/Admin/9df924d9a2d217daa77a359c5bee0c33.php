@@ -23,6 +23,8 @@
 <script type="text/javascript" src="/Public/JS/common.js"></script>
 <script type="text/javascript" src="/Public/JS/bootstrap.min.js"></script>
 
+<script type="text/javascript" src="/Public/plugin/layer/layer.js"></script>
+
 </head>
 <body>
     <!--顶部-->
