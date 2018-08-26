@@ -58,8 +58,8 @@
             <li class="childUlLi">
                 <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>相册管理</a>
                 <ul>
-                    <li><a href="<?php echo U('Index/album_list');?>"><i class="glyph-icon icon-chevron-right"></i>相册列表</a></li>
-                    <li><a href="<?php echo U('Index/album_add');?>"><i class="glyph-icon icon-chevron-right"></i>相册添加</a></li>
+                    <li><a href="<?php echo U('Album/album_list');?>"><i class="glyph-icon icon-chevron-right"></i>相册列表</a></li>
+                    <li><a href="<?php echo U('Album/album_add');?>"><i class="glyph-icon icon-chevron-right"></i>相册添加</a></li>
                 </ul>
             </li>
             <li class="childUlLi">

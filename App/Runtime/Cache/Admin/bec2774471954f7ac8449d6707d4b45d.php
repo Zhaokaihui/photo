@@ -58,8 +58,8 @@
             <li class="childUlLi">
                 <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>相册管理</a>
                 <ul>
-                    <li><a href="<?php echo U('Index/album_list');?>"><i class="glyph-icon icon-chevron-right"></i>相册列表</a></li>
-                    <li><a href="<?php echo U('Index/album_add');?>"><i class="glyph-icon icon-chevron-right"></i>相册添加</a></li>
+                    <li><a href="<?php echo U('Album/album_list');?>"><i class="glyph-icon icon-chevron-right"></i>相册列表</a></li>
+                    <li><a href="<?php echo U('Album/album_add');?>"><i class="glyph-icon icon-chevron-right"></i>相册添加</a></li>
                 </ul>
             </li>
             <li class="childUlLi">
@@ -98,89 +98,119 @@
 
         <div class="route_bg">
             <a href="<?php echo U('Index/index');?>" id='admin-index'>主页</a><i class="glyph-icon icon-chevron-right"></i>
-            <a id='admin-type'>用户管理</a>
+            <a id='admin-type'>相册添加</a>
         </div>
         <div class="mian_content">
             <div id="page_content">
                 
-    <div class="div_from_aoto" style="width: 500px;">
-    <FORM method='post'>
-        <DIV class="control-group">
-            <label class="laber_from">注册邮箱</label>
-            <DIV  class="controls" ><INPUT class="input_from" type='email' name='email' placeholder=" 请输入注册邮箱"><P class='help-block'></P></DIV>
-        </DIV>
-        <DIV class="control-group">
-            <LABEL class="laber_from">密码</LABEL>
-            <DIV  class="controls" ><INPUT class="input_from" type='password' name='pwd' placeholder=" 请输入密码" name='pwd'><P class='help-block'></P></DIV>
-        </DIV>
-        <DIV class="control-group">
-            <LABEL class="laber_from" >确认密码</LABEL>
-            <DIV  class="controls" ><INPUT class="input_from" type='password' name='pwd2' placeholder=" 请输入确认密码"><P class='help-block'></P></DIV>
-        </DIV>
-        <DIV class="control-group">
-            <LABEL class="laber_from">角色</LABEL>
-            <DIV  class="controls" >
-                <SELECT class="input_select" name='role'>
-                    <OPTION selected value='0'>普通会员</OPTION>
-                    <?php if(($_SESSION['User']['Role'] == 2)): ?><OPTION value='1'>管理员</OPTION><?php endif; ?>
-                </SELECT>
-            </DIV>
-        </DIV>
-        <DIV class="control-group">
-            <LABEL class="laber_from" ></LABEL>
-            <DIV class="controls" ><button class="btn btn-success" style="width:120px;" >确认</button></DIV>
-        </DIV>
-    </FORM>
+<div class="div_from_aoto" style="width: 500px;">
+	<form method='post' id="myForm" action="<?php echo U('Album/album_add');?>" enctype="multipart/form-data" >
+		<div class="control-group">
+			<label class="laber_from">相册名称</label>
+			<div class="controls">
+				<input class="input_from" name='album_name' placeholder="请输入相册名称" value=''>
+				<p class=help-block></p>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="laber_from">相册简介</label>
+			<div class="controls">
+				<textarea class="text_from" style="width:250px;height:100px" name='album_introduce' placeholder="请输入相册简介"></textarea>
+				<p class=help-block></p>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="laber_from">排序</label>
+			<div class="controls">
+				<input class="input_from" name='sort' value='0'>
+				<p class=help-block></p>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="laber_from">相册封面</label>
+			<div class="controls">
+				<button type="button" class="img_upload_btn" title="点击上传图片">
+					<img class="album_image_img" src="/Public/images/albumImg/default.png">
+				</button>
+				<input type="file" name="image"  id="picture" class="img_upload_file" multiple="multiple" style="display: none" />
+				<p class=help-block></p>
+			</div>
+		</div>
+		
+		
+		<div class="control-group">
+			<label class="laber_from">状态</label>
+			<div class="controls">
+				<select class="input_select" id="is_delete" name='is_delete'>
+					<option value="0">正常</option>
+					<option value="1">禁用</option>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="laber_from"></label>
+			<div class="controls">
+				<button type="button" id="update_btn" class="btn btn-success" style="width: 120px;">提交</button>
+				<button type="button" id="back_btn" class="btn btn-success" onclick="window.location.href=document.referrer;" style="width: 120px;">返回列表</button>
+			</div>
+		</div>
+		<div class="hidden-div">
+			<input type="hidden" name="is_add" value="1">
+		</div>
+	</form>
 </div>
 <script type="text/javascript">
-    var bool=0;
-    $("input[name='email']").focusout(function(){
-        var email=$(this).val();
-        var str=/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-        if(str.test(email)){
-            $.get("<?php echo U('Index/exist');?>",{email:$(this).val()},function(data){
-                if(!data){
-                    bool++;
-                    $("input[name='email']").next().html('');
-                }else{
-                    $("input[name='email']").next().css('color','red').html('邮箱已被使用');
-                }
-            });
-        }else{
-            $(this).next().css('color','red').html('邮箱格式非法');
-        }
+	$(".img_upload_btn").click(function() {
+        $(".img_upload_file").click();
     });
+	
+	$('#update_btn').click(function(){
+		var form = document.getElementById("myForm");
+		var myFormData = new FormData(form);
+		var album_image_img = $(".album_image_img").attr("src");
+		myFormData.append("album_image", album_image_img);
+		$.ajax({
+			type: "POST",
+			url: '<?php echo U("Album/album_add");?>',
+			data: myFormData,
+			dataType: "json",
+			processData: false,
+			contentType: false,
+			success: function(data){
+				layer.msg(data.msg);
+			}
+		});
+		 
+	})
+	
+	$(".img_upload_file").change(function() {
+		var path = $(this).val(),
+		extStart = path.lastIndexOf('.'),
+		ext = path.substring(extStart,path.length).toUpperCase();
+		//判断图片格式
+		if(ext !== '.PNG' && ext !== '.JPG' && ext !== '.JPEG' && ext !== '.GIF'){
+			alert('请上传正确格式的图片');
+			return false;
+		}
+		
+		//判断图片大小
+		var size = this.files[0].size / 1024;
+		if(size > 6144){
+		   alert('图片大小不能超过6M');
+		   return false;
+		}
+		
+		var file = this.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function(e) {
+			$(".album_image_img").attr("src", this.result);
+		};
+	});
+	
 
-    $("input[name='pwd']").focusout(function(){
-        var pwd=$(this).val();
-        if(pwd!=''){
-            bool++;
-            $(this).next().html('');
-        }else{
-            $(this).next().css('color','red').html('密码不许为空');
-        }
-    });
-
-    $("input[name='pwd2']").focusout(function(){
-        var pwd2=$(this).val();
-        var pwd=$("input[name='pwd']").val();
-        if(pwd!='' && pwd==pwd2){
-            bool++;
-            $(this).next().html('');
-        }else{
-            $(this).next().css('color','red').html('密码不一致');
-        }
-    });
-
-    $(".controls button").click(function(){
-        if(bool!=3){
-            return false;
-        }
-        bool=0;
-    });
-
-</script>
-
+</script> 
             </div>
         </div>
     </div>

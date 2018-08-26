@@ -107,27 +107,14 @@
 <div class="div_from_aoto">
 	<div class='lyq-term'>
 		<div role="tabpanel" class="tab-pane" id="user">
-			<div class="check-div form-inline">
+			<div class="check-div form-inline" style="height:45px;">
 				<div class="col-xs-3">
-					<button class="btn btn-yellow btn-xs" data-toggle="modal"
-						data-target="#addUser">添加用户</button>
+					<a class="btn btn-yellow btn-xs"  href="<?php echo U('Album/album_add');?>">添加相册</a>
 				</div>
-				<div class="col-xs-4">
-					<input type="text" class="form-control input-sm"
-						placeholder="输入文字搜索">
+				<!-- <div class="col-xs-4">
+					<input type="text" class="form-control input-sm" placeholder="输入文字搜索">
 					<button class="btn-white btn-xs ">查 询</button>
-				</div>
-				<div class="col-lg-3 col-lg-offset-2 col-xs-4"
-					style="padding-right: 40px; text-align: right;">
-					<label for="paixu">排序:&nbsp;</label> <select class=" form-control">
-						<option>地区</option>
-						<option>地区</option>
-						<option>班期</option>
-						<option>性别</option>
-						<option>年龄</option>
-						<option>份数</option>
-					</select>
-				</div>
+				</div> -->
 			</div>
 
 			<table class="album-data-div" width="100%">
@@ -144,7 +131,7 @@
 					<td class="col-xs-2"><img class="album_img" src='/Public/images/albumImg/<?php echo ($val['album_image']); ?>'></td>
 					<td class="col-xs-2"><?php echo ($val['album_introduce']); ?></td>
 					<td class="col-xs-2" par=<?php echo ($val['id']); ?>>
-						<a class="btn btn-success btn-xs edit-btn" href="<?php echo U('Index/album_edit_add');?>">修改</a>
+						<a class="btn btn-success btn-xs edit-btn" href="<?php echo U('Album/album_edit');?>">修改</a>
 						<a class="btn btn-danger btn-xs del-btn">删除</a>
 					</td>
 				</tr><?php endforeach; endif; ?>
@@ -178,7 +165,7 @@
 			icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
 			$.ajax({
 				type: "GET",
-				url: '<?php echo U("Index/album_del");?>',
+				url: '<?php echo U("Album/album_del");?>',
 				data: {id:par},
 				dataType: "json",
 				success: function(data){

@@ -58,15 +58,15 @@
             <li class="childUlLi">
                 <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>相册管理</a>
                 <ul>
-                    <li><a href="<?php echo U('Index/album_list');?>"><i class="glyph-icon icon-chevron-right"></i>相册列表</a></li>
-                    <li><a href="<?php echo U('Index/album_add');?>"><i class="glyph-icon icon-chevron-right"></i>相册添加</a></li>
+                    <li><a href="<?php echo U('Album/album_list');?>"><i class="glyph-icon icon-chevron-right"></i>相册列表</a></li>
+                    <li><a href="<?php echo U('Album/album_add');?>"><i class="glyph-icon icon-chevron-right"></i>相册添加</a></li>
                 </ul>
             </li>
             <li class="childUlLi">
                 <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>照片管理</a>
                 <ul>
-                    <li><a href="<?php echo U('Index/photo_list');?>"><i class="glyph-icon icon-chevron-right"></i>照片列表</a></li>
-                    <li><a href="<?php echo U('Index/photo_add');?>"><i class="glyph-icon icon-chevron-right"></i>照片添加</a></li>
+                    <li><a href="<?php echo U('Photo/photo_list');?>"><i class="glyph-icon icon-chevron-right"></i>照片列表</a></li>
+                    <li><a href="<?php echo U('Photo/photo_add');?>"><i class="glyph-icon icon-chevron-right"></i>照片添加</a></li>
                 </ul>
             </li>
             <li class="childUlLi">
@@ -98,89 +98,84 @@
 
         <div class="route_bg">
             <a href="<?php echo U('Index/index');?>" id='admin-index'>主页</a><i class="glyph-icon icon-chevron-right"></i>
-            <a id='admin-type'>用户管理</a>
+            <a id='admin-type'>相册列表</a>
         </div>
         <div class="mian_content">
             <div id="page_content">
-                
-    <div class="div_from_aoto" style="width: 500px;">
-    <FORM method='post'>
-        <DIV class="control-group">
-            <label class="laber_from">注册邮箱</label>
-            <DIV  class="controls" ><INPUT class="input_from" type='email' name='email' placeholder=" 请输入注册邮箱"><P class='help-block'></P></DIV>
-        </DIV>
-        <DIV class="control-group">
-            <LABEL class="laber_from">密码</LABEL>
-            <DIV  class="controls" ><INPUT class="input_from" type='password' name='pwd' placeholder=" 请输入密码" name='pwd'><P class='help-block'></P></DIV>
-        </DIV>
-        <DIV class="control-group">
-            <LABEL class="laber_from" >确认密码</LABEL>
-            <DIV  class="controls" ><INPUT class="input_from" type='password' name='pwd2' placeholder=" 请输入确认密码"><P class='help-block'></P></DIV>
-        </DIV>
-        <DIV class="control-group">
-            <LABEL class="laber_from">角色</LABEL>
-            <DIV  class="controls" >
-                <SELECT class="input_select" name='role'>
-                    <OPTION selected value='0'>普通会员</OPTION>
-                    <?php if(($_SESSION['User']['Role'] == 2)): ?><OPTION value='1'>管理员</OPTION><?php endif; ?>
-                </SELECT>
-            </DIV>
-        </DIV>
-        <DIV class="control-group">
-            <LABEL class="laber_from" ></LABEL>
-            <DIV class="controls" ><button class="btn btn-success" style="width:120px;" >确认</button></DIV>
-        </DIV>
-    </FORM>
+                 <script type="text/javascript"
+	src="/Public/JS/css-browser-select.js"></script>
+<div class="div_from_aoto">
+	<div class='lyq-term'>
+		<div role="tabpanel" class="tab-pane" id="user">
+			<div class="check-div form-inline" style="height:45px;">
+				<div class="col-xs-3">
+					<a class="btn btn-yellow btn-xs"  href="<?php echo U('Album/album_add');?>">添加相册</a>
+				</div>
+				<!-- <div class="col-xs-4">
+					<input type="text" class="form-control input-sm" placeholder="输入文字搜索">
+					<button class="btn-white btn-xs ">查 询</button>
+				</div> -->
+			</div>
+
+			<table class="album-data-div" width="100%">
+				<tr class="tableHeader">
+					<td>编号</td>
+					<td>相册名称</td>
+					<td>相册封面</td>
+					<td>相册简介</td>
+					<td>操作</td>
+				</tr>
+				<?php if(is_array($list)): foreach($list as $key=>$val): ?><tr class="tablebody">
+					<td class="col-xs-2" height="120px"><?php echo ($val['id']); ?></td>
+					<td class="col-xs-2"><?php echo ($val['album_name']); ?></td>
+					<td class="col-xs-2"><img class="album_img" src='/Public/images/albumImg/<?php echo ($val['album_image']); ?>'></td>
+					<td class="col-xs-2"><?php echo ($val['album_introduce']); ?></td>
+					<td class="col-xs-2" par=<?php echo ($val['id']); ?>>
+						<a class="btn btn-success btn-xs edit-btn" href="<?php echo U('Album/album_edit');?>">修改</a>
+						<a class="btn btn-danger btn-xs del-btn">删除</a>
+					</td>
+				</tr><?php endforeach; endif; ?>
+			</table>
+		</div>
+	</div>
 </div>
+<div class="quotes"><?php echo ($page); ?></div>
 <script type="text/javascript">
-    var bool=0;
-    $("input[name='email']").focusout(function(){
-        var email=$(this).val();
-        var str=/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-        if(str.test(email)){
-            $.get("<?php echo U('Index/exist');?>",{email:$(this).val()},function(data){
-                if(!data){
-                    bool++;
-                    $("input[name='email']").next().html('');
-                }else{
-                    $("input[name='email']").next().css('color','red').html('邮箱已被使用');
-                }
-            });
-        }else{
-            $(this).next().css('color','red').html('邮箱格式非法');
-        }
-    });
-
-    $("input[name='pwd']").focusout(function(){
-        var pwd=$(this).val();
-        if(pwd!=''){
-            bool++;
-            $(this).next().html('');
-        }else{
-            $(this).next().css('color','red').html('密码不许为空');
-        }
-    });
-
-    $("input[name='pwd2']").focusout(function(){
-        var pwd2=$(this).val();
-        var pwd=$("input[name='pwd']").val();
-        if(pwd!='' && pwd==pwd2){
-            bool++;
-            $(this).next().html('');
-        }else{
-            $(this).next().css('color','red').html('密码不一致');
-        }
-    });
-
-    $(".controls button").click(function(){
-        if(bool!=3){
-            return false;
-        }
-        bool=0;
-    });
-
-</script>
-
+	$('.tableCell').click(
+			function() {
+				$(this).addClass('recommended').siblings().removeClass(
+						'recommended').children().children('.price3')
+						.removeClass('price3').addClass('price1');
+				$(this).children().children('.price1').addClass('price3')
+						.removeClass('price1');
+				var par = $(this).attr('par');
+				$("td[par='" + par + "']").addClass('recommended').siblings()
+						.removeClass('recommended');
+			});
+	$('.edit-btn').click(function() {
+		var par = $(this).parent().attr('par');
+		var url = $(this).attr('href');
+		url = url + '?id=' + par;
+		$(this).attr('href', url);
+	});
+	
+	$('.del-btn').click(function(){
+		var par = $(this).parent().attr('par');
+		layer.alert('',{
+			icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
+			$.ajax({
+				type: "GET",
+				url: '<?php echo U("Album/album_del");?>',
+				data: {id:par},
+				dataType: "json",
+				success: function(data){
+					refresh(1,data.msg)
+				}
+			});
+		    layer.close(index);
+		});
+	})
+</script> 
             </div>
         </div>
     </div>

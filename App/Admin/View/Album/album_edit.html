@@ -2,7 +2,7 @@
 <extend name='./Public/Tpl/Admin_index.html' />
 <block name="main">
 <div class="div_from_aoto" style="width: 500px;">
-	<form method='post' id="myForm" action="{:U('Index/album_edit')}" enctype="multipart/form-data" >
+	<form method='post' id="myForm" action="{:U('Album/album_edit')}" enctype="multipart/form-data" >
 		<div class="control-group">
 			<label class="laber_from">相册名称</label>
 			<div class="controls">
@@ -73,7 +73,7 @@
 		myFormData.append("album_image", album_image_img);
 		$.ajax({
 			type: "POST",
-			url: '{:U("Index/album_update")}',
+			url: '{:U("Album/album_update")}',
 			data: myFormData,
 			dataType: "json",
 			processData: false,
@@ -113,4 +113,4 @@
 
 </script> </block>
 
-<block name="type">相册管理</block>
+<block name="type">相册修改</block>
