@@ -76,12 +76,6 @@
                     <li><a href="<?php echo U('Index/user_list');?>"><i class="glyph-icon icon-chevron-right"></i>用户列表</a></li>
                 </ul>
             </li>
-            <li class="childUlLi">
-                <a href="#" target="menuFrame"> <i class="glyph-icon icon-reorder"></i>角色管理</a>
-                <ul>
-                    <li><a href="<?php echo U('Index/user_edit');?>"><i class="glyph-icon icon-chevron-right"></i>用户修改</a></li>
-                </ul>
-            </li>
             <!-- <li class="childUlLi">
                 <a href="#"> <i class="glyph-icon  icon-location-arrow"></i>菜单管理</a>
                 <ul>
@@ -119,18 +113,27 @@
 
 			<table class="album-data-div" width="100%">
 				<tr class="tableHeader">
-					<td>编号</td>
+					<td width="30px">编号</td>
 					<td>相册名称</td>
 					<td>相册封面</td>
 					<td>相册简介</td>
+					<td>排序</td>
+					<td>前台显示</td>
 					<td>操作</td>
 				</tr>
 				<?php if(is_array($list)): foreach($list as $key=>$val): ?><tr class="tablebody">
-					<td class="col-xs-2" height="120px"><?php echo ($val['id']); ?></td>
+					<td class="col-xs-1" height="120px"><?php echo ($val['id']); ?></td>
 					<td class="col-xs-2"><?php echo ($val['album_name']); ?></td>
 					<td class="col-xs-2"><img class="album_img" src='/Public/images/albumImg/<?php echo ($val['album_image']); ?>'></td>
 					<td class="col-xs-2"><?php echo ($val['album_introduce']); ?></td>
-					<td class="col-xs-2" par=<?php echo ($val['id']); ?>>
+					<td class="col-xs-1"><?php echo ($val['sort']); ?></td>
+					
+					<td class="col-xs-1">
+						<?php if(($val['is_delete'] == 0)): ?><img class="delete_on" src="/Public/images/delete_on.png">
+						<?php else: ?>
+							<img class="delete_off" src="/Public/images/delete_off.png"><?php endif; ?>
+					</td>
+					<td class="col-xs-1" par=<?php echo ($val['id']); ?>>
 						<a class="btn btn-success btn-xs edit-btn" href="<?php echo U('Album/album_edit');?>">修改</a>
 						<a class="btn btn-danger btn-xs del-btn">删除</a>
 					</td>

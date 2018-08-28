@@ -20,7 +20,7 @@ class PhotoController extends Controller{
  	    $map['is_delete'] = 0;
  	    
  	    $p=$_GET['p']?$_GET['p']:1;
- 	    //$list = $Album->where($map)->select();
+ 	    //$list = $Photo->where($map)->select();
  	    
  	    //分页
  	    $count=$Photo->where()->count();
@@ -36,8 +36,8 @@ class PhotoController extends Controller{
  	    $show=$Page->show();
  	    
  	    foreach($list as $key => $val){
- 	        if($val['album_image'] == '')
- 	            $list[$key]['album_image'] = 'default.png';
+ 	        if($val['photo_image'] == '')
+ 	            $list[$key]['photo_image'] = 'default.png';
  	    }
  	    $this->assign('page',$show);
  	    $this->assign('list',$list);
@@ -47,43 +47,44 @@ class PhotoController extends Controller{
  	/**
  	 * 修改相册信息
  	 */
- 	function album_edit(){
+ 	function photo_edit(){
  		if(!empty($_GET['id'])){
  			$id=$_GET['id'];
- 			$Model=D('Album');
+ 			$Model=D('Photo');
  			$result=$Model->where('id=%d',$id)->find();
  			$this->assign('result',$result);
- 			$this->display('album_edit');
+ 			$this->display('photo_edit');
  		}
  	}
  	
  	/**
  	 * 修改相册视图
  	 */
- 	function album_update(){
+ 	function photo_update(){
  	    if(!empty($_POST['id'])){
  	        $id = $_POST['id'];
  	        
- 	        $Model=D('album');
- 	        $oldImage = $Model->where('id=%d',$id)->field('album_image')->find();
- 			$data['album_name']=$_POST['album_name'];
+ 	        $Model=D('photo');
+ 	        $oldImage = $Model->where('id=%d',$id)->field('photo_image')->find();
  			$data['sort']=$_POST['sort'];
  			$data['is_delete']=$_POST['is_delete'];
- 			$data['album_introduce'] = $_POST['album_introduce'];
+ 			$data['update_time'] = date('Y-m-d H:i:s',time());
 
  			//上传图片
  			$upload = new \Think\Upload();
  			$upload->exts=array('jpg', 'gif', 'png', 'jpeg');
- 			$upload->rootPath='./Public/images/albumImg/';
+ 			$upload->rootPath='./Public/images/photoImg/';
  			$info=$upload->upload();
- 			$data['album_image'] = '';
+ 			$data['photo_image'] = '';
  			if(!empty($info)){
- 			    $data['album_image'] = $info['image']['savepath'].$info['image']['savename'];
+ 			    $data['photo_image'] = $info['image']['savepath'].$info['image']['savename'];
+ 			    
+ 			    //删除旧图片
+ 			    if($oldImage['photo_image'] != $data['photo_image'] && $data['photo_image'] != ''){
+ 			        unlink('./Public/images/photoImg/'.$oldImage['photo_image']);
+ 			    }
  			}
- 			//删除旧图片
- 			if($oldImage['album_image'] != $data['album_image'] && $data['album_image'] != ''){
- 			    unlink('./Public/images/albumImg/'.$oldImage['album_image']);
- 			}
+ 			
  			
  			$result = $Model->where('id=%s',$id)->save($data);
  			if($result){
@@ -99,14 +100,14 @@ class PhotoController extends Controller{
  	/**
  	 * 删除相册
  	 */
- 	function album_del(){
+ 	function photo_del(){
  	    $id = $_GET['id'];
- 	    $Model=D('album');
- 	    $oldImage = $Model->where('id=%d',$id)->field('album_image')->find();
+ 	    $Model=D('photo');
+ 	    $oldImage = $Model->where('id=%d',$id)->field('photo_image')->find();
  	    $result = $Model->where('id=%s',$id)->delete();
  	    if($result){
  	        //删除旧图片
- 	        unlink('./Public/images/albumImg/'.$oldImage['album_image']);
+ 	        unlink('./Public/images/photoImg/'.$oldImage['photo_image']);
  	        $return = array('msg'=>'修改成功！');
  	    }else{
  	        $return = array('msg'=>'删除失败！');
@@ -117,22 +118,20 @@ class PhotoController extends Controller{
  	/**
  	 * 添加相册
  	 */
- 	function album_add(){
+ 	function photo_add(){
  	    if($_POST['is_add'] == 1){
- 	        $Model=D('album');
- 	        $data['album_name']=$_POST['album_name'];
+ 	        $Model=D('photo');
  	        $data['sort']=$_POST['sort'];
  	        $data['is_delete']=$_POST['is_delete'];
- 	        $data['album_introduce'] = $_POST['album_introduce'];
- 	        $data['insert_time'] = date('Y-m-d H:i:s',time());
+ 	        $data['update_time'] = date('Y-m-d H:i:s',time());
  	        
  	        //上传图片
  	        $upload = new \Think\Upload();
  	        $upload->exts=array('jpg', 'gif', 'png', 'jpeg');
- 	        $upload->rootPath='./Public/images/albumImg/';
+ 	        $upload->rootPath='./Public/images/photoImg/';
  	        $info=$upload->upload();
  	        if(!empty($info)){
- 	            $data['album_image'] = $info['image']['savepath'].$info['image']['savename'];
+ 	            $data['photo_image'] = $info['image']['savepath'].$info['image']['savename'];
  	        }
  	        $result = $Model->add($data);
  	        if($result){

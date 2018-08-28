@@ -71,7 +71,8 @@ class AlbumController extends Controller{
  			$data['sort']=$_POST['sort'];
  			$data['is_delete']=$_POST['is_delete'];
  			$data['album_introduce'] = $_POST['album_introduce'];
-
+ 			$data['update_time'] = date('Y-m-d H:i:s',time());
+ 			
  			//上传图片
  			$upload = new \Think\Upload();
  			$upload->exts=array('jpg', 'gif', 'png', 'jpeg');
@@ -80,10 +81,10 @@ class AlbumController extends Controller{
  			$data['album_image'] = '';
  			if(!empty($info)){
  			    $data['album_image'] = $info['image']['savepath'].$info['image']['savename'];
- 			}
- 			//删除旧图片
- 			if($oldImage['album_image'] != $data['album_image'] && $data['album_image'] != ''){
- 			    unlink('./Public/images/albumImg/'.$oldImage['album_image']);
+ 			    //删除旧图片
+ 			    if($oldImage['album_image'] != $data['album_image'] && $data['album_image'] != ''){
+ 			        unlink('./Public/images/albumImg/'.$oldImage['album_image']);
+ 			    }
  			}
  			
  			$result = $Model->where('id=%s',$id)->save($data);
@@ -125,7 +126,7 @@ class AlbumController extends Controller{
  	        $data['sort']=$_POST['sort'];
  	        $data['is_delete']=$_POST['is_delete'];
  	        $data['album_introduce'] = $_POST['album_introduce'];
- 	        $data['insert_time'] = date('Y-m-d H:i:s',time());
+ 	        $data['update_time'] = date('Y-m-d H:i:s',time());
  	        
  	        //上传图片
  	        $upload = new \Think\Upload();

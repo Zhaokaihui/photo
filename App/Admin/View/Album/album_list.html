@@ -17,19 +17,30 @@
 
 			<table class="album-data-div" width="100%">
 				<tr class="tableHeader">
-					<td>编号</td>
+					<td width="30px">编号</td>
 					<td>相册名称</td>
 					<td>相册封面</td>
 					<td>相册简介</td>
+					<td>排序</td>
+					<td>前台显示</td>
 					<td>操作</td>
 				</tr>
 				<foreach name='list' item='val'>
 				<tr class="tablebody">
-					<td class="col-xs-2" height="120px">{$val['id']}</td>
+					<td class="col-xs-1" height="120px">{$val['id']}</td>
 					<td class="col-xs-2">{$val['album_name']}</td>
 					<td class="col-xs-2"><img class="album_img" src='__PUBLIC__/images/albumImg/{$val['album_image']}'></td>
 					<td class="col-xs-2">{$val['album_introduce']}</td>
-					<td class="col-xs-2" par={$val['id']}>
+					<td class="col-xs-1">{$val['sort']}</td>
+					
+					<td class="col-xs-1">
+						<if condition="($val['is_delete'] eq 0)">
+							<img class="delete_on" src="__PUBLIC__/images/delete_on.png">
+						<else />
+							<img class="delete_off" src="__PUBLIC__/images/delete_off.png">
+						</if>
+					</td>
+					<td class="col-xs-1" par={$val['id']}>
 						<a class="btn btn-success btn-xs edit-btn" href="{:U('Album/album_edit')}">修改</a>
 						<a class="btn btn-danger btn-xs del-btn">删除</a>
 					</td>

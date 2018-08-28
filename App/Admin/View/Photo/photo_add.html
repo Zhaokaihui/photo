@@ -2,21 +2,18 @@
 <extend name='./Public/Tpl/Admin_index.html' />
 <block name="main">
 <div class="div_from_aoto" style="width: 500px;">
-	<form method='post' id="myForm" action="{:U('Album/album_add')}" enctype="multipart/form-data" >
+	<form method='post' id="myForm" action="{:U('Photo/photo_add')}" enctype="multipart/form-data" >
 		<div class="control-group">
-			<label class="laber_from">相册名称</label>
+			<label class="laber_from">相册封面</label>
 			<div class="controls">
-				<input class="input_from" name='album_name' placeholder="请输入相册名称" value=''>
+				<button type="button" class="img_upload_btn" title="点击上传图片">
+					<img class="photo_image_img" src="__PUBLIC__/images/photoImg/default.png">
+				</button>
+				<input type="file" name="image"  id="picture" class="img_upload_file" multiple="multiple" style="display: none" />
 				<p class=help-block></p>
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="laber_from">相册简介</label>
-			<div class="controls">
-				<textarea class="text_from" style="width:250px;height:100px" name='album_introduce' placeholder="请输入相册简介"></textarea>
-				<p class=help-block></p>
-			</div>
-		</div>
+		
 		<div class="control-group">
 			<label class="laber_from">排序</label>
 			<div class="controls">
@@ -24,18 +21,6 @@
 				<p class=help-block></p>
 			</div>
 		</div>
-		
-		<div class="control-group">
-			<label class="laber_from">相册封面</label>
-			<div class="controls">
-				<button type="button" class="img_upload_btn" title="点击上传图片">
-					<img class="album_image_img" src="__PUBLIC__/images/albumImg/default.png">
-				</button>
-				<input type="file" name="image"  id="picture" class="img_upload_file" multiple="multiple" style="display: none" />
-				<p class=help-block></p>
-			</div>
-		</div>
-		
 		
 		<div class="control-group">
 			<label class="laber_from">状态</label>
@@ -66,11 +51,11 @@
 	$('#update_btn').click(function(){
 		var form = document.getElementById("myForm");
 		var myFormData = new FormData(form);
-		var album_image_img = $(".album_image_img").attr("src");
-		myFormData.append("album_image", album_image_img);
+		var photo_image_img = $(".photo_image_img").attr("src");
+		myFormData.append("photo_image", photo_image_img);
 		$.ajax({
 			type: "POST",
-			url: '{:U("Album/album_add")}',
+			url: '{:U("Photo/photo_add")}',
 			data: myFormData,
 			dataType: "json",
 			processData: false,
@@ -103,7 +88,7 @@
 		var reader = new FileReader();
 		reader.readAsDataURL(file);
 		reader.onload = function(e) {
-			$(".album_image_img").attr("src", this.result);
+			$(".photo_image_img").attr("src", this.result);
 		};
 	});
 	
