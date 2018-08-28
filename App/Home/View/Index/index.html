@@ -32,9 +32,9 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse navbar-right">
 					<ul class="nav navbar-nav">
-						<li><a href="#"><span data-hover="Home">Home</span></a></li>
-						<li><a href="#about"><span data-hover="About">About</span></a></li>
-						<li><a href="#service"><span data-hover="Services">Services</span></a></li>
+						<li><a href="#"><span data-hover="主页">主页</span></a></li>
+						<li><a href="#about"><span data-hover="关于我们">关于我们</span></a></li>
+						<li><a href="#service"><span data-hover="服务">服务</span></a></li>
 						<li><a href="#events"><span data-hover="Events">Events</span></a></li>
 						<li><a href="#gallery"><span data-hover="作品">作品</span></a></li>
 						<li><a href="#testimonials"><span data-hover="Testimonials">Testimonials</span></a></li>

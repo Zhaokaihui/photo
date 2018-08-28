@@ -1,13 +1,12 @@
 <meta charset="UTF-8">
 <extend name='./Public/Tpl/Admin_index.html' />
-<block name="main"> <script type="text/javascript"
-	src="__PUBLIC__/JS/css-browser-select.js"></script>
+<block name="main"> <script type="text/javascript" src="__PUBLIC__/JS/css-browser-select.js"></script>
 <div class="div_from_aoto">
 	<div class='lyq-term'>
 		<div role="tabpanel" class="tab-pane" id="user">
 			<div class="check-div form-inline" style="height:45px;">
 				<div class="col-xs-3">
-					<a class="btn btn-yellow btn-xs"  href="{:U('Album/album_add')}">添加相册</a>
+					<a class="btn btn-yellow btn-xs"  href="{:U('Photo/photo_add')}">添加相册</a>
 				</div>
 				<!-- <div class="col-xs-4">
 					<input type="text" class="form-control input-sm" placeholder="输入文字搜索">
@@ -15,22 +14,22 @@
 				</div> -->
 			</div>
 
-			<table class="album-data-div" width="100%">
+			<table class="photo-data-div" width="100%">
 				<tr class="tableHeader">
 					<td>编号</td>
-					<td>相册名称</td>
-					<td>相册封面</td>
-					<td>相册简介</td>
+					<td>照片</td>
+					<td>排序</td>
+					<td>是否禁用</td>
 					<td>操作</td>
 				</tr>
 				<foreach name='list' item='val'>
 				<tr class="tablebody">
 					<td class="col-xs-2" height="120px">{$val['id']}</td>
-					<td class="col-xs-2">{$val['album_name']}</td>
-					<td class="col-xs-2"><img class="album_img" src='__PUBLIC__/images/albumImg/{$val['album_image']}'></td>
-					<td class="col-xs-2">{$val['album_introduce']}</td>
+					<td class="col-xs-2"><img class="photo_img" src='__PUBLIC__/images/photoImg/{$val['photo_image']}'></td>
+					<td class="col-xs-2">{$val['sort']}</td>
+					<td class="col-xs-2">{$val['is_delete']}</td>
 					<td class="col-xs-2" par={$val['id']}>
-						<a class="btn btn-success btn-xs edit-btn" href="{:U('Album/album_edit')}">修改</a>
+						<a class="btn btn-success btn-xs edit-btn" href="{:U('Photo/photo_edit')}">修改</a>
 						<a class="btn btn-danger btn-xs del-btn">删除</a>
 					</td>
 				</tr>
@@ -43,14 +42,10 @@
 <script type="text/javascript">
 	$('.tableCell').click(
 			function() {
-				$(this).addClass('recommended').siblings().removeClass(
-						'recommended').children().children('.price3')
-						.removeClass('price3').addClass('price1');
-				$(this).children().children('.price1').addClass('price3')
-						.removeClass('price1');
+				$(this).addClass('recommended').siblings().removeClass('recommended').children().children('.price3').removeClass('price3').addClass('price1');
+				$(this).children().children('.price1').addClass('price3').removeClass('price1');
 				var par = $(this).attr('par');
-				$("td[par='" + par + "']").addClass('recommended').siblings()
-						.removeClass('recommended');
+				$("td[par='" + par + "']").addClass('recommended').siblings().removeClass('recommended');
 			});
 	$('.edit-btn').click(function() {
 		var par = $(this).parent().attr('par');
@@ -65,7 +60,7 @@
 			icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
 			$.ajax({
 				type: "GET",
-				url: '{:U("Album/album_del")}',
+				url: '{:U("Photo/photo_del")}',
 				data: {id:par},
 				dataType: "json",
 				success: function(data){

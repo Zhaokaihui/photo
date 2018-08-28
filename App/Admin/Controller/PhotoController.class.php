@@ -13,7 +13,7 @@ class PhotoController extends Controller{
  	}
  	
  	/**
- 	 * 相册列表
+ 	 * 照片列表
  	 */
  	function photo_list(){
  	    $Photo = D('photo');
@@ -23,7 +23,7 @@ class PhotoController extends Controller{
  	    //$list = $Album->where($map)->select();
  	    
  	    //分页
- 	    $count=$Album->where($map)->count();
+ 	    $count=$Photo->where()->count();
  	    $max=ceil($count/10);
  	    if($p>$max){
  	        $p=$max;
@@ -31,19 +31,17 @@ class PhotoController extends Controller{
  	    if($p<1){
  	        $p=1;
  	    }
- 	    $list=$Album->where($map)->order('Id')->page($p.',10')->select();
+ 	    $list=$Photo->where()->order('id')->page($p.',10')->select();
  	    $Page=new \Think\Page($count,10);
  	    $show=$Page->show();
  	    
  	    foreach($list as $key => $val){
- 	        if (strlen($val['album_introduce'])>60) 
- 	            $list[$key]['album_introduce']=substr($val['album_introduce'],0,60) . '...';
  	        if($val['album_image'] == '')
  	            $list[$key]['album_image'] = 'default.png';
  	    }
  	    $this->assign('page',$show);
  	    $this->assign('list',$list);
- 	    $this->display('album_list');
+ 	    $this->display('photo_list');
  	}
  	
  	/**

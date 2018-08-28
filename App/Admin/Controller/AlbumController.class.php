@@ -30,7 +30,7 @@ class AlbumController extends Controller{
  	    if($p<1){
  	        $p=1;
  	    }
- 	    $list=$Album->where()->order('Id')->page($p.',10')->select();
+ 	    $list=$Album->where()->order('id')->page($p.',10')->select();
  	    $Page=new \Think\Page($count,10);
  	    $show=$Page->show();
  	    
