@@ -108,7 +108,7 @@ class PhotoController extends Controller{
  	    if($result){
  	        //删除旧图片
  	        unlink('./Public/images/photoImg/'.$oldImage['photo_image']);
- 	        $return = array('msg'=>'修改成功！');
+ 	        $return = array('msg'=>'删除成功！');
  	    }else{
  	        $return = array('msg'=>'删除失败！');
  	    }

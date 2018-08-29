@@ -109,7 +109,7 @@ class AlbumController extends Controller{
  	    if($result){
  	        //删除旧图片
  	        unlink('./Public/images/albumImg/'.$oldImage['album_image']);
- 	        $return = array('msg'=>'修改成功！');
+ 	        $return = array('msg'=>'删除成功！');
  	    }else{
  	        $return = array('msg'=>'删除失败！');
  	    }
@@ -146,6 +146,59 @@ class AlbumController extends Controller{
  	    }else{
  	        $this->display();
  	    }
+ 	}
+ 	
+ 	/**
+ 	 * 关联照片列表
+ 	 */
+ 	function relation_photo_list(){
+ 	    $albumId = $_GET['id'];
+ 	    $Album = D('album');
+ 	    $Photo = d('photo');
+ 	    
+ 	    $p=$_GET['p']?$_GET['p']:1;
+ 	    //$list = $Album->where($map)->select();
+ 	    
+ 	    //分页
+ 	    $count=$Photo->join('photo_album_relation ON photo_album_relation.photo_id = photo.id')->where("photo_album_relation.album_id='%d'",$albumId)->count();
+ 	    $max=ceil($count/10);
+ 	    if($p>$max){
+ 	        $p=$max;
+ 	    }
+ 	    if($p<1){
+ 	        $p=1;
+ 	    }
+ 	    
+ 	    $list = $Photo
+ 	    ->join('photo_album_relation ON photo_album_relation.photo_id = photo.id')
+ 	    ->where("photo_album_relation.album_id='%d'",$albumId)
+ 	    ->select();
+ 	    
+ 	    $Page=new \Think\Page($count,10);
+ 	    $show=$Page->show();
+ 	    
+ 	    foreach($list as $key => $val){
+            if($val['photo_image'] == '')
+                $list[$key]['photo_image'] = 'default.png';
+ 	    }
+ 	    $this->assign('page',$show);
+ 	    $this->assign('list',$list);
+ 	    $this->display('relation_photo_list');
+ 	}
+ 	
+ 	/**
+ 	 * 删除相册
+ 	 */
+ 	function relation_photo_del(){
+ 	    $id = $_GET['id'];
+ 	    $Model=D('photo_album_relation');
+ 	    $result = $Model->where('id=%s',$id)->delete();
+ 	    if($result){
+ 	        $return = array('msg'=>'删除成功！');
+ 	    }else{
+ 	        $return = array('msg'=>'删除失败！');
+ 	    }
+ 	    $this->ajaxReturn($return);
  	}
 	
 }

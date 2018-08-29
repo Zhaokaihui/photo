@@ -117,6 +117,7 @@
 					<td>相册名称</td>
 					<td>相册封面</td>
 					<td>相册简介</td>
+					<td>关联照片</td>
 					<td>排序</td>
 					<td>前台显示</td>
 					<td>操作</td>
@@ -126,6 +127,7 @@
 					<td class="col-xs-2"><?php echo ($val['album_name']); ?></td>
 					<td class="col-xs-2"><img class="album_img" src='/Public/images/albumImg/<?php echo ($val['album_image']); ?>'></td>
 					<td class="col-xs-2"><?php echo ($val['album_introduce']); ?></td>
+					<td class="col-xs-1" par=<?php echo ($val['id']); ?>><a class="relation-photo-btn" href="<?php echo U('Album/relation_photo_list');?>">查看</a></td>
 					<td class="col-xs-1"><?php echo ($val['sort']); ?></td>
 					
 					<td class="col-xs-1">
@@ -177,6 +179,14 @@
 			});
 		    layer.close(index);
 		});
+	})
+	
+	//关联照片选择
+	$('.relation-photo-btn').click(function(){
+		var par = $(this).parent().attr('par');
+		var url = $(this).attr('href');
+		url = url + '?id=' + par;
+		$(this).attr('href', url);
 	})
 </script> 
             </div>

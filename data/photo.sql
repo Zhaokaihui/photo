@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2018-08-28 17:27:38
+Date: 2018-08-30 01:41:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -50,15 +50,15 @@ CREATE TABLE `album` (
   `album_introduce` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '相册简介',
   `sort` int(11) DEFAULT '0' COMMENT '排序（数值越大越靠前）',
   `is_delete` tinyint(2) DEFAULT '0' COMMENT '禁用（0：前台可见1：不可见）',
-  `insert_time` datetime DEFAULT NULL COMMENT '插入时间',
-  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `insert_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '插入时间',
+  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='相册表';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='相册表';
 
 -- ----------------------------
 -- Records of album
 -- ----------------------------
-INSERT INTO `album` VALUES ('1', 'JAPAN11', '2018-08-28/5b84b25f909ef.jpg', 'JAPAN11', '2', '0', null, '2018-08-28 10:24:31');
+INSERT INTO `album` VALUES ('1', 'JAPAN11', '2018-08-29/5b86a835903fd.jpg', 'JAPAN11', '2', '0', null, '2018-08-29 22:05:41');
 INSERT INTO `album` VALUES ('2', 'AQUARIUM', 'album2.jpg', 'AQUARIUM', '0', '0', null, '2018-08-21 16:58:33');
 INSERT INTO `album` VALUES ('3', 'FRIENDS', 'album3.jpg', 'MY FRIENDS', '0', '0', null, '2018-08-20 14:58:09');
 INSERT INTO `album` VALUES ('4', 'HONGKONG', 'album4.jpg', '带你走进不一样的HONGKONG！', '0', '0', null, '2018-08-20 14:58:09');
@@ -69,6 +69,7 @@ INSERT INTO `album` VALUES ('8', 'JJUN', 'album8.jpg', 'JJUN', '0', '0', null, '
 INSERT INTO `album` VALUES ('9', 'JUICY', 'album9.jpg', 'JUICY', '0', '0', null, '2018-08-20 14:58:09');
 INSERT INTO `album` VALUES ('10', 'HACHI', 'album10.jpg', 'HACHI', '0', '0', null, '2018-08-20 14:58:09');
 INSERT INTO `album` VALUES ('11', 'YUKI', 'album11.jpg', 'YUKI', '0', '0', null, '2018-08-20 14:58:09');
+INSERT INTO `album` VALUES ('12', 'aaa', '2018-08-29/5b8588c986b16.jpg', 'aaa', '1', '0', '2018-08-29 00:35:02', '2018-08-29 01:39:21');
 
 -- ----------------------------
 -- Table structure for `photo`
@@ -79,10 +80,10 @@ CREATE TABLE `photo` (
   `photo_image` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '照片链接',
   `sort` int(11) DEFAULT '0' COMMENT '排序（数值越大越靠前）',
   `is_delete` tinyint(2) DEFAULT '0' COMMENT '禁用（0：前台可见1：不可见）',
-  `insert_time` datetime DEFAULT NULL COMMENT '插入时间',
-  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `insert_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '插入时间',
+  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='照片表';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='照片表';
 
 -- ----------------------------
 -- Records of photo
@@ -97,7 +98,7 @@ INSERT INTO `photo` VALUES ('7', 'album8.jpg', '0', '0', null, '2018-08-28 16:43
 INSERT INTO `photo` VALUES ('8', 'album9.jpg', '0', '0', null, '2018-08-28 16:43:13');
 INSERT INTO `photo` VALUES ('9', 'album10.jpg', '0', '0', null, '2018-08-28 16:43:16');
 INSERT INTO `photo` VALUES ('10', 'album3.jpg', '0', '0', null, '2018-08-28 16:42:49');
-INSERT INTO `photo` VALUES ('11', 'album3.jpg', '0', '0', null, '2018-08-28 16:42:50');
+INSERT INTO `photo` VALUES ('12', '2018-08-29/5b858a139c809.jpg', '0', '0', '2018-08-29 01:44:51', null);
 
 -- ----------------------------
 -- Table structure for `photo_album_relation`
@@ -105,15 +106,18 @@ INSERT INTO `photo` VALUES ('11', 'album3.jpg', '0', '0', null, '2018-08-28 16:4
 DROP TABLE IF EXISTS `photo_album_relation`;
 CREATE TABLE `photo_album_relation` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `photo_id` int(11) DEFAULT NULL COMMENT '照片id',
   `album_id` int(11) DEFAULT NULL COMMENT '相册id',
-  `insert_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `photo_id` int(11) DEFAULT NULL COMMENT '照片id',
+  `insert_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '插入时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of photo_album_relation
 -- ----------------------------
+INSERT INTO `photo_album_relation` VALUES ('2', '1', '2', '2018-08-29 22:27:29');
+INSERT INTO `photo_album_relation` VALUES ('3', '1', '3', '2018-08-29 22:27:35');
+INSERT INTO `photo_album_relation` VALUES ('5', '1', '5', '2018-08-29 22:27:40');
 
 -- ----------------------------
 -- Table structure for `user`
