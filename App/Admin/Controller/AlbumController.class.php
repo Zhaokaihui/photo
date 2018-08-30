@@ -181,6 +181,7 @@ class AlbumController extends Controller{
             if($val['photo_image'] == '')
                 $list[$key]['photo_image'] = 'default.png';
  	    }
+ 	    $this->assign('album_id',$albumId);
  	    $this->assign('page',$show);
  	    $this->assign('list',$list);
  	    $this->display('relation_photo_list');
@@ -199,6 +200,37 @@ class AlbumController extends Controller{
  	        $return = array('msg'=>'删除失败！');
  	    }
  	    $this->ajaxReturn($return);
+ 	}
+ 	
+ 	/**
+ 	 * 添加关联照片
+ 	 */
+ 	function relation_photo_add(){
+ 	    $album_id = $_GET['album_id'];
+ 	    $Photo = d('photo');
+ 	    
+ 	    $exislist = $Photo
+ 	    ->join('photo_album_relation ON photo_album_relation.photo_id = photo.id')
+ 	    ->field('photo_album_relation.photo_id')
+ 	    ->where("photo_album_relation.album_id='%d'",$album_id)
+ 	    ->select();
+ 	    
+ 	    $list = $Photo->select();
+ 	    
+ 	    if(!empty($list) && is_array($list)){
+ 	        foreach ($list as $key => $val){
+ 	            if(!empty($exislist) && is_array($exislist)){
+ 	                foreach ($exislist as $k => $v){
+ 	                    if($val['id'] == $v['photo_id']){
+ 	                        unset($list[$key]);
+ 	                    }
+ 	                }
+ 	            }
+ 	        }
+ 	    }
+ 	    $list = array_values($list);
+ 	    $this->assign('result',$list);
+ 	    $this->display('');
  	}
 	
 }

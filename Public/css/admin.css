@@ -63,6 +63,10 @@
 	max-width:100px;
 	max-height:100px;
 }
+.relation_photo_img{
+	max-width:200px;
+	max-height:140px;
+}
 .album-data-div td,.photo-data-div td{
 	text-align: center;
 		vertical-align: middle;
