@@ -1,16 +1,16 @@
-<meta charset="UTF-8">
-<block name="main">
-
-<script type="text/javascript" src="__PUBLIC__/JS/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/plugin/layer/layer.js"></script>
-<script type="text/javascript" src="__PUBLIC__/JS/common.js"></script>
-<script type="text/javascript" src="__PUBLIC__/JS/tendina.min.js"></script>
+<?php if (!defined('THINK_PATH')) exit();?><meta charset="UTF-8">
 
 
-<link rel="stylesheet" href="__PUBLIC__/CSS/admin.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="__PUBLIC__/CSS/admin_common.css" media="screen">
-<link rel="stylesheet" href="__PUBLIC__/CSS/bootstrap.min_new.css" media="screen">
-<link rel="stylesheet" href="__PUBLIC__/CSS/Page.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/Public/JS/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="/Public/plugin/layer/layer.js"></script>
+<script type="text/javascript" src="/Public/JS/common.js"></script>
+<script type="text/javascript" src="/Public/JS/tendina.min.js"></script>
+
+
+<link rel="stylesheet" href="/Public/CSS/admin.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/Public/CSS/admin_common.css" media="screen">
+<link rel="stylesheet" href="/Public/CSS/bootstrap.min_new.css" media="screen">
+<link rel="stylesheet" href="/Public/CSS/Page.css" type="text/css" media="screen" />
 <div class="div_from_aoto">
 	<div class='lyq-term'>
 		<div role="tabpanel" class="tab-pane" id="user">
@@ -29,26 +29,22 @@
 					<td>排序</td>
 					<td>是否禁用</td>
 				</tr>
-				<foreach name='list' item='val'>
-				<tr class="tablebody">
+				<?php if(is_array($list)): foreach($list as $key=>$val): ?><tr class="tablebody">
 					<td class="col-xs-1"><input type="checkbox" name="chose" value="1"/></td>
-					<td class="col-xs-1" height="120px">{$val['id']}</td>
-					<td class="col-xs-2"><img class="photo_img" src='__PUBLIC__/images/photoImg/{$val['photo_image']}'></td>
-					<td class="col-xs-1">{$val['sort']}</td>
+					<td class="col-xs-1" height="120px"><?php echo ($val['id']); ?></td>
+					<td class="col-xs-2"><img class="photo_img" src='/Public/images/photoImg/<?php echo ($val['photo_image']); ?>'></td>
+					<td class="col-xs-1"><?php echo ($val['sort']); ?></td>
 					<td class="col-xs-1">
-						<if condition="($val['is_delete'] eq 0)">
-							<img class="delete_on" src="__PUBLIC__/images/delete_on.png">
-						<else />
-							<img class="delete_off" src="__PUBLIC__/images/delete_off.png">
-						</if>
+						<?php if(($val['is_delete'] == 0)): ?><img class="delete_on" src="/Public/images/delete_on.png">
+						<?php else: ?>
+							<img class="delete_off" src="/Public/images/delete_off.png"><?php endif; ?>
 					</td>
-				</tr>
-				</foreach>
+				</tr><?php endforeach; endif; ?>
 			</table>
 		</div>
 	</div>
 </div>
-<div class="quotes">{$page}</div>
+<div class="quotes"><?php echo ($page); ?></div>
 <script type="text/javascript">
 	$('.tableCell').click(
 			function() {
@@ -70,7 +66,7 @@
 			icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
 			$.ajax({
 				type: "GET",
-				url: '{:U("Photo/photo_del")}',
+				url: '<?php echo U("Photo/photo_del");?>',
 				data: {id:par},
 				dataType: "json",
 				success: function(data){
@@ -80,5 +76,4 @@
 		    layer.close(index);
 		});
 	})
-</script> </block>
-
+</script>
