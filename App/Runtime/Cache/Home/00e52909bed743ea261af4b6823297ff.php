@@ -187,16 +187,12 @@
 <!-- Gallery Section -->
 <section class="our-gallery" id="gallery">
 	<h3 class="text-center slideanim">作品</h3>
-	<p class="text-center slideanim">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 	<div class="container">
-		<img src="/Public/images/gallery-img1.jpg" data-darkbox="/Public/images/gallery-img1-1.jpg" data-darkbox-description="<b>Lorem Ipsum</b><br>Lorem ipsum dolor sit amet" class="img-responsive slideanim">
-        <img src="/Public/images/gallery-img2.jpg" data-darkbox="/Public/images/gallery-img2-2.jpg" data-darkbox-description="<b>Lorem Ipsum</b><br>Lorem ipsum dolor sit amet" class="img-responsive slideanim">
-		<img src="/Public/images/gallery-img3.jpg" data-darkbox="/Public/images/gallery-img3-3.jpg" data-darkbox-description="<b>Lorem Ipsum</b><br>Lorem ipsum dolor sit amet" class="img-responsive slideanim">
-		<img src="/Public/images/gallery-img4.jpg" data-darkbox="/Public/images/gallery-img4-4.jpg" data-darkbox-description="<b>Lorem Ipsum</b><br>Lorem ipsum dolor sit amet" class="img-responsive slideanim">
-		<img src="/Public/images/gallery-img5.jpg" data-darkbox="/Public/images/gallery-img5-5.jpg" data-darkbox-description="<b>Lorem Ipsum</b><br>Lorem ipsum dolor sit amet" class="img-responsive slideanim">
-		<img src="/Public/images/gallery-img6.jpg" data-darkbox="/Public/images/gallery-img6-6.jpg" data-darkbox-description="<b>Lorem Ipsum</b><br>Lorem ipsum dolor sit amet" class="img-responsive slideanim">
-		<img src="/Public/images/gallery-img7.jpg" data-darkbox="/Public/images/gallery-img7-7.jpg" data-darkbox-description="<b>Lorem Ipsum</b><br>Lorem ipsum dolor sit amet" class="img-responsive slideanim">
-		<img src="/Public/images/gallery-img8.jpg" data-darkbox="/Public/images/gallery-img8-8.jpg" data-darkbox-description="<b>Lorem Ipsum</b><br>Lorem ipsum dolor sit amet" class="img-responsive slideanim">
+		<ul>
+		<?php if(is_array($indexAlbumList)): foreach($indexAlbumList as $key=>$val): ?><li class="index_album_li">
+			<a class="mustang-gallery cboxElement" href=""><img class="index_album_img" src="/Public/images/albumImg/<?php echo ($val['album_image']); ?>"></a>
+		</li><?php endforeach; endif; ?>
+		</ul>
 	</div>
 </section>
 <!-- /Gallery Section -->
