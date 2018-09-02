@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2018-08-30 01:41:55
+Date: 2018-09-03 02:44:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -118,6 +118,36 @@ CREATE TABLE `photo_album_relation` (
 INSERT INTO `photo_album_relation` VALUES ('2', '1', '2', '2018-08-29 22:27:29');
 INSERT INTO `photo_album_relation` VALUES ('3', '1', '3', '2018-08-29 22:27:35');
 INSERT INTO `photo_album_relation` VALUES ('5', '1', '5', '2018-08-29 22:27:40');
+
+-- ----------------------------
+-- Table structure for `theme`
+-- ----------------------------
+DROP TABLE IF EXISTS `theme`;
+CREATE TABLE `theme` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `theme_name` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '相册名称',
+  `sort` int(11) DEFAULT '0' COMMENT '排序（数值越大越靠前）',
+  `is_delete` tinyint(2) DEFAULT '0' COMMENT '禁用（0：前台可见1：不可见）',
+  `insert_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '插入时间',
+  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='相册表';
+
+-- ----------------------------
+-- Records of theme
+-- ----------------------------
+INSERT INTO `theme` VALUES ('1', 'JAPAN11', '2', '0', null, '2018-08-29 22:05:41');
+INSERT INTO `theme` VALUES ('2', 'AQUARIUM', '0', '0', null, '2018-08-21 16:58:33');
+INSERT INTO `theme` VALUES ('3', 'FRIENDS', '0', '0', null, '2018-08-20 14:58:09');
+INSERT INTO `theme` VALUES ('4', 'HONGKONG', '0', '0', null, '2018-08-20 14:58:09');
+INSERT INTO `theme` VALUES ('5', 'hanna', '0', '0', null, '2018-08-20 14:58:09');
+INSERT INTO `theme` VALUES ('6', 'ZHANGCHEN', '0', '0', null, '2018-08-20 14:58:09');
+INSERT INTO `theme` VALUES ('7', 'FAYE', '0', '0', null, '2018-08-20 14:58:09');
+INSERT INTO `theme` VALUES ('8', 'JJUN', '0', '0', null, '2018-08-20 14:58:09');
+INSERT INTO `theme` VALUES ('9', 'JUICY', '0', '0', null, '2018-08-20 14:58:09');
+INSERT INTO `theme` VALUES ('10', 'HACHI', '0', '0', null, '2018-08-20 14:58:09');
+INSERT INTO `theme` VALUES ('11', 'YUKI', '0', '0', null, '2018-08-20 14:58:09');
+INSERT INTO `theme` VALUES ('12', 'aaa', '1', '0', '2018-08-29 00:35:02', '2018-08-29 01:39:21');
 
 -- ----------------------------
 -- Table structure for `user`
