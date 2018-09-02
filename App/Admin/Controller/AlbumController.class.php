@@ -230,7 +230,7 @@ class AlbumController extends Controller{
  	    }
  	    $list = array_values($list);
  	    $this->assign('list',$list);
- 	    $this->display('');
+ 	    $this->display();
  	}
 	
 }
