@@ -206,8 +206,9 @@ class AlbumController extends Controller{
  	 * 添加关联照片
  	 */
  	function relation_photo_add(){
- 	    $album_id = $_GET['album_id'];
- 	    $Photo = d('photo');
+ 	    $album_id = !empty($_GET['album_id']) ? $_GET['album_id'] : $_POST['album_id'];
+ 	    $Photo = D('photo');
+ 	    $Relation = D('photo_album_relation');
  	    
  	    $exislist = $Photo
  	    ->join('photo_album_relation ON photo_album_relation.photo_id = photo.id')
@@ -215,22 +216,39 @@ class AlbumController extends Controller{
  	    ->where("photo_album_relation.album_id='%d'",$album_id)
  	    ->select();
  	    
- 	    $list = $Photo->select();
- 	    
- 	    if(!empty($list) && is_array($list)){
- 	        foreach ($list as $key => $val){
- 	            if(!empty($exislist) && is_array($exislist)){
- 	                foreach ($exislist as $k => $v){
- 	                    if($val['id'] == $v['photo_id']){
+ 	    if(!empty($_GET['album_id'])){
+ 	        $list = $Photo->select();
+ 	        
+ 	        if(!empty($list) && is_array($list)){
+ 	            foreach ($list as $key => $val){
+ 	                if(!empty($exislist) && is_array($exislist)){
+ 	                    foreach ($exislist as $k => $v){
+ 	                        if($val['id'] == $v['photo_id']){
+ 	                            unset($list[$key]);
+ 	                        }
+ 	                    }
+ 	                }
+ 	            }
+ 	        }
+ 	        $list = array_values($list);
+ 	        $this->assign('album_id',$album_id);
+ 	        $this->assign('list',$list);
+ 	        $this->display();
+ 	    }else{
+ 	        $photo_ids = $_POST['photo_ids'];
+ 	        if(!empty($photo_ids) && is_array($photo_ids)){
+ 	            foreach($photo_ids as $key => $val){
+ 	                if(!empty($exislist) && is_array($exislist)){
+ 	                    if($val == $v['photo_id']){
  	                        unset($list[$key]);
  	                    }
  	                }
  	            }
  	        }
+ 	        if(count($photo_ids) > 0){
+ 	            
+ 	        }
  	    }
- 	    $list = array_values($list);
- 	    $this->assign('list',$list);
- 	    $this->display();
  	}
 	
 }

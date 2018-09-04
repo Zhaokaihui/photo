@@ -55,25 +55,24 @@
 </div>
 <div class="quotes">{$page}</div>
 <script type="text/javascript">
-	$('.tableCell').click(
-			function() {
-				$(this).addClass('recommended').siblings().removeClass('recommended').children().children('.price3').removeClass('price3').addClass('price1');
-				$(this).children().children('.price1').addClass('price3').removeClass('price1');
-				var par = $(this).attr('par');
-				$("td[par='" + par + "']").addClass('recommended').siblings().removeClass('recommended');
-			});
-	$('.edit-btn').click(function() {
-		var par = $(this).parent().attr('par');
-		var url = $(this).attr('href');
-		url = url + '?id=' + par;
-		$(this).attr('href', url);
-	});
-	
 	$('#add_btn').click(function(){
-		var photo_id = [];
+		var photo_ids = [];
 		$("input[name='chose']:checked").each(function(i){
-			photo_id[i] =$(this).val();
+			photo_ids[i] =$(this).val();
         });
+		var album_id = {$album_id};
+		if(photo_ids.length > 0){
+			$.ajax({
+				type: "POST",
+				url: '{:U("Album/relation_photo_add")}',
+				data: {photo_ids:photo_ids,album_id:album_id},
+				dataType: "json",
+				success: function(data){
+					refresh(1,data.msg)
+				}
+			});
+		}
+		
 	})
 </script> </block>
 

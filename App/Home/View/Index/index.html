@@ -310,27 +310,8 @@ $('.contact_img').click(function(){
         area: ['450px', '530px'],
         fix: false, //不固定
         maxmin: true,
-        content: "{:U('Index/wechat_img')}",
-        success:function(layero,index){
-        },
-        end:function(){
-            var handle_status = $("#handle_status").val();
-            if ( handle_status == '1' ) {
-                layer.msg('添加成功！',{
-                    icon: 1,
-                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
-                },function(){
-                    history.go(0);
-                });
-            } else if ( handle_status == '2' ) {
-                layer.msg('添加失败！',{
-                    icon: 2,
-                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
-                },function(){
-                    history.go(0);
-                });
-            }
-        }
+        shadeClose: true,
+        content: "{:U('Index/wechat_img')}"
     });
 })
 </script>
