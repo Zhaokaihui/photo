@@ -157,7 +157,7 @@
 	})
 	
 	$('.relation-photo-add').click(function(){
-		var par = 33;
+		var par = $(this).attr('par');
 		layer.open({
 	        title:'<img src="{sh::RES}image/add.gif">&nbsp;添加关联照片',
 	        type: 2,

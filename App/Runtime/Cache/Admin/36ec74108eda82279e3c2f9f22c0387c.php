@@ -30,7 +30,7 @@
 					<td>是否禁用</td>
 				</tr>
 				<?php if(is_array($list)): foreach($list as $key=>$val): ?><tr class="tablebody">
-					<td class="col-xs-1"><input type="checkbox" name="chose" value="1"/></td>
+					<td class="col-xs-1"><input type="checkbox" name="chose" value="<?php echo ($val['id']); ?>"/></td>
 					<td class="col-xs-1" height="120px"><?php echo ($val['id']); ?></td>
 					<td class="col-xs-2"><img class="photo_img" src='/Public/images/photoImg/<?php echo ($val['photo_image']); ?>'></td>
 					<td class="col-xs-1"><?php echo ($val['sort']); ?></td>
@@ -40,6 +40,11 @@
 							<img class="delete_off" src="/Public/images/delete_off.png"><?php endif; ?>
 					</td>
 				</tr><?php endforeach; endif; ?>
+				<tr>
+					<td>
+						<div class="controls"><button type="button" id="add_btn" class="btn btn-success" style="width: 120px;">提交</button></div>
+					</td>
+				</tr>
 			</table>
 		</div>
 	</div>
@@ -60,20 +65,12 @@
 		$(this).attr('href', url);
 	});
 	
-	$('.del-btn').click(function(){
-		var par = $(this).parent().attr('par');
-		layer.alert('',{
-			icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
-			$.ajax({
-				type: "GET",
-				url: '<?php echo U("Photo/photo_del");?>',
-				data: {id:par},
-				dataType: "json",
-				success: function(data){
-					refresh(1,data.msg)
-				}
-			});
-		    layer.close(index);
-		});
+	$('#add_btn').click(function(){
+		alert(1);
+		var photo_id = [];
+		$("input[name='chose']:checked").each(function(i){
+			photo_id[i] =$(this).val();
+        });
+		console.log(photo_id);
 	})
 </script>
