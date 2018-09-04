@@ -1,0 +1,15 @@
+[ 2018-08-09T15:10:18+08:00 ] 127.0.0.1 /Admin/Index/person.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000610s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.012296s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.012384s ]
+NOTIC: [8] Undefined index: User D:\wamp\www\photo\App\Admin\Controller\IndexController.class.php 第 111 行.
+NOTIC: [8] Undefined index: pwd D:\wamp\www\photo\App\Admin\Controller\IndexController.class.php 第 112 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.0170s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%d ) LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT * FROM `user` WHERE ( User_id=%d ) LIMIT 1  
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%d ) LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT * FROM `user` WHERE ( User_id=%d ) LIMIT 1  
+

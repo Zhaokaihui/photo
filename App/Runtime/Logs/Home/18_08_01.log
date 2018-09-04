@@ -1,0 +1,54 @@
+[ 2018-08-01T14:09:49+08:00 ] 127.0.0.1 /index.php/home/index/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000438s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000537s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000642s ]
+SQL: SHOW COLUMNS FROM `admin` [ RunTime:0.0022s ]
+SQL: SHOW COLUMNS FROM `admin` [ RunTime:0.0020s ]
+SQL: SELECT `admin_name` FROM `admin`  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `User` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `User` LIMIT 0,2   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `admin` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `admin`  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000129s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000210s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.153787s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.153951s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000238s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000302s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000424s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000489s ]
+
+[ 2018-08-01T16:36:46+08:00 ] 127.0.0.1 /index.php/home/index/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000374s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000428s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000510s ]
+SQL: SHOW COLUMNS FROM `admin` [ RunTime:0.0399s ]
+SQL: SHOW COLUMNS FROM `admin` [ RunTime:0.0720s ]
+SQL: SELECT `admin_name` FROM `admin`  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `User` [ RunTime:0.0034s ]
+SQL: SELECT * FROM `User` LIMIT 0,2   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `admin` [ RunTime:0.0023s ]
+SQL: SELECT * FROM `admin`  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.019705s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.019815s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.058619s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.058719s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000792s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000720s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000829s ]
+
