@@ -236,18 +236,41 @@ class AlbumController extends Controller{
  	        $this->display();
  	    }else{
  	        $photo_ids = $_POST['photo_ids'];
+ 	        $return = array('msg'=>'关联失败！请刷新页面，再勾选正确的照片');
+ 	        //删除已经存在的关联
  	        if(!empty($photo_ids) && is_array($photo_ids)){
  	            foreach($photo_ids as $key => $val){
  	                if(!empty($exislist) && is_array($exislist)){
- 	                    if($val == $v['photo_id']){
- 	                        unset($list[$key]);
+ 	                    foreach ($exislist as $k => $v){
+ 	                        if($val == $v['photo_id']){
+ 	                            unset($photo_ids[$key]);
+ 	                        }
  	                    }
  	                }
  	            }
  	        }
- 	        if(count($photo_ids) > 0){
+ 	        //插入新关联
+ 	        if(!empty($photo_ids) && is_array($photo_ids)){
  	            
+ 	            $data = array();
+ 	            $data['album_id'] = $_POST['album_id'];
+ 	            $insert_photo_id = array();
+ 	            foreach($photo_ids as $key => $val){
+ 	                $data['photo_id'] = ''; 
+ 	                $data['photo_id'] = $val;
+ 	                if(!empty($data['photo_id'])){
+ 	                    $result = $Relation->add($data);
+ 	                    if($result){
+ 	                        $insert_photo_id[] = $data['photo_id'];
+ 	                    }
+ 	                }
+ 	            }
+ 	            if(!empty($insert_photo_id) && is_array($insert_photo_id)){
+ 	                $insert_photo_id_str = join(',',$insert_photo_id);
+ 	                $return = array('msg'=>'关联成功！已将编号为'.$insert_photo_id_str.'的照片与该相册关联');
+ 	            }
  	        }
+ 	        $this->ajaxReturn($return);
  	    }
  	}
 	
