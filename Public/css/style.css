@@ -1263,21 +1263,28 @@ section.footer h2 {
 }
 
 .index_album_img{
-	max-width:280px;
-	max-height:180px;
+	width:280px;
+	height:180px;
 }
 
 .index_album_li{
-	width:280px;
+	width:285px;
 	height:190px;
 	float:left;
-	list-style:none;
 	text-align:center;
 	padding-left:3px;
-	background-color:#c0c0c0;
 }
 
 .index_album_li:hover{
 	color: #FFFFFF;
 	text-decoration: none;
+}
+
+.carousel .carousel_title{
+	position:absolute;
+	z-index:20;
+	color:#fff;
+	font-size:26px;
+	left:650px;
+	top:700px;
 }

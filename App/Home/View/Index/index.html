@@ -21,25 +21,19 @@
     <div class="container">
 		<nav class="navbar navbar-inverse navbar-static-top cl-effect-20">
 			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="index.html">Outing</a>
-				</div>
-				<div id="navbar" class="navbar-collapse collapse navbar-right">
+				<div id="navbar" class="navbar-collapse collapse navbar-left">
 					<ul class="nav navbar-nav">
 						<li><a href="#"><span data-hover="主页">主页</span></a></li>
 						<li><a href="#about"><span data-hover="关于我们">关于我们</span></a></li>
-						<li><a href="#service"><span data-hover="服务">服务</span></a></li>
-						<li><a href="#events"><span data-hover="Events">Events</span></a></li>
+						<li><a href="#service"><span data-hover="Services">Services</span></a></li>
 						<li><a href="#gallery"><span data-hover="作品">作品</span></a></li>
-						<li><a href="#testimonials"><span data-hover="Testimonials">Testimonials</span></a></li>
 						<li><a href="#contact"><span data-hover="联系我们">联系我们</span></a></li>
 					</ul>
+				</div>
+				
+				<div id="top_contact" class="navbar-right contact" style="padding-top:20px;">
+					<span style="color:#fff;font-size:24px;">SHARE</span>
+					<a class="contact_img"><img style="width:40px;height:40px;" src="__PUBLIC__/images/wechat_img.jpg"></a>
 				</div>
 			</div>
         </nav>
@@ -50,30 +44,20 @@
     ================================================== -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
+        	<span class="carousel_title">时光会走远，影像能长存</span>
 			<img class="first-slide" src="__PUBLIC__/images/banner1.jpg" alt="First slide">
         </div>
-        <div class="item">
-			<img class="second-slide" src="__PUBLIC__/images/banner2.jpg" alt="Second slide">
-        </div>
-        <div class="item">
-			<img class="third-slide" src="__PUBLIC__/images/banner3.jpg" alt="Third slide">
-        </div>
     </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+   <!--  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
     <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
-    </a>
+    </a> -->
 </div><!-- /.carousel -->
 <!-- /Banner Section -->
 <!-- About Section -->
@@ -149,48 +133,20 @@
 					</div><!-- Accordion -->
 				</div>
 				<div class="col-md-6">
-					<img src="__PUBLIC__/images/service-img.jpg" class="img-responsive slideanim" alt="service">
+					<img src="images/service-img.jpg" class="img-responsive slideanim" alt="service">
 				</div>
 			</div>
 		</div><!--/ .container -->
 	</div><!--/ #features -->
 </section>
 <!-- /Services Section -->
-<!-- Events -->
-<section class="our-events slideanim" id="events">
-	<h3 class="text-center slideanim">Our Events</h3>
-	<p class="text-center slideanim">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-4 col-md-4">
-				<div class="event-info">
-					<h4 class="text-center slideanim">March 24th</h4>
-					<p class="eve slideanim">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-4">
-				<div class="event-info">
-					<h4 class="text-center slideanim">March 26th</h4>
-					<p class="eve slideanim">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				</div>
-			</div>	
-			<div class="col-lg-4 col-md-4">
-				<div class="event-info">
-					<h4 class="text-center slideanim">March 28th</h4>
-					<p class="eve slideanim">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				</div>
-			</div>	
-		</div>
-	</div>
-</section>
-<!-- /Events -->
 <!-- Gallery Section -->
 <section class="our-gallery" id="gallery">
 	<h3 class="text-center slideanim">作品</h3>
 	<div class="container">
 		<ul>
 		<foreach name='indexAlbumList' item='val'>
-		<li class="index_album_li">
+		<li class="index_album_li list-unstyled">
 			<a class="mustang-gallery cboxElement" href=""><img class="index_album_img" src="__PUBLIC__/images/albumImg/{$val['album_image']}"></a>
 		</li>
 		</foreach>
@@ -198,37 +154,6 @@
 	</div>
 </section>
 <!-- /Gallery Section -->
-<!-- Testimonials -->
-<section class="our-testimonials slideanim" id="testimonials">
-	<h3 class="text-center slideanim">What Our Clients Say</h3>
-	<p class="text-center slideanim">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-4 col-md-4">
-				<div class="test">
-					<img src="__PUBLIC__/images/test-img1.png" class="img-responsive slideanim" alt="">
-					<h4 class="text-center slideanim">Lorem Ipsum</h4>
-					<p class="t1 slideanim">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>	
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-4">
-				<div class="test">
-					<img src="__PUBLIC__/images/test-img2.png" class="img-responsive slideanim" alt="">
-					<h4 class="text-center slideanim">Lorem Ipsum</h4>
-					<p class="t1 slideanim">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>	
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-4">
-				<div class="test">
-					<img src="__PUBLIC__/images/test-img3.png" class="img-responsive slideanim" alt="">
-					<h4 class="text-center slideanim">Lorem Ipsum</h4>
-					<p class="t1 slideanim">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>	
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- Testimonials -->
 <!-- Contact Section -->
 <section class="our-contacts slideanim" id="contact">
 	<h3 class="text-center slideanim">Contact Us</h3>
@@ -341,6 +266,7 @@
 <!-- /js for gallery -->
 <!-- js for back to top -->
 <script src="__PUBLIC__/js/main.js"></script>
+<script type="text/javascript" src="__PUBLIC__/plugin/layer/layer.js"></script>
 <!-- /js for back to top -->
 <!-- js for nav-smooth scroll -->
 <script>
@@ -376,6 +302,37 @@ $(window).scroll(function() {
     }
   });
 });
+
+$('.contact_img').click(function(){
+	layer.open({
+        title:'联系我',
+        type: 2,
+        area: ['450px', '530px'],
+        fix: false, //不固定
+        maxmin: true,
+        content: "{:U('Index/wechat_img')}",
+        success:function(layero,index){
+        },
+        end:function(){
+            var handle_status = $("#handle_status").val();
+            if ( handle_status == '1' ) {
+                layer.msg('添加成功！',{
+                    icon: 1,
+                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                },function(){
+                    history.go(0);
+                });
+            } else if ( handle_status == '2' ) {
+                layer.msg('添加失败！',{
+                    icon: 2,
+                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                },function(){
+                    history.go(0);
+                });
+            }
+        }
+    });
+})
 </script>
 <!-- /js for slide animations -->
 <!-- /js files -->

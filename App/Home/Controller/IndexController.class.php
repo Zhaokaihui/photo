@@ -8,5 +8,9 @@ class IndexController extends Controller{
  		$this->assign('indexAlbumList',$indexAlbumList);
  		$this->display();	
  	}
+ 	
+ 	public function wechat_img(){
+ 	    $this->display();
+ 	}
 }
 ?>
