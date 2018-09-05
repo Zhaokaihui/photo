@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
 <html>
 <head>
 <title>子云工作室</title>
@@ -6,14 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <!-- css files -->
-<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="__PUBLIC__/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="/Public/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/Public/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/Public/css/style.css" rel="stylesheet" type="text/css" media="all"/>
 <!-- /css files -->
 <!-- font files -->
  
 <!-- js files -->
-<script src="__PUBLIC__/js/modernizr.custom.js"></script>
+<script src="/Public/js/modernizr.custom.js"></script>
 <!-- /js files -->
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -33,7 +33,7 @@
 				
 				<div id="top_contact" class="navbar-right contact" style="padding-top:20px;">
 					<span style="color:#fff;font-size:24px;">SHARE</span>
-					<a class="contact_img"><img style="width:40px;height:40px;" src="__PUBLIC__/images/wechat_img.jpg"></a>
+					<a class="contact_img"><img style="width:40px;height:40px;" src="/Public/images/wechat_img.jpg"></a>
 				</div>
 			</div>
         </nav>
@@ -47,7 +47,7 @@
     <div class="carousel-inner" role="listbox">
         <div class="item active">
         	<span class="carousel_title">时光会走远，影像能长存</span>
-			<img class="first-slide" src="__PUBLIC__/images/banner1.jpg" alt="First slide">
+			<img class="first-slide" src="/Public/images/banner1.jpg" alt="First slide">
         </div>
     </div>
    <!--  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -67,7 +67,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6">
-				<img src="__PUBLIC__/images/about-img.jpg" alt="about" class="img-responsive slideanim">
+				<img src="/Public/images/about-img.jpg" alt="about" class="img-responsive slideanim">
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6">
 				<div class="about-info">
@@ -145,11 +145,9 @@
 	<h3 class="text-center slideanim">作品</h3>
 	<div class="container">
 		<ul>
-		<foreach name='indexAlbumList' item='val'>
-		<li class="index_album_li list-unstyled index_album" par={$val['id']}>
-			<img class="index_album_img" src="__PUBLIC__/images/albumImg/{$val['album_image']}">
-		</li>
-		</foreach>
+		<?php if(is_array($indexAlbumList)): foreach($indexAlbumList as $key=>$val): ?><li class="index_album_li list-unstyled index_album" par=<?php echo ($val['id']); ?>>
+			<img class="index_album_img" src="/Public/images/albumImg/<?php echo ($val['album_image']); ?>">
+		</li><?php endforeach; endif; ?>
 		<li class="index_album_li list-unstyled">
 			<div class="look_album_more"><span class="glyphicon glyphicon-search"></span> 查看更多</div>
 		</li>
@@ -261,15 +259,15 @@
 <!-- /Back To Top -->
 
 <!-- js files -->
-<script src="__PUBLIC__/js/jquery.min.js"></script>
-<script src="__PUBLIC__/js/bootstrap.min.js"></script>
-<script src="__PUBLIC__/js/SmoothScroll.min.js"></script>
+<script src="/Public/js/jquery.min.js"></script>
+<script src="/Public/js/bootstrap.min.js"></script>
+<script src="/Public/js/SmoothScroll.min.js"></script>
 <!-- js for gallery -->
-<script src="__PUBLIC__/js/darkbox.js"></script>
+<script src="/Public/js/darkbox.js"></script>
 <!-- /js for gallery -->
 <!-- js for back to top -->
-<script src="__PUBLIC__/js/main.js"></script>
-<script type="text/javascript" src="__PUBLIC__/plugin/layer/layer.js"></script>
+<script src="/Public/js/main.js"></script>
+<script type="text/javascript" src="/Public/plugin/layer/layer.js"></script>
 <!-- /js for back to top -->
 <!-- js for nav-smooth scroll -->
 <script>
@@ -314,13 +312,13 @@ $('.contact_img').click(function(){
         fix: false, //不固定
         maxmin: true,
         shadeClose: true,
-        content: "{:U('Index/wechat_img')}"
+        content: "<?php echo U('Index/wechat_img');?>"
     });
 })
 
 $('.index_album_li').click(function(){
 	var par = $(this).attr('par');
-	var url = "{:U('Index/photo_show',array('album_id'=>'par'))}";
+	var url = "<?php echo U('Index/photo_show',array('album_id'=>'par'));?>";
 	url =  url.replace("par",par); //将代替变量的字符串用真实变量替换掉，OK搞定！
 	layer.open({
         title:'查看',
