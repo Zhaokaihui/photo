@@ -1267,17 +1267,21 @@ section.footer h2 {
 	height:180px;
 }
 
+.look_album_more{
+	width:280px;
+	height:180px;
+	border:1px solid #000;
+	text-align:center;
+	padding-top:60px;
+	font-size:22px;
+}
+
 .index_album_li{
 	width:285px;
 	height:190px;
 	float:left;
 	text-align:center;
 	padding-left:3px;
-}
-
-.index_album_li:hover{
-	color: #FFFFFF;
-	text-decoration: none;
 }
 
 .carousel .carousel_title{
@@ -1287,4 +1291,10 @@ section.footer h2 {
 	font-size:26px;
 	left:650px;
 	top:700px;
+}
+
+.photo-show-img-div > .item > img {
+	position: absolute;
+	top: 0;
+	left: 0;
 }

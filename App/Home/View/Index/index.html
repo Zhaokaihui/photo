@@ -146,10 +146,13 @@
 	<div class="container">
 		<ul>
 		<foreach name='indexAlbumList' item='val'>
-		<li class="index_album_li list-unstyled">
-			<a class="mustang-gallery cboxElement" href=""><img class="index_album_img" src="__PUBLIC__/images/albumImg/{$val['album_image']}"></a>
+		<li class="index_album_li list-unstyled index_album" par={$val['id']}>
+			<img class="index_album_img" src="__PUBLIC__/images/albumImg/{$val['album_image']}">
 		</li>
 		</foreach>
+		<li class="index_album_li list-unstyled">
+			<div class="look_album_more"><span class="glyphicon glyphicon-search"></span> 查看更多</div>
+		</li>
 		</ul>
 	</div>
 </section>
@@ -312,6 +315,18 @@ $('.contact_img').click(function(){
         maxmin: true,
         shadeClose: true,
         content: "{:U('Index/wechat_img')}"
+    });
+})
+
+$('.index_album').click(function(){
+	layer.open({
+        title:'查看',
+        type: 2,
+        area: ['700px', '550px'],
+        fix: false,
+        maxmin: true,
+        shadeClose: true,
+        content: "{:U('Index/photo_show',array('album_id'=>$album_id))}"
     });
 })
 </script>

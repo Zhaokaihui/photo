@@ -38,7 +38,7 @@
 		
 		function getIndexAlbumList(){
 		    $Album = D('album');
-		    $list = $Album->limit(12)->select();
+		    $list = $Album->order(array('sort'=>'desc','id'=>'asc'))->limit(11)->select();
 		    return $list;
 		}
 	}
