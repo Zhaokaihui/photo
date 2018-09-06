@@ -91,7 +91,7 @@
 
         <div class="route_bg">
             <a href="<?php echo U('Index/index');?>" id='admin-index'>主页</a><i class="glyph-icon icon-chevron-right"></i>
-            <a id='admin-type'>相册列表</a>
+            <a id='admin-type'>照片列表</a>
         </div>
         <div class="mian_content">
             <div id="page_content">
@@ -101,7 +101,7 @@
 		<div role="tabpanel" class="tab-pane" id="user">
 			<div class="check-div form-inline" style="height:45px;">
 				<div class="col-xs-3">
-					<a class="btn btn-yellow btn-xs"  href="<?php echo U('Album/album_add');?>">添加相册</a>
+					<a class="btn btn-yellow btn-xs"  href="<?php echo U('Photo/photo_add');?>">添加照片</a>
 				</div>
 				<!-- <div class="col-xs-4">
 					<input type="text" class="form-control input-sm" placeholder="输入文字搜索">
@@ -109,32 +109,25 @@
 				</div> -->
 			</div>
 
-			<table class="album-data-div" width="100%">
+			<table class="photo-data-div" width="100%">
 				<tr class="tableHeader">
-					<td width="30px">编号</td>
-					<td>相册名称</td>
-					<td>相册封面</td>
-					<td>相册简介</td>
-					<td>关联照片</td>
+					<td>编号</td>
+					<td>照片</td>
 					<td>排序</td>
-					<td>前台显示</td>
+					<td>是否禁用</td>
 					<td>操作</td>
 				</tr>
 				<?php if(is_array($list)): foreach($list as $key=>$val): ?><tr class="tablebody">
 					<td class="col-xs-1" height="120px"><?php echo ($val['id']); ?></td>
-					<td class="col-xs-2"><?php echo ($val['album_name']); ?></td>
-					<td class="col-xs-2"><img class="album_img" src='/Public/images/albumImg/<?php echo ($val['album_image']); ?>'></td>
-					<td class="col-xs-2"><?php echo ($val['album_introduce']); ?></td>
-					<td class="col-xs-1" par=<?php echo ($val['id']); ?>><a class="relation-photo-btn" href="<?php echo U('Album/relation_photo_list');?>">查看</a></td>
+					<td class="col-xs-2"><img class="photo_img" src='/Public/images/photoImg/<?php echo ($val['photo_image']); ?>'></td>
 					<td class="col-xs-1"><?php echo ($val['sort']); ?></td>
-					
 					<td class="col-xs-1">
 						<?php if(($val['is_delete'] == 0)): ?><img class="delete_on" src="/Public/images/delete_on.png">
 						<?php else: ?>
 							<img class="delete_off" src="/Public/images/delete_off.png"><?php endif; ?>
 					</td>
 					<td class="col-xs-1" par=<?php echo ($val['id']); ?>>
-						<a class="btn btn-success btn-xs edit-btn" href="<?php echo U('Album/album_edit');?>">修改</a>
+						<a class="btn btn-success btn-xs edit-btn" href="<?php echo U('Photo/photo_edit');?>">修改</a>
 						<a class="btn btn-danger btn-xs del-btn">删除</a>
 					</td>
 				</tr><?php endforeach; endif; ?>
@@ -146,14 +139,10 @@
 <script type="text/javascript">
 	$('.tableCell').click(
 			function() {
-				$(this).addClass('recommended').siblings().removeClass(
-						'recommended').children().children('.price3')
-						.removeClass('price3').addClass('price1');
-				$(this).children().children('.price1').addClass('price3')
-						.removeClass('price1');
+				$(this).addClass('recommended').siblings().removeClass('recommended').children().children('.price3').removeClass('price3').addClass('price1');
+				$(this).children().children('.price1').addClass('price3').removeClass('price1');
 				var par = $(this).attr('par');
-				$("td[par='" + par + "']").addClass('recommended').siblings()
-						.removeClass('recommended');
+				$("td[par='" + par + "']").addClass('recommended').siblings().removeClass('recommended');
 			});
 	$('.edit-btn').click(function() {
 		var par = $(this).parent().attr('par');
@@ -168,7 +157,7 @@
 			icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
 			$.ajax({
 				type: "GET",
-				url: '<?php echo U("Album/album_del");?>',
+				url: '<?php echo U("Photo/photo_del");?>',
 				data: {id:par},
 				dataType: "json",
 				success: function(data){
@@ -177,14 +166,6 @@
 			});
 		    layer.close(index);
 		});
-	})
-	
-	//关联照片选择
-	$('.relation-photo-btn').click(function(){
-		var par = $(this).parent().attr('par');
-		var url = $(this).attr('href');
-		url = url + '?id=' + par;
-		$(this).attr('href', url);
 	})
 </script> 
             </div>

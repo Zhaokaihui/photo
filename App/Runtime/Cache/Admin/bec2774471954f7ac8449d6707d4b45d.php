@@ -12,11 +12,10 @@
 <link rel="stylesheet" href="/Public/CSS/lyq-list.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/Public/CSS/master.css" media="screen">
 <link rel="stylesheet" href="/Public/CSS/reset.css" media="screen">
-<link rel="stylesheet" href="/Public/CSS/admin_common.css" media="screen">
 <link rel="stylesheet" href="/Public/CSS/bootstrap.min_new.css" media="screen">
-<link rel="stylesheet" type="text/css" href="css/flat-ui.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.nouislider.css">
-<link rel="stylesheet" type="text/css" href="css/slide.css" />
+<link rel="stylesheet" type="text/css" href="/Public/CSS/flat-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/Public/CSS/jquery.nouislider.css">
+<link rel="stylesheet" type="text/css" href="/Public/CSS/slide.css" />
 
 <script type="text/javascript" src="/Public/JS/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="/Public/JS/tendina.min.js"></script>
@@ -70,10 +69,10 @@
                 </ul>
             </li>
             <li class="childUlLi">
-                <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>用户管理</a>
+                <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>主题管理</a>
                 <ul>
-                    <li><a href="<?php echo U('Index/user_add');?>"><i class="glyph-icon icon-chevron-right"></i>用户添加</a></li>
-                    <li><a href="<?php echo U('Index/user_list');?>"><i class="glyph-icon icon-chevron-right"></i>用户列表</a></li>
+                    <li><a href="<?php echo U('Theme/theme_list');?>"><i class="glyph-icon icon-chevron-right"></i>主题列表</a></li>
+                    <li><a href="<?php echo U('Theme/theme_add');?>"><i class="glyph-icon icon-chevron-right"></i>主题添加</a></li>
                 </ul>
             </li>
             <!-- <li class="childUlLi">
@@ -92,31 +91,31 @@
 
         <div class="route_bg">
             <a href="<?php echo U('Index/index');?>" id='admin-index'>主页</a><i class="glyph-icon icon-chevron-right"></i>
-            <a id='admin-type'>相册修改</a>
+            <a id='admin-type'>相册添加</a>
         </div>
         <div class="mian_content">
             <div id="page_content">
                 
 <div class="div_from_aoto" style="width: 500px;">
-	<form method='post' id="myForm" action="<?php echo U('Album/album_edit');?>" enctype="multipart/form-data" >
+	<form method='post' id="myForm" action="<?php echo U('Album/album_add');?>" enctype="multipart/form-data" >
 		<div class="control-group">
 			<label class="laber_from">相册名称</label>
 			<div class="controls">
-				<input class="input_from" name='album_name' placeholder="请输入相册名称" value='<?php echo ($result["album_name"]); ?>'>
+				<input class="input_from" name='album_name' placeholder="请输入相册名称" value=''>
 				<p class=help-block></p>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="laber_from">相册简介</label>
 			<div class="controls">
-				<textarea class="text_from" style="width:250px;height:100px" name='album_introduce' placeholder="请输入相册简介"><?php echo ($result['album_introduce']); ?></textarea>
+				<textarea class="text_from" style="width:250px;height:100px" name='album_introduce' placeholder="请输入相册简介"></textarea>
 				<p class=help-block></p>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="laber_from">排序</label>
 			<div class="controls">
-				<input class="input_from" name='sort' value='<?php echo ($result["sort"]); ?>'>
+				<input class="input_from" name='sort' value='0'>
 				<p class=help-block></p>
 			</div>
 		</div>
@@ -125,7 +124,7 @@
 			<label class="laber_from">相册封面</label>
 			<div class="controls">
 				<button type="button" class="img_upload_btn" title="点击上传图片">
-					<img class="album_image_img" src="/Public/images/albumImg/<?php echo ($result['album_image']); ?>">
+					<img class="album_image_img" src="/Public/images/albumImg/default.png">
 				</button>
 				<input type="file" name="image"  id="picture" class="img_upload_file" multiple="multiple" style="display: none" />
 				<p class=help-block></p>
@@ -150,14 +149,11 @@
 			</div>
 		</div>
 		<div class="hidden-div">
-			<input type="hidden" name="id" value="<?php echo ($result['id']); ?>">
+			<input type="hidden" name="is_add" value="1">
 		</div>
 	</form>
 </div>
 <script type="text/javascript">
-	var result = <?php echo ($result); ?>;
-	$('#is_delete').val(<?php echo ($result['is_delete']); ?>)
-	
 	$(".img_upload_btn").click(function() {
         $(".img_upload_file").click();
     });
@@ -169,7 +165,7 @@
 		myFormData.append("album_image", album_image_img);
 		$.ajax({
 			type: "POST",
-			url: '<?php echo U("Album/album_update");?>',
+			url: '<?php echo U("Album/album_add");?>',
 			data: myFormData,
 			dataType: "json",
 			processData: false,

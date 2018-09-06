@@ -67,11 +67,11 @@
 	max-width:200px;
 	max-height:140px;
 }
-.album-data-div td,.photo-data-div td{
+.album-data-div td,.photo-data-div td,.theme-data-div td{
 	text-align: center;
-		vertical-align: middle;
-		border-right: 1px solid #e2e7eb;
-		color: #77808a;
+	vertical-align: middle;
+	border-right: 1px solid #e2e7eb;
+	color: #77808a;
 }
 .btn-white {
 	background: #fff;

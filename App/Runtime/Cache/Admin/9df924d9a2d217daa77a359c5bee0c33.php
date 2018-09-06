@@ -12,11 +12,10 @@
 <link rel="stylesheet" href="/Public/CSS/lyq-list.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/Public/CSS/master.css" media="screen">
 <link rel="stylesheet" href="/Public/CSS/reset.css" media="screen">
-<link rel="stylesheet" href="/Public/CSS/admin_common.css" media="screen">
 <link rel="stylesheet" href="/Public/CSS/bootstrap.min_new.css" media="screen">
-<link rel="stylesheet" type="text/css" href="css/flat-ui.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.nouislider.css">
-<link rel="stylesheet" type="text/css" href="css/slide.css" />
+<link rel="stylesheet" type="text/css" href="/Public/CSS/flat-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/Public/CSS/jquery.nouislider.css">
+<link rel="stylesheet" type="text/css" href="/Public/CSS/slide.css" />
 
 <script type="text/javascript" src="/Public/JS/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="/Public/JS/tendina.min.js"></script>
@@ -70,10 +69,10 @@
                 </ul>
             </li>
             <li class="childUlLi">
-                <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>用户管理</a>
+                <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>主题管理</a>
                 <ul>
-                    <li><a href="<?php echo U('Index/user_add');?>"><i class="glyph-icon icon-chevron-right"></i>用户添加</a></li>
-                    <li><a href="<?php echo U('Index/user_list');?>"><i class="glyph-icon icon-chevron-right"></i>用户列表</a></li>
+                    <li><a href="<?php echo U('Theme/theme_list');?>"><i class="glyph-icon icon-chevron-right"></i>主题列表</a></li>
+                    <li><a href="<?php echo U('Theme/theme_add');?>"><i class="glyph-icon icon-chevron-right"></i>主题添加</a></li>
                 </ul>
             </li>
             <!-- <li class="childUlLi">

@@ -30,7 +30,7 @@ class ThemeController extends Controller{
  	    if($p<1){
  	        $p=1;
  	    }
- 	    $list=$Theme->where()->order('id')->page($p.',10')->select();
+ 	    $list=$Theme->where()->order(array('sort'=>'desc','id'))->page($p.',10')->select();
  	    $Page=new \Think\Page($count,10);
  	    $show=$Page->show();
  	    
@@ -60,26 +60,10 @@ class ThemeController extends Controller{
  	        $id = $_POST['id'];
  	        
  	        $Model=D('theme');
- 	        $oldImage = $Model->where('id=%d',$id)->field('theme_image')->find();
  			$data['theme_name']=$_POST['theme_name'];
  			$data['sort']=$_POST['sort'];
  			$data['is_delete']=$_POST['is_delete'];
- 			$data['theme_introduce'] = $_POST['theme_introduce'];
  			$data['update_time'] = date('Y-m-d H:i:s',time());
- 			
- 			//上传图片
- 			$upload = new \Think\Upload();
- 			$upload->exts=array('jpg', 'gif', 'png', 'jpeg');
- 			$upload->rootPath='./Public/images/themeImg/';
- 			$info=$upload->upload();
- 			$data['theme_image'] = '';
- 			if(!empty($info)){
- 			    $data['theme_image'] = $info['image']['savepath'].$info['image']['savename'];
- 			    //删除旧图片
- 			    if($oldImage['theme_image'] != $data['theme_image'] && $data['theme_image'] != ''){
- 			        unlink('./Public/images/themeImg/'.$oldImage['theme_image']);
- 			    }
- 			}
  			
  			$result = $Model->where('id=%s',$id)->save($data);
  			if($result){

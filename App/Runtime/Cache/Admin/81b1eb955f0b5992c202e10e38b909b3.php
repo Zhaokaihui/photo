@@ -12,11 +12,10 @@
 <link rel="stylesheet" href="/Public/CSS/lyq-list.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/Public/CSS/master.css" media="screen">
 <link rel="stylesheet" href="/Public/CSS/reset.css" media="screen">
-<link rel="stylesheet" href="/Public/CSS/admin_common.css" media="screen">
 <link rel="stylesheet" href="/Public/CSS/bootstrap.min_new.css" media="screen">
-<link rel="stylesheet" type="text/css" href="css/flat-ui.min.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.nouislider.css">
-<link rel="stylesheet" type="text/css" href="css/slide.css" />
+<link rel="stylesheet" type="text/css" href="/Public/CSS/flat-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/Public/CSS/jquery.nouislider.css">
+<link rel="stylesheet" type="text/css" href="/Public/CSS/slide.css" />
 
 <script type="text/javascript" src="/Public/JS/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="/Public/JS/tendina.min.js"></script>
@@ -70,10 +69,10 @@
                 </ul>
             </li>
             <li class="childUlLi">
-                <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>用户管理</a>
+                <a href="#"  target="menuFrame"> <i class="glyph-icon icon-reorder"></i>主题管理</a>
                 <ul>
-                    <li><a href="<?php echo U('Index/user_add');?>"><i class="glyph-icon icon-chevron-right"></i>用户添加</a></li>
-                    <li><a href="<?php echo U('Index/user_list');?>"><i class="glyph-icon icon-chevron-right"></i>用户列表</a></li>
+                    <li><a href="<?php echo U('Theme/theme_list');?>"><i class="glyph-icon icon-chevron-right"></i>主题列表</a></li>
+                    <li><a href="<?php echo U('Theme/theme_add');?>"><i class="glyph-icon icon-chevron-right"></i>主题添加</a></li>
                 </ul>
             </li>
             <!-- <li class="childUlLi">
@@ -92,105 +91,104 @@
 
         <div class="route_bg">
             <a href="<?php echo U('Index/index');?>" id='admin-index'>主页</a><i class="glyph-icon icon-chevron-right"></i>
-            <a id='admin-type'>关联照片</a>
+            <a id='admin-type'>相册修改</a>
         </div>
         <div class="mian_content">
             <div id="page_content">
                 
-<script type="text/javascript" src="/Public/JS/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="/Public/plugin/layer/layer.js"></script>
-<script type="text/javascript" src="/Public/JS/common.js"></script>
-<script type="text/javascript" src="/Public/JS/tendina.min.js"></script>
-
-
-<link rel="stylesheet" href="/Public/CSS/admin.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="/Public/CSS/admin_common.css" media="screen">
-<link rel="stylesheet" href="/Public/CSS/bootstrap.min_new.css" media="screen">
-<link rel="stylesheet" href="/Public/CSS/Page.css" type="text/css" media="screen" />
-<div class="div_from_aoto">
-	<div class='lyq-term'>
-		<div role="tabpanel" class="tab-pane" id="user">
-			<div class="check-div form-inline" style="height:45px;">
-				<div class="col-xs-3">
-					<a class="btn btn-yellow btn-xs relation-photo-add" par=<?php echo ($album_id); ?>>添加关联照片</a>
-				</div>
-				<!-- <div class="col-xs-4">
-					<input type="text" class="form-control input-sm" placeholder="输入文字搜索">
-					<button class="btn-white btn-xs ">查 询</button>
-				</div> -->
+<div class="div_from_aoto" style="width: 500px;">
+	<form method='post' id="myForm" action="<?php echo U('Theme/theme_edit');?>" enctype="multipart/form-data" >
+		<div class="control-group">
+			<label class="laber_from">相册名称</label>
+			<div class="controls">
+				<input class="input_from" name='theme_name' placeholder="请输入相册名称" value='<?php echo ($result["theme_name"]); ?>'>
+				<p class=help-block></p>
 			</div>
-
-			<table class="photo-data-div" width="100%">
-				<tr class="tableHeader">
-					<td>编号</td>
-					<td>照片</td>
-					<td>操作</td>
-				</tr>
-				<?php if(is_array($list)): foreach($list as $key=>$val): ?><tr class="tablebody">
-					<td class="col-xs-1" height="150px"><?php echo ($val['id']); ?></td>
-					<td class="col-xs-2"><img class="relation_photo_img" src='/Public/images/photoImg/<?php echo ($val['photo_image']); ?>'></td>
-					<td class="col-xs-1" par=<?php echo ($val['id']); ?>>
-						<a class="btn btn-danger btn-xs del-btn" id="del-btn">删除</a>
-					</td>
-				</tr><?php endforeach; endif; ?>
-			</table>
 		</div>
-	</div>
+		<div class="control-group">
+			<label class="laber_from">排序</label>
+			<div class="controls">
+				<input class="input_from" name='sort' value='<?php echo ($result["sort"]); ?>'>
+				<p class=help-block></p>
+			</div>
+		</div>
+		
+		
+		
+		<div class="control-group">
+			<label class="laber_from">状态</label>
+			<div class="controls">
+				<select class="input_select" id="is_delete" name='is_delete'>
+					<option value="0">正常</option>
+					<option value="1">禁用</option>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="laber_from"></label>
+			<div class="controls">
+				<button type="button" id="update_btn" class="btn btn-success" style="width: 120px;">提交</button>
+				<button type="button" id="back_btn" class="btn btn-success" onclick="window.location.href=document.referrer;" style="width: 120px;">返回列表</button>
+			</div>
+		</div>
+		<div class="hidden-div">
+			<input type="hidden" name="id" value="<?php echo ($result['id']); ?>">
+		</div>
+	</form>
 </div>
-<div class="quotes"><?php echo ($page); ?></div>
 <script type="text/javascript">
-	$('.del-btn').click(function(){
-		var par = $(this).parent().attr('par');
-		layer.alert('',{
-			icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
-			$.ajax({
-				type: "GET",
-				url: '<?php echo U("Album/relation_photo_del");?>',
-				data: {id:par},
-				dataType: "json",
-				success: function(data){
-					refresh(1,data.msg)
-				}
-			});
-		    layer.close(index);
+	var result = <?php echo ($result); ?>;
+	$('#is_delete').val(<?php echo ($result['is_delete']); ?>)
+	
+	$(".img_upload_btn").click(function() {
+        $(".img_upload_file").click();
+    });
+	
+	$('#update_btn').click(function(){
+		var form = document.getElementById("myForm");
+		var myFormData = new FormData(form);
+		var theme_image_img = $(".theme_image_img").attr("src");
+		myFormData.append("theme_image", theme_image_img);
+		$.ajax({
+			type: "POST",
+			url: '<?php echo U("Theme/theme_update");?>',
+			data: myFormData,
+			dataType: "json",
+			processData: false,
+			contentType: false,
+			success: function(data){
+				layer.msg(data.msg);
+			}
 		});
+		 
 	})
 	
-	$('.relation-photo-add').click(function(){
-		var par = $(this).attr('par');
-		layer.open({
-	        title:'添加关联照片',
-	        type: 2,
-	        area: ['700px', '530px'],
-	        fix: false, //不固定
-	        maxmin: true,
-	        content: "<?php echo U('Album/relation_photo_add',array('album_id'=>$album_id));?>",
-	        success:function(layero,index){
-	        },
-	        end:function(){
-	            var handle_status = $("#handle_status").val();
-	            if ( handle_status == '1' ) {
-	                layer.msg('添加成功！',{
-	                    icon: 1,
-	                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
-	                },function(){
-	                    history.go(0);
-	                });
-	            } else if ( handle_status == '2' ) {
-	                layer.msg('添加失败！',{
-	                    icon: 2,
-	                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
-	                },function(){
-	                    history.go(0);
-	                });
-	            }
-	        }
-	    });
-	})
+	$(".img_upload_file").change(function() {
+		var path = $(this).val(),
+		extStart = path.lastIndexOf('.'),
+		ext = path.substring(extStart,path.length).toUpperCase();
+		//判断图片格式
+		if(ext !== '.PNG' && ext !== '.JPG' && ext !== '.JPEG' && ext !== '.GIF'){
+			alert('请上传正确格式的图片');
+			return false;
+		}
+		
+		//判断图片大小
+		var size = this.files[0].size / 1024;
+		if(size > 6144){
+		   alert('图片大小不能超过6M');
+		   return false;
+		}
+		
+		var file = this.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function(e) {
+			$(".theme_image_img").attr("src", this.result);
+		};
+	});
 	
-	
-	
-	
+
 </script> 
             </div>
         </div>

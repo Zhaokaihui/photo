@@ -101,7 +101,7 @@
 		<div role="tabpanel" class="tab-pane" id="user">
 			<div class="check-div form-inline" style="height:45px;">
 				<div class="col-xs-3">
-					<a class="btn btn-yellow btn-xs"  href="<?php echo U('Album/album_add');?>">添加相册</a>
+					<a class="btn btn-yellow btn-xs"  href="<?php echo U('Theme/theme_add');?>">添加相册</a>
 				</div>
 				<!-- <div class="col-xs-4">
 					<input type="text" class="form-control input-sm" placeholder="输入文字搜索">
@@ -109,23 +109,19 @@
 				</div> -->
 			</div>
 
-			<table class="album-data-div" width="100%">
+			<table class="theme-data-div" width="100%">
 				<tr class="tableHeader">
 					<td width="30px">编号</td>
-					<td>相册名称</td>
-					<td>相册封面</td>
-					<td>相册简介</td>
-					<td>关联照片</td>
+					<td>主题名称</td>
+					<td>关联相册</td>
 					<td>排序</td>
 					<td>前台显示</td>
 					<td>操作</td>
 				</tr>
 				<?php if(is_array($list)): foreach($list as $key=>$val): ?><tr class="tablebody">
 					<td class="col-xs-1" height="120px"><?php echo ($val['id']); ?></td>
-					<td class="col-xs-2"><?php echo ($val['album_name']); ?></td>
-					<td class="col-xs-2"><img class="album_img" src='/Public/images/albumImg/<?php echo ($val['album_image']); ?>'></td>
-					<td class="col-xs-2"><?php echo ($val['album_introduce']); ?></td>
-					<td class="col-xs-1" par=<?php echo ($val['id']); ?>><a class="relation-photo-btn" href="<?php echo U('Album/relation_photo_list');?>">查看</a></td>
+					<td class="col-xs-2"><?php echo ($val['theme_name']); ?></td>
+					<td class="col-xs-1" par=<?php echo ($val['id']); ?>><a class="relation-photo-btn" href="<?php echo U('Theme/relation_photo_list');?>">查看</a></td>
 					<td class="col-xs-1"><?php echo ($val['sort']); ?></td>
 					
 					<td class="col-xs-1">
@@ -134,7 +130,7 @@
 							<img class="delete_off" src="/Public/images/delete_off.png"><?php endif; ?>
 					</td>
 					<td class="col-xs-1" par=<?php echo ($val['id']); ?>>
-						<a class="btn btn-success btn-xs edit-btn" href="<?php echo U('Album/album_edit');?>">修改</a>
+						<a class="btn btn-success btn-xs edit-btn" href="<?php echo U('Theme/theme_edit');?>">修改</a>
 						<a class="btn btn-danger btn-xs del-btn">删除</a>
 					</td>
 				</tr><?php endforeach; endif; ?>
@@ -168,7 +164,7 @@
 			icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
 			$.ajax({
 				type: "GET",
-				url: '<?php echo U("Album/album_del");?>',
+				url: '<?php echo U("Theme/theme_del");?>',
 				data: {id:par},
 				dataType: "json",
 				success: function(data){
