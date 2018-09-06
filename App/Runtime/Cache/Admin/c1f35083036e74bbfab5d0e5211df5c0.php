@@ -91,17 +91,27 @@
 
         <div class="route_bg">
             <a href="<?php echo U('Index/index');?>" id='admin-index'>主页</a><i class="glyph-icon icon-chevron-right"></i>
-            <a id='admin-type'>主题列表</a>
+            <a id='admin-type'>关联照片</a>
         </div>
         <div class="mian_content">
             <div id="page_content">
                 
+<script type="text/javascript" src="/Public/JS/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="/Public/plugin/layer/layer.js"></script>
+<script type="text/javascript" src="/Public/JS/common.js"></script>
+<script type="text/javascript" src="/Public/JS/tendina.min.js"></script>
+
+
+<link rel="stylesheet" href="/Public/CSS/admin.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/Public/CSS/admin_common.css" media="screen">
+<link rel="stylesheet" href="/Public/CSS/bootstrap.min_new.css" media="screen">
+<link rel="stylesheet" href="/Public/CSS/Page.css" type="text/css" media="screen" />
 <div class="div_from_aoto">
 	<div class='lyq-term'>
 		<div role="tabpanel" class="tab-pane" id="user">
 			<div class="check-div form-inline" style="height:45px;">
 				<div class="col-xs-3">
-					<a class="btn btn-yellow btn-xs"  href="<?php echo U('Theme/theme_add');?>">添加主题</a>
+					<a class="btn btn-yellow btn-xs relation-photo-add" par=<?php echo ($album_id); ?>>添加关联照片</a>
 				</div>
 				<!-- <div class="col-xs-4">
 					<input type="text" class="form-control input-sm" placeholder="输入文字搜索">
@@ -109,29 +119,17 @@
 				</div> -->
 			</div>
 
-			<table class="theme-data-div" width="100%">
+			<table class="photo-data-div" width="100%">
 				<tr class="tableHeader">
-					<td width="30px">编号</td>
-					<td>主题名称</td>
-					<td>关联相册</td>
-					<td>排序</td>
-					<td>前台显示</td>
+					<td>编号</td>
+					<td>照片</td>
 					<td>操作</td>
 				</tr>
 				<?php if(is_array($list)): foreach($list as $key=>$val): ?><tr class="tablebody">
-					<td class="col-xs-1" height="120px"><?php echo ($val['id']); ?></td>
-					<td class="col-xs-2"><?php echo ($val['theme_name']); ?></td>
-					<td class="col-xs-1" par=<?php echo ($val['id']); ?>><a class="relation-album-btn" href="<?php echo U('Theme/relation_album_list');?>">查看</a></td>
-					<td class="col-xs-1"><?php echo ($val['sort']); ?></td>
-					
-					<td class="col-xs-1">
-						<?php if(($val['is_delete'] == 0)): ?><img class="delete_on" src="/Public/images/delete_on.png">
-						<?php else: ?>
-							<img class="delete_off" src="/Public/images/delete_off.png"><?php endif; ?>
-					</td>
+					<td class="col-xs-1" height="150px"><?php echo ($val['id']); ?></td>
+					<td class="col-xs-2"><img class="relation_photo_img" src='/Public/images/photoImg/<?php echo ($val['photo_image']); ?>'></td>
 					<td class="col-xs-1" par=<?php echo ($val['id']); ?>>
-						<a class="btn btn-success btn-xs edit-btn" href="<?php echo U('Theme/theme_edit');?>">修改</a>
-						<a class="btn btn-danger btn-xs del-btn">删除</a>
+						<a class="btn btn-danger btn-xs del-btn" id="del-btn">删除</a>
 					</td>
 				</tr><?php endforeach; endif; ?>
 			</table>
@@ -140,31 +138,13 @@
 </div>
 <div class="quotes"><?php echo ($page); ?></div>
 <script type="text/javascript">
-	$('.tableCell').click(
-			function() {
-				$(this).addClass('recommended').siblings().removeClass(
-						'recommended').children().children('.price3')
-						.removeClass('price3').addClass('price1');
-				$(this).children().children('.price1').addClass('price3')
-						.removeClass('price1');
-				var par = $(this).attr('par');
-				$("td[par='" + par + "']").addClass('recommended').siblings()
-						.removeClass('recommended');
-			});
-	$('.edit-btn').click(function() {
-		var par = $(this).parent().attr('par');
-		var url = $(this).attr('href');
-		url = url + '?id=' + par;
-		$(this).attr('href', url);
-	});
-	
 	$('.del-btn').click(function(){
 		var par = $(this).parent().attr('par');
 		layer.alert('',{
 			icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
 			$.ajax({
 				type: "GET",
-				url: '<?php echo U("Theme/theme_del");?>',
+				url: '<?php echo U("Album/relation_photo_del");?>',
 				data: {id:par},
 				dataType: "json",
 				success: function(data){
@@ -175,13 +155,41 @@
 		});
 	})
 	
-	//关联照片选择
-	$('.relation-album-btn').click(function(){
-		var par = $(this).parent().attr('par');
-		var url = $(this).attr('href');
-		url = url + '?id=' + par;
-		$(this).attr('href', url);
+	$('.relation-photo-add').click(function(){
+		var par = $(this).attr('par');
+		layer.open({
+	        title:'添加关联照片',
+	        type: 2,
+	        area: ['700px', '530px'],
+	        fix: false, //不固定
+	        maxmin: true,
+	        content: "<?php echo U('Album/relation_photo_add',array('album_id'=>$album_id));?>",
+	        success:function(layero,index){
+	        },
+	        end:function(){
+	            var handle_status = $("#handle_status").val();
+	            if ( handle_status == '1' ) {
+	                layer.msg('添加成功！',{
+	                    icon: 1,
+	                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+	                },function(){
+	                    history.go(0);
+	                });
+	            } else if ( handle_status == '2' ) {
+	                layer.msg('添加失败！',{
+	                    icon: 2,
+	                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+	                },function(){
+	                    history.go(0);
+	                });
+	            }
+	        }
+	    });
 	})
+	
+	
+	
+	
 </script> 
             </div>
         </div>

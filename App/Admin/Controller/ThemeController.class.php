@@ -82,11 +82,8 @@ class ThemeController extends Controller{
  	function theme_del(){
  	    $id = $_GET['id'];
  	    $Model=D('theme');
- 	    $oldImage = $Model->where('id=%d',$id)->field('theme_image')->find();
  	    $result = $Model->where('id=%s',$id)->delete();
  	    if($result){
- 	        //删除旧图片
- 	        unlink('./Public/images/themeImg/'.$oldImage['theme_image']);
  	        $return = array('msg'=>'删除成功！');
  	    }else{
  	        $return = array('msg'=>'删除失败！');
@@ -103,17 +100,8 @@ class ThemeController extends Controller{
  	        $data['theme_name']=$_POST['theme_name'];
  	        $data['sort']=$_POST['sort'];
  	        $data['is_delete']=$_POST['is_delete'];
- 	        $data['theme_introduce'] = $_POST['theme_introduce'];
  	        $data['update_time'] = date('Y-m-d H:i:s',time());
  	        
- 	        //上传图片
- 	        $upload = new \Think\Upload();
- 	        $upload->exts=array('jpg', 'gif', 'png', 'jpeg');
- 	        $upload->rootPath='./Public/images/themeImg/';
- 	        $info=$upload->upload();
- 	        if(!empty($info)){
- 	            $data['theme_image'] = $info['image']['savepath'].$info['image']['savename'];
- 	        }
  	        $result = $Model->add($data);
  	        if($result){
  	            $return = array('msg'=>'添加成功！');
@@ -127,18 +115,18 @@ class ThemeController extends Controller{
  	}
  	
  	/**
- 	 * 关联照片列表
+ 	 * 关联相册列表
  	 */
- 	function relation_photo_list(){
+ 	function relation_album_list(){
  	    $themeId = $_GET['id'];
  	    $Theme = D('theme');
- 	    $Photo = d('photo');
+ 	    $Album = d('album');
  	    
  	    $p=$_GET['p']?$_GET['p']:1;
  	    //$list = $Theme->where($map)->select();
  	    
  	    //分页
- 	    $count=$Photo->join('photo_theme_relation ON photo_theme_relation.photo_id = photo.id')->where("photo_theme_relation.theme_id='%d'",$themeId)->count();
+ 	    $count=$Album->join('album_theme_relation ON album_theme_relation.album_id = album.id')->where("album_theme_relation.theme_id='%d'",$themeId)->count();
  	    $max=ceil($count/10);
  	    if($p>$max){
  	        $p=$max;
@@ -147,30 +135,30 @@ class ThemeController extends Controller{
  	        $p=1;
  	    }
  	    
- 	    $list = $Photo
- 	    ->join('photo_theme_relation ON photo_theme_relation.photo_id = photo.id')
- 	    ->where("photo_theme_relation.theme_id='%d'",$themeId)
+ 	    $list = $Album
+ 	    ->join('album_theme_relation ON album_theme_relation.album_id = album.id')
+ 	    ->where("album_theme_relation.theme_id='%d'",$themeId)
  	    ->select();
  	    
  	    $Page=new \Think\Page($count,10);
  	    $show=$Page->show();
  	    
  	    foreach($list as $key => $val){
-            if($val['photo_image'] == '')
-                $list[$key]['photo_image'] = 'default.png';
+            if($val['album_image'] == '')
+                $list[$key]['album_image'] = 'default.png';
  	    }
  	    $this->assign('theme_id',$themeId);
  	    $this->assign('page',$show);
  	    $this->assign('list',$list);
- 	    $this->display('relation_photo_list');
+ 	    $this->display('relation_album_list');
  	}
  	
  	/**
- 	 * 删除相册
+ 	 * 删除关联相册
  	 */
- 	function relation_photo_del(){
+ 	function relation_album_del(){
  	    $id = $_GET['id'];
- 	    $Model=D('photo_theme_relation');
+ 	    $Model=D('album_theme_relation');
  	    $result = $Model->where('id=%s',$id)->delete();
  	    if($result){
  	        $return = array('msg'=>'删除成功！');
@@ -183,32 +171,72 @@ class ThemeController extends Controller{
  	/**
  	 * 添加关联照片
  	 */
- 	function relation_photo_add(){
- 	    $theme_id = $_GET['theme_id'];
- 	    $Photo = d('photo');
+ 	function relation_album_add(){
+ 	    $theme_id = !empty($_GET['theme_id']) ? $_GET['theme_id'] : $_POST['theme_id'];
+ 	    $Album = D('album');
+ 	    $Relation = D('album_theme_relation');
  	    
- 	    $exislist = $Photo
- 	    ->join('photo_theme_relation ON photo_theme_relation.photo_id = photo.id')
- 	    ->field('photo_theme_relation.photo_id')
- 	    ->where("photo_theme_relation.theme_id='%d'",$theme_id)
+ 	    $exislist = $Album
+ 	    ->join('album_theme_relation ON album_theme_relation.album_id = album.id')
+ 	    ->field('album_theme_relation.album_id')
+ 	    ->where("album_theme_relation.theme_id='%d'",$theme_id)
  	    ->select();
- 	    
- 	    $list = $Photo->select();
- 	    
- 	    if(!empty($list) && is_array($list)){
- 	        foreach ($list as $key => $val){
- 	            if(!empty($exislist) && is_array($exislist)){
- 	                foreach ($exislist as $k => $v){
- 	                    if($val['id'] == $v['photo_id']){
- 	                        unset($list[$key]);
+ 	    if(!empty($_GET['theme_id'])){
+ 	        $list = $Album->select();
+ 	        
+ 	        if(!empty($list) && is_array($list)){
+ 	            foreach ($list as $key => $val){
+ 	                if(!empty($exislist) && is_array($exislist)){
+ 	                    foreach ($exislist as $k => $v){
+ 	                        if($val['id'] == $v['album_id']){
+ 	                            unset($list[$key]);
+ 	                        }
  	                    }
  	                }
  	            }
  	        }
+ 	        $list = array_values($list);
+ 	        $this->assign('theme_id',$theme_id);
+ 	        $this->assign('list',$list);
+ 	        $this->display();
+ 	    }else{
+ 	        $album_ids = $_POST['album_ids'];
+ 	        $return = array('msg'=>'关联失败！请刷新页面，再勾选正确的照片');
+ 	        //删除已经存在的关联
+ 	        if(!empty($album_ids) && is_array($album_ids)){
+ 	            foreach($album_ids as $key => $val){
+ 	                if(!empty($exislist) && is_array($exislist)){
+ 	                    foreach ($exislist as $k => $v){
+ 	                        if($val == $v['album_id']){
+ 	                            unset($album_ids[$key]);
+ 	                        }
+ 	                    }
+ 	                }
+ 	            }
+ 	        }
+ 	        //插入新关联
+ 	        if(!empty($album_ids) && is_array($album_ids)){
+ 	            
+ 	            $data = array();
+ 	            $data['theme_id'] = $_POST['theme_id'];
+ 	            $insert_album_id = array();
+ 	            foreach($album_ids as $key => $val){
+ 	                $data['album_id'] = '';
+ 	                $data['album_id'] = $val;
+ 	                if(!empty($data['album_id'])){
+ 	                    $result = $Relation->add($data);
+ 	                    if($result){
+ 	                        $insert_album_id[] = $data['album_id'];
+ 	                    }
+ 	                }
+ 	            }
+ 	            if(!empty($insert_album_id) && is_array($insert_album_id)){
+ 	                $insert_album_id_str = join(',',$insert_album_id);
+ 	                $return = array('msg'=>'关联成功！已将编号为'.$insert_album_id_str.'的照片与该相册关联');
+ 	            }
+ 	        }
+ 	        $this->ajaxReturn($return);
  	    }
- 	    $list = array_values($list);
- 	    $this->assign('list',$list);
- 	    $this->display('');
  	}
 	
 }
