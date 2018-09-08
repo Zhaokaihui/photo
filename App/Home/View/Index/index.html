@@ -150,8 +150,8 @@
 			<img class="index_album_img" src="__PUBLIC__/images/albumImg/{$val['album_image']}">
 		</li>
 		</foreach>
-		<li class="index_album_li list-unstyled">
-			<div class="look_album_more"><span class="glyphicon glyphicon-search"></span> 查看更多</div>
+		<li class="more_index_album_li list-unstyled">
+			<div class="look_album_more" onclick="javascript:location.href='{:U('album_show')}'"><span class="glyphicon glyphicon-search"></span>查看更多</div>
 		</li>
 		</ul>
 	</div>
@@ -318,6 +318,7 @@ $('.contact_img').click(function(){
     });
 })
 
+//查看相册内照片
 $('.index_album_li').click(function(){
 	var par = $(this).attr('par');
 	var url = "{:U('Index/photo_show',array('album_id'=>'par'))}";
@@ -331,6 +332,12 @@ $('.index_album_li').click(function(){
         shadeClose: true,
         content: url
     });
+})
+
+
+//查看更多相册
+$('.more_index_album_li').click(function(){
+	
 })
 </script>
 <!-- /js for slide animations -->

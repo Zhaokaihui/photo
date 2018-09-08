@@ -70,11 +70,15 @@ class IndexController extends Controller{
  	    $Theme = D('theme');
  	    $Relation = D('album_theme_relation');
  	    $theme_list = $Theme->where('is_delete=%d',0)->select();
- 	    $album_data['is_delete'] = 0;
+ 	    
  	    $album_list = $Album
- 	    ->where($album_data)
- 	    ->order(array('sort'=>'desc','id'=>'asc'))
+ 	    ->field('album.*')
+ 	    ->join('left join photo_album_relation ON photo_album_relation.album_id = album.id')
+ 	    ->where("album.is_delete=0 and photo_album_relation.album_id <> ''")
+ 	    ->order(array('album.sort'=>'desc','album.id'=>'asc'))
+ 	    ->group('album.id')
  	    ->select();
+
  	    //获取相册对应的主题id
  	    if(!empty($album_list) && is_array($album_list)){
  	        foreach ($album_list as $key => $val){

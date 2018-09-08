@@ -148,8 +148,8 @@
 		<?php if(is_array($indexAlbumList)): foreach($indexAlbumList as $key=>$val): ?><li class="index_album_li list-unstyled index_album" par=<?php echo ($val['id']); ?>>
 			<img class="index_album_img" src="/Public/images/albumImg/<?php echo ($val['album_image']); ?>">
 		</li><?php endforeach; endif; ?>
-		<li class="index_album_li list-unstyled">
-			<div class="look_album_more"><span class="glyphicon glyphicon-search"></span> 查看更多</div>
+		<li class="more_index_album_li list-unstyled">
+			<div class="look_album_more" onclick="javascript:location.href='<?php echo U('album_show');?>'"><span class="glyphicon glyphicon-search"></span>查看更多</div>
 		</li>
 		</ul>
 	</div>
@@ -316,6 +316,7 @@ $('.contact_img').click(function(){
     });
 })
 
+//查看相册内照片
 $('.index_album_li').click(function(){
 	var par = $(this).attr('par');
 	var url = "<?php echo U('Index/photo_show',array('album_id'=>'par'));?>";
@@ -329,6 +330,12 @@ $('.index_album_li').click(function(){
         shadeClose: true,
         content: url
     });
+})
+
+
+//查看更多相册
+$('.more_index_album_li').click(function(){
+	
 })
 </script>
 <!-- /js for slide animations -->

@@ -1276,7 +1276,7 @@ section.footer h2 {
 	font-size:22px;
 }
 
-.index_album_li{
+.index_album_li,.more_index_album_li{
 	width:285px;
 	height:190px;
 	float:left;

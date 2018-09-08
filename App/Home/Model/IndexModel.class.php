@@ -38,7 +38,14 @@
 		
 		function getIndexAlbumList(){
 		    $Album = D('album');
-		    $list = $Album->order(array('sort'=>'desc','id'=>'asc'))->limit(11)->select();
+		    $list = $Album
+		    ->field('album.*')
+		    ->join('left join photo_album_relation ON photo_album_relation.album_id = album.id')
+		    ->where("album.is_delete=0 and photo_album_relation.album_id <> ''")
+		    ->order(array('album.sort'=>'desc','album.id'=>'asc'))
+		    ->group('album.id')
+		    ->select();
+
 		    return $list;
 		}
 	}
