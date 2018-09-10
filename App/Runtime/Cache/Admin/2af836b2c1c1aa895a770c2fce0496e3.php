@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/Public/CSS/Page.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/Public/CSS/lyq-list.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/Public/CSS/master.css" media="screen">
-<link rel="stylesheet" href="/Public/CSS/reset.css" media="screen">
+<link rel="stylesheet" href="/Publ1ic/CSS/reset.css" media="screen">
 <link rel="stylesheet" href="/Public/CSS/bootstrap.min_new.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/Public/CSS/flat-ui.min.css" />
 <link rel="stylesheet" type="text/css" href="/Public/CSS/jquery.nouislider.css">
