@@ -303,7 +303,8 @@ section.our-events .event-info:hover {
 /*-- /Events Section --*/
 /*-- Gallery Section --*/
 section.our-gallery {
-	padding:100px 0;
+	padding:100px 0px 900px;
+	height:1050px;
 }
 section.our-gallery img.img-responsive {
 	display:inline;
@@ -1277,8 +1278,8 @@ section.footer h2 {
 }
 
 .index_album_li,.more_index_album_li{
-	width:285px;
-	height:190px;
+	width:300px;
+	height:200px;
 	float:left;
 	text-align:center;
 	padding-left:3px;

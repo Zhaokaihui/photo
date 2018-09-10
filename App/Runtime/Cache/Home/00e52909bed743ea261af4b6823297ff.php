@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
 <html>
 <head>
 <title>子云工作室</title>
@@ -6,15 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <!-- css files -->
-<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="__PUBLIC__/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/album_show_style.css" />
+<link href="/Public/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/Public/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="/Public/css/style.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="/Public/css/album_show_style.css" />
 <!-- /css files -->
 <!-- font files -->
  
 <!-- js files -->
-<script src="__PUBLIC__/js/modernizr.custom.js"></script>
+<script src="/Public/js/modernizr.custom.js"></script>
 <!-- /js files -->
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -34,7 +34,7 @@
 				
 				<div id="top_contact" class="navbar-right contact" style="padding-top:20px;">
 					<span style="color:#fff;font-size:21px;">SHARE</span>
-					<img class="contact_img pointer" style="width:30px;height:30px;" src="__PUBLIC__/images/wechat_img.jpg">
+					<img class="contact_img pointer" style="width:30px;height:30px;" src="/Public/images/wechat_img.jpg">
 				</div>
 			</div>
         </nav>
@@ -48,7 +48,7 @@
     <div class="carousel-inner" role="listbox">
         <div class="item active">
         	<div class="carousel_title_div"><span class="carousel_title">时光会走远，影像能长存</span></div>
-			<img class="first-slide" src="__PUBLIC__/images/banner1.jpg" alt="First slide">
+			<img class="first-slide" src="/Public/images/banner1.jpg" alt="First slide">
         </div>
     </div>
    <!--  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -68,7 +68,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6">
-				<img src="__PUBLIC__/images/about-img.jpg" alt="about" class="img-responsive slideanim">
+				<img src="/Public/images/about-img.jpg" alt="about" class="img-responsive slideanim">
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6">
 				<div class="about-info">
@@ -146,23 +146,19 @@
 	<h3 class="text-center slideanim">作品</h3>
 	<!-- <div class="container">
 		<ul>
-		<foreach name='indexAlbumList' item='val'>
-		<li class="index_album_li list-unstyled index_album pointer" par={$val['id']}>
-			<img class="index_album_img" src="__PUBLIC__/images/albumImg/{$val['album_image']}">
-		</li>
-		</foreach>
+		<?php if(is_array($indexAlbumList)): foreach($indexAlbumList as $key=>$val): ?><li class="index_album_li list-unstyled index_album pointer" par=<?php echo ($val['id']); ?>>
+			<img class="index_album_img" src="/Public/images/albumImg/<?php echo ($val['album_image']); ?>">
+		</li><?php endforeach; endif; ?>
 		<li class="more_index_album_li list-unstyled pointer">
-			<div class="look_album_more" onclick="javascript:window.open('{:U('album_show')}')"><span class="glyphicon glyphicon-search"></span>查看更多</div>
+			<div class="look_album_more" onclick="javascript:window.open('<?php echo U('album_show');?>')"><span class="glyphicon glyphicon-search"></span>查看更多</div>
 		</li>
 		</ul>
 		
 	</div> -->
 	
 	<div id="gallery">
-		<foreach name="indexAlbumList" item="val">
-			<img class="album_one pointer index_album_li" par="{$val['id']}" src="__PUBLIC__/images/albumImg/{$val['album_image']}">
-		</foreach>
-		<img class="album_one pointer" onclick="javascript:window.open('{:U('album_show')}')" src="__PUBLIC__/images/lookMore.png">
+		<?php if(is_array($indexAlbumList)): foreach($indexAlbumList as $key=>$val): ?><img class="album_one pointer index_album_li" par="<?php echo ($val['id']); ?>" src="/Public/images/albumImg/<?php echo ($val['album_image']); ?>"><?php endforeach; endif; ?>
+		<img class="album_one pointer" onclick="javascript:window.open('<?php echo U('album_show');?>')" src="/Public/images/lookMore.png">
 	</div>
 </section>
 <!-- /Gallery Section -->
@@ -270,15 +266,15 @@
 <!-- /Back To Top -->
 
 <!-- js files -->
-<script src="__PUBLIC__/js/jquery.min.js"></script>
-<script src="__PUBLIC__/js/bootstrap.min.js"></script>
-<script src="__PUBLIC__/js/SmoothScroll.min.js"></script>
+<script src="/Public/js/jquery.min.js"></script>
+<script src="/Public/js/bootstrap.min.js"></script>
+<script src="/Public/js/SmoothScroll.min.js"></script>
 <!-- js for gallery -->
-<script src="__PUBLIC__/js/darkbox.js"></script>
+<script src="/Public/js/darkbox.js"></script>
 <!-- /js for gallery -->
 <!-- js for back to top -->
-<script src="__PUBLIC__/js/main.js"></script>
-<script type="text/javascript" src="__PUBLIC__/plugin/layer/layer.js"></script>
+<script src="/Public/js/main.js"></script>
+<script type="text/javascript" src="/Public/plugin/layer/layer.js"></script>
 <!-- /js for back to top -->
 <!-- js for nav-smooth scroll -->
 <script>
@@ -323,14 +319,14 @@ $('.contact_img,.title_contact').click(function(){
         fix: false, //不固定
         maxmin: true,
         shadeClose: true,
-        content: "{:U('Index/wechat_img')}"
+        content: "<?php echo U('Index/wechat_img');?>"
     });
 })
 
 //查看相册内照片
 $('.index_album_li').click(function(){
 	var par = $(this).attr('par');
-	var url = "{:U('Index/photo_show',array('album_id'=>'par'))}";
+	var url = "<?php echo U('Index/photo_show',array('album_id'=>'par'));?>";
 	url =  url.replace("par",par); //将代替变量的字符串用真实变量替换掉，OK搞定！
 	layer.open({
         title:'查看',
