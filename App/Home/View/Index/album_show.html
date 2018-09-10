@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/htmleaf-demo.css">
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/album_show_style.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" />
 </head>
 <body>
 	<div class="htmleaf-container">
@@ -15,13 +16,13 @@
 			<div id="buttons"></div>
 			<div id="gallery">
 				<foreach name="album_list" item="val">
-					<img class="album_one" par="{$val['id']}" src="__PUBLIC__/images/albumImg/{$val['album_image']}" data-tags="{$val['theme_names']}" alt="Alex Man">
+					<img class="album_one pointer" par="{$val['id']}" src="__PUBLIC__/images/albumImg/{$val['album_image']}" data-tags="{$val['theme_names']}" alt="Alex Man">
 				</foreach>
 		    </div>
 		</div>
 	</div>
-<script src="__PUBLIC__/js/jquery.min.js"></script>
-<script src="__PUBLIC__/js/filter-tags.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/filter-tags.js"></script>
 <script type="text/javascript" src="__PUBLIC__/plugin/layer/layer.js"></script>
 <script>
 //查看相册内照片

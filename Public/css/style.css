@@ -1298,3 +1298,7 @@ section.footer h2 {
 	top: 0;
 	left: 0;
 }
+
+.pointer{
+	cursor: pointer;
+}

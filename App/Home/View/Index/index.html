@@ -6,9 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <!-- css files -->
-<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="__PUBLIC__/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="__PUBLIC__/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css"/>
 <!-- /css files -->
 <!-- font files -->
  
@@ -146,11 +146,11 @@
 	<div class="container">
 		<ul>
 		<foreach name='indexAlbumList' item='val'>
-		<li class="index_album_li list-unstyled index_album" par={$val['id']}>
+		<li class="index_album_li list-unstyled index_album pointer" par={$val['id']}>
 			<img class="index_album_img" src="__PUBLIC__/images/albumImg/{$val['album_image']}">
 		</li>
 		</foreach>
-		<li class="more_index_album_li list-unstyled">
+		<li class="more_index_album_li list-unstyled pointer">
 			<div class="look_album_more" onclick="javascript:location.href='{:U('album_show')}'"><span class="glyphicon glyphicon-search"></span>查看更多</div>
 		</li>
 		</ul>
