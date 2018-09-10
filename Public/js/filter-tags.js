@@ -20,7 +20,7 @@
   });
 
   $('<button/>', {                                 // Create empty button
-    text: '全部',                              // Add text 'show all'
+    text: '全部',                              	   // Add text 'show all'
     class: 'active',                               // Make it active
     click: function() {                            // Add onclick handler to
       $(this)                                      // Get the clicked on button
