@@ -50,8 +50,7 @@ class IndexController extends Controller{
  	    ->where("photo_album_relation.album_id='$album_id' and photo.is_delete = 0")
  	    ->order(array('photo.sort'=>'desc','photo.id'=>'asc'))
  	    ->select();
- 	echo '<pre>';
- 	print_r($photo_list);die;
+ 	
  	    if(!empty($photo_list) && is_array($photo_list)){
  	        $i = 0;
  	        foreach($photo_list as $key => $val){
