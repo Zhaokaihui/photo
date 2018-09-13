@@ -11,7 +11,7 @@
 			return count($list);
 		}
 
-		/*
+		/**
 		 * 获取首页相册列表
 		 */
 		function getIndexAlbumList(){
@@ -28,7 +28,7 @@
 		}
 		
 		/**
-		 * 获取首页主题列表
+		 * 获取首页主题列表（排序最靠前的三个主题）
 		 */
 		function getIndexThemeList(){
 		    
