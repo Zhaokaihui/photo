@@ -4,12 +4,24 @@
 <div class="div_from_aoto" style="width: 500px;">
 	<form method='post' id="myForm" action="{:U('Theme/theme_edit')}" enctype="multipart/form-data" >
 		<div class="control-group">
-			<label class="laber_from">相册名称</label>
+			<label class="laber_from">主题名称</label>
 			<div class="controls">
-				<input class="input_from" name='theme_name' placeholder="请输入相册名称" value='{$result["theme_name"]}'>
+				<input class="input_from" name='theme_name' placeholder="请输入主题名称" value='{$result["theme_name"]}'>
 				<p class=help-block></p>
 			</div>
 		</div>
+		
+		<div class="control-group">
+			<label class="laber_from">主题封面<br/><span style="color:#8d8d8d">推荐比例3:4</span></label>
+			<div class="controls">
+				<button type="button" class="img_upload_btn" title="点击上传图片">
+					<img class="theme_image_img" src="__PUBLIC__/images/themeImg/{$result['theme_image']}">
+				</button>
+				<input type="file" name="image"  id="picture" class="img_upload_file" multiple="multiple" style="display: none" />
+				<p class=help-block></p>
+			</div>
+		</div>
+		
 		<div class="control-group">
 			<label class="laber_from">排序</label>
 			<div class="controls">
@@ -96,4 +108,4 @@
 
 </script> </block>
 
-<block name="type">相册修改</block>
+<block name="type">主题修改</block>

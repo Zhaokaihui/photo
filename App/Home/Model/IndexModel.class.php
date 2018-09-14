@@ -16,13 +16,18 @@
 		 */
 		function getIndexAlbumList(){
 		    $Album = D('album');
-		    $list = $Album
-		    ->field('album.*')
-		    ->join('left join photo_album_relation ON photo_album_relation.album_id = album.id')
-		    ->where("album.is_delete=0 and photo_album_relation.album_id <> ''")
-		    ->order(array('album.sort'=>'desc','album.id'=>'asc'))
-		    ->group('album.id')
-		    ->select();
+		    $Theme = D('theme');
+// 		    $list = $Album
+// 		    ->field('album.*')
+// 		    ->join('left join photo_album_relation ON photo_album_relation.album_id = album.id')
+// 		    ->where("album.is_delete=0 and photo_album_relation.album_id <> ''")
+// 		    ->order(array('album.sort'=>'desc','album.id'=>'asc'))
+// 		    ->group('album.id')
+// 		    ->select();
+		    
+		    $list = $Theme
+		    ->order(array('theme.sort'=>'desc','theme.id'=>'asc'))
+		    ->limit(4)->select();
 
 		    return $list;
 		}

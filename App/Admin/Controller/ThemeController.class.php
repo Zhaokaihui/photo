@@ -34,36 +34,65 @@ class ThemeController extends Controller{
  	    $Page=new \Think\Page($count,10);
  	    $show=$Page->show();
  	    
+ 	    if(!empty($list) && is_array($list)){
+ 	        foreach($list as $key => $val){
+ 	            if($val['theme_image'] == '')
+ 	                $list[$key]['theme_image'] = 'default.png';
+ 	        }
+ 	    }
+ 	    
+ 	    
  	    $this->assign('page',$show);
  	    $this->assign('list',$list);
  	    $this->display('theme_list');
  	}
  	
  	/**
- 	 * 修改相册信息
+ 	 * 修改主题信息
  	 */
  	function theme_edit(){
  		if(!empty($_GET['id'])){
  			$id=$_GET['id'];
  			$Model=D('Theme');
  			$result=$Model->where('id=%d',$id)->find();
+
+ 			if($result['theme_image'] == '')
+ 			    $result['theme_image'] = 'default.png';
+ 			
  			$this->assign('result',$result);
  			$this->display('theme_edit');
  		}
  	}
  	
  	/**
- 	 * 修改相册视图
+ 	 * 修改主题视图
  	 */
  	function theme_update(){
  	    if(!empty($_POST['id'])){
  	        $id = $_POST['id'];
  	        
  	        $Model=D('theme');
+ 	        $oldImage = $Model->where('id=%d',$id)->field('theme_image')->find();
  			$data['theme_name']=$_POST['theme_name'];
  			$data['sort']=$_POST['sort'];
  			$data['is_delete']=$_POST['is_delete'];
  			$data['update_time'] = date('Y-m-d H:i:s',time());
+ 			
+ 			
+ 			//上传图片
+ 			$upload = new \Think\Upload();
+ 			$upload->exts=array('jpg', 'gif', 'png', 'jpeg');
+ 			$upload->rootPath='./Public/images/themeImg/';
+ 			$info=$upload->upload();
+ 			$data['theme_image'] = '';
+ 			if(!empty($info)){
+ 			    $data['theme_image'] = $info['image']['savepath'].$info['image']['savename'];
+ 			    //删除旧图片
+ 			    if($oldImage['theme_image'] != $data['theme_image'] && $data['theme_image'] != ''){
+ 			        unlink('./Public/images/themeImg/'.$oldImage['theme_image']);
+ 			    }
+ 			}
+ 			
  			
  			$result = $Model->where('id=%s',$id)->save($data);
  			if($result){
@@ -77,7 +106,7 @@ class ThemeController extends Controller{
  	}
  	
  	/**
- 	 * 删除相册
+ 	 * 删除主题
  	 */
  	function theme_del(){
  	    $id = $_GET['id'];
@@ -92,7 +121,7 @@ class ThemeController extends Controller{
  	}
  	
  	/**
- 	 * 添加相册
+ 	 * 添加主题
  	 */
  	function theme_add(){
  	    if($_POST['is_add'] == 1){
@@ -101,6 +130,17 @@ class ThemeController extends Controller{
  	        $data['sort']=$_POST['sort'];
  	        $data['is_delete']=$_POST['is_delete'];
  	        $data['update_time'] = date('Y-m-d H:i:s',time());
+ 	        
+ 	        
+ 	        //上传图片
+ 	        $upload = new \Think\Upload();
+ 	        $upload->exts=array('jpg', 'gif', 'png', 'jpeg');
+ 	        $upload->rootPath='./Public/images/themeImg/';
+ 	        $info=$upload->upload();
+ 	        if(!empty($info)){
+ 	            $data['theme_image'] = $info['image']['savepath'].$info['image']['savename'];
+ 	        }
+ 	        
  	        
  	        $result = $Model->add($data);
  	        if($result){
@@ -232,7 +272,7 @@ class ThemeController extends Controller{
  	            }
  	            if(!empty($insert_album_id) && is_array($insert_album_id)){
  	                $insert_album_id_str = join(',',$insert_album_id);
- 	                $return = array('msg'=>'关联成功！已将编号为'.$insert_album_id_str.'的照片与该相册关联');
+ 	                $return = array('msg'=>'关联成功！已将编号为'.$insert_album_id_str.'的相册与该主题关联');
  	            }
  	        }
  	        $this->ajaxReturn($return);

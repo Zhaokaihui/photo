@@ -59,7 +59,7 @@
 	background-color: #e3e8ee;
 	text-align: left;
 }
-.album_img,.photo_img{
+.album_img,.photo_img,.theme_img{
 	max-width:100px;
 	max-height:100px;
 }
@@ -96,7 +96,7 @@
 }
 
 /*œ‡≤·±‡º≠*/
-.album_image_img,.photo_image_img{
+.album_image_img,.photo_image_img,.theme_image_img{
 	max-width:300px;
 	max-height:300px;
 }

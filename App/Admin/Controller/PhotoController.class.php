@@ -45,7 +45,7 @@ class PhotoController extends Controller{
  	}
  	
  	/**
- 	 * 修改相册信息
+ 	 * 修改照片信息
  	 */
  	function photo_edit(){
  		if(!empty($_GET['id'])){
@@ -58,7 +58,7 @@ class PhotoController extends Controller{
  	}
  	
  	/**
- 	 * 修改相册视图
+ 	 * 修改照片视图
  	 */
  	function photo_update(){
  	    if(!empty($_POST['id'])){
@@ -98,7 +98,7 @@ class PhotoController extends Controller{
  	}
  	
  	/**
- 	 * 删除相册
+ 	 * 删除照片
  	 */
  	function photo_del(){
  	    $id = $_GET['id'];
@@ -116,7 +116,7 @@ class PhotoController extends Controller{
  	}
  	
  	/**
- 	 * 添加相册
+ 	 * 添加照片
  	 */
  	function photo_add(){
  	    if($_POST['is_add'] == 1){

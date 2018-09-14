@@ -18,6 +18,7 @@
 				<tr class="tableHeader">
 					<td width="30px">编号</td>
 					<td>主题名称</td>
+					<td>主题封面</td>
 					<td>关联相册</td>
 					<td>排序</td>
 					<td>前台显示</td>
@@ -27,6 +28,7 @@
 				<tr class="tablebody">
 					<td class="col-xs-1" height="120px">{$val['id']}</td>
 					<td class="col-xs-2">{$val['theme_name']}</td>
+					<td class="col-xs-2"><img class="theme_img" src='__PUBLIC__/images/themeImg/{$val['theme_image']}'></td>
 					<td class="col-xs-1" par={$val['id']}><a class="relation-album-btn" href="{:U('Theme/relation_album_list')}">查看</a></td>
 					<td class="col-xs-1">{$val['sort']}</td>
 					

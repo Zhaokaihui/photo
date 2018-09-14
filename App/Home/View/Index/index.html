@@ -87,25 +87,12 @@
 <!-- Gallery Section -->
 <section class="our-gallery" id="gallery">
 	<div id="gallery">
-		<!-- <foreach name="indexAlbumList" item="val">
-			<img class="album_one pointer index_album_li" par="{$val['id']}" src="__PUBLIC__/images/albumImg/{$val['album_image']}">
-		</foreach> -->
-		<div class="index_theme_box">
-			<img class="album_one pointer index_album_li" par="{$val['id']}" src="__PUBLIC__/images/index-theme1.png">
-			<div class="index_theme_title"><span>婚纱</span></div>
+		<foreach name="indexAlbumList" item="val">
+			<div class="index_theme_box">
+			<img class="album_one pointer index_album_li" par="{$val['id']}" src="__PUBLIC__/images/themeImg/{$val['theme_image']}">
+			<div class="index_theme_title"><span>{$val['theme_name']}</span></div>
 		</div>
-		<div class="index_theme_box">
-			<img class="album_one pointer index_album_li" par="{$val['id']}" src="__PUBLIC__/images/index-theme2.png">
-			<div class="index_theme_title"><span>婚纱</span></div>
-		</div>
-		<div class="index_theme_box">
-			<img class="album_one pointer index_album_li" par="{$val['id']}" src="__PUBLIC__/images/index-theme3.png">
-			<div class="index_theme_title"><span>婚纱</span></div>
-		</div>
-		<div class="index_theme_box">
-			<img class="album_one pointer index_album_li" par="{$val['id']}" src="__PUBLIC__/images/index-theme2.png">
-			<div class="index_theme_title"><span>婚纱</span></div>
-		</div>
+		</foreach>
 		<!-- <img class="album_one pointer" onclick="javascript:window.open('{:U('album_show')}')" src="__PUBLIC__/images/lookMore.png"> -->
 	</div>
 </section>
