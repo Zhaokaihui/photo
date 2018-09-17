@@ -26,6 +26,7 @@
 // 		    ->select();
 		    
 		    $list = $Theme
+		    ->where("theme.is_delete=0")
 		    ->order(array('theme.sort'=>'desc','theme.id'=>'asc'))
 		    ->limit(4)->select();
 
