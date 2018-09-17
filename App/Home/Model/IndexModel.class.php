@@ -37,7 +37,14 @@
 		 * 获取首页主题列表（排序最靠前的三个主题）
 		 */
 		function getIndexThemeList(){
+		    $Theme = D('theme');
 		    
+		    $list = $Theme
+		    ->where("theme.is_delete=0")
+		    ->order(array('theme.sort'=>'desc','theme.id'=>'asc'))
+		    ->limit(4)->select();
+		    
+		    return $list;
 		}
 		
 	}
